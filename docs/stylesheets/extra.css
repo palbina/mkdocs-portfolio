@@ -1,0 +1,228 @@
+/* =============================================================================
+ * MkDocs Portfolio - Custom Stylesheet
+ * Estilo minimalista "Terminal/Dark" inspirado en Stefan Prodan
+ * ============================================================================= */
+
+/* -----------------------------------------------------------------------------
+ * CSS Variables - Colores de marca minimalistas
+ * ----------------------------------------------------------------------------- */
+:root {
+  --md-primary-fg-color:        #000000;
+  --md-primary-fg-color--light: #333333;
+  --md-primary-fg-color--dark:  #000000;
+  --md-accent-fg-color:         #00E5FF; /* Cian cibernético */
+}
+
+/* -----------------------------------------------------------------------------
+ * Dark Mode (Slate) - Configuración principal
+ * ----------------------------------------------------------------------------- */
+[data-md-color-scheme="slate"] {
+  --md-default-bg-color: #0d1117;        /* GitHub Dark Dimmed */
+  --md-code-bg-color: #161b22;           /* Bloques de código */
+  --md-default-fg-color: #c9d1d9;        /* Texto gris claro */
+  --md-default-fg-color--light: #8b949e;
+  --md-default-fg-color--lighter: #6e7681;
+  --md-default-fg-color--lightest: #30363d;
+  
+  /* Accent colors */
+  --md-accent-fg-color: #00E5FF;
+  --md-accent-bg-color: rgba(0, 229, 255, 0.1);
+  
+  /* Typeset */
+  --md-typeset-a-color: #58a6ff;
+}
+
+/* -----------------------------------------------------------------------------
+ * Eliminación de sombras - Estética Flat/Minimalista
+ * ----------------------------------------------------------------------------- */
+.md-header,
+.md-tabs,
+.md-sidebar,
+.md-footer {
+  box-shadow: none !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.md-header {
+  background-color: var(--md-default-bg-color);
+}
+
+/* -----------------------------------------------------------------------------
+ * Tipografía
+ * ----------------------------------------------------------------------------- */
+h1, h2, h3 {
+  font-weight: 600;
+  letter-spacing: -0.02em;
+}
+
+h1 {
+  font-size: 2.2em;
+  margin-bottom: 0.8em;
+}
+
+/* Efectos sutiles en links */
+.md-typeset a:hover {
+  color: var(--md-accent-fg-color);
+  text-decoration: underline;
+}
+
+/* -----------------------------------------------------------------------------
+ * Bloques de código - Estilo terminal
+ * ----------------------------------------------------------------------------- */
+.md-typeset pre > code {
+  border: 1px solid #30363d;
+  border-radius: 6px;
+}
+
+.md-typeset pre {
+  background-color: var(--md-code-bg-color);
+}
+
+/* Line numbers */
+.md-typeset .highlight .linenos {
+  color: #6e7681;
+}
+
+/* -----------------------------------------------------------------------------
+ * Admonitions - Minimalistas
+ * ----------------------------------------------------------------------------- */
+.md-typeset .admonition,
+.md-typeset details {
+  border: 1px solid var(--md-default-fg-color--lightest);
+  box-shadow: none;
+  background-color: transparent;
+  border-radius: 6px;
+}
+
+.md-typeset .admonition-title,
+.md-typeset details summary {
+  background-color: rgba(255, 255, 255, 0.05);
+}
+
+/* -----------------------------------------------------------------------------
+ * Navigation
+ * ----------------------------------------------------------------------------- */
+.md-nav__link--active {
+  color: var(--md-accent-fg-color) !important;
+  font-weight: 600;
+}
+
+/* -----------------------------------------------------------------------------
+ * Tables
+ * ----------------------------------------------------------------------------- */
+.md-typeset table:not([class]) {
+  border: 1px solid var(--md-default-fg-color--lightest);
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+.md-typeset table:not([class]) th {
+  background-color: rgba(255, 255, 255, 0.05);
+}
+
+/* -----------------------------------------------------------------------------
+ * Hero Section (homepage)
+ * ----------------------------------------------------------------------------- */
+.hero {
+  text-align: center;
+  padding: 4rem 1rem;
+}
+
+.hero h1 {
+  font-size: 3rem;
+  background: linear-gradient(135deg, #00E5FF 0%, #00B8D4 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.hero .tagline {
+  font-size: 1.3rem;
+  color: var(--md-default-fg-color--light);
+  margin-top: 0.5rem;
+}
+
+/* Skills badges */
+.skills-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  justify-content: center;
+  margin-top: 2rem;
+}
+
+.skill-badge {
+  background-color: rgba(0, 229, 255, 0.1);
+  border: 1px solid rgba(0, 229, 255, 0.3);
+  color: var(--md-accent-fg-color);
+  padding: 0.4rem 0.8rem;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  font-weight: 500;
+}
+
+/* -----------------------------------------------------------------------------
+ * Project Cards
+ * ----------------------------------------------------------------------------- */
+.project-card {
+  border: 1px solid var(--md-default-fg-color--lightest);
+  border-radius: 8px;
+  padding: 1.5rem;
+  margin-bottom: 1rem;
+  transition: border-color 0.2s ease;
+}
+
+.project-card:hover {
+  border-color: var(--md-accent-fg-color);
+}
+
+.project-card h3 {
+  margin-top: 0;
+}
+
+.project-card .tech-stack {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.3rem;
+  margin-top: 1rem;
+}
+
+.project-card .tech-tag {
+  background-color: rgba(255, 255, 255, 0.05);
+  padding: 0.2rem 0.5rem;
+  border-radius: 4px;
+  font-size: 0.75rem;
+  color: var(--md-default-fg-color--light);
+}
+
+/* -----------------------------------------------------------------------------
+ * GitHub Stats (from macros)
+ * ----------------------------------------------------------------------------- */
+.repo-stats {
+  font-size: 0.85rem;
+  color: var(--md-default-fg-color--light);
+}
+
+.repo-stats-error {
+  font-size: 0.85rem;
+  color: #f85149;
+}
+
+/* -----------------------------------------------------------------------------
+ * Responsive adjustments
+ * ----------------------------------------------------------------------------- */
+@media screen and (max-width: 76.25em) {
+  .hero h1 {
+    font-size: 2.2rem;
+  }
+}
+
+@media screen and (max-width: 60em) {
+  .hero {
+    padding: 2rem 1rem;
+  }
+  
+  .hero h1 {
+    font-size: 1.8rem;
+  }
+}

@@ -1,0 +1,160 @@
+# =============================================================================
+# MkDocs Portfolio - Configuration
+# DevOps Portfolio Minimalista con filosofía "Docs as Code"
+# =============================================================================
+
+site_name: Cloud Native Engineer
+site_url: https://docs.arkenops.cc
+site_author: Peter Albina
+site_description: >-
+  Portfolio de ingeniería DevOps/SRE especializado en Kubernetes, GitOps, 
+  observabilidad y automatización de infraestructura cloud-native.
+repo_name: palbina/mkdocs-portfolio
+repo_url: https://github.com/palbina/mkdocs-portfolio
+edit_uri: edit/main/docs/
+copyright: Copyright © 2026 Peter Albina. Licencia MIT.
+
+# =============================================================================
+# THEME CONFIGURATION
+# =============================================================================
+theme:
+  name: material
+  custom_dir: docs/overrides
+  
+  # Paleta minimalista con modo oscuro por defecto
+  palette:
+    # Light mode
+    - scheme: default
+      primary: white
+      accent: cyan
+      toggle:
+        icon: material/weather-night
+        name: Cambiar a modo oscuro
+
+    # Dark mode (default)
+    - scheme: slate
+      primary: black
+      accent: cyan
+      toggle:
+        icon: material/weather-sunny
+        name: Cambiar a modo claro
+  
+  # Tipografía de ingeniería
+  font:
+    text: Inter
+    code: JetBrains Mono
+  
+  # Iconografía
+  icon:
+    logo: material/kubernetes
+    repo: fontawesome/brands/github
+  
+  # Features de UX
+  features:
+    - navigation.instant
+    - navigation.instant.prefetch
+    - navigation.tracking
+    - navigation.top
+    - navigation.footer
+    - navigation.indexes
+    - content.code.copy
+    - content.code.annotate
+    - content.tabs.link
+    - toc.follow
+    - search.suggest
+    - search.highlight
+
+# =============================================================================
+# NAVIGATION
+# =============================================================================
+nav:
+  - Inicio: index.md
+  - Proyectos:
+      - projects/index.md
+      - 'HomeLab Kubernetes': projects/homelab.md
+      - 'GitOps con ArgoCD': projects/gitops.md
+      - 'Observabilidad LGTM': projects/observability.md
+  - Blog:
+      - blog/index.md
+  - Sobre Mí: about.md
+
+# =============================================================================
+# PLUGINS
+# =============================================================================
+plugins:
+  - search:
+      lang: es
+  - minify:
+      minify_html: true
+      minify_js: true
+      minify_css: true
+  - git-revision-date-localized:
+      enable_creation_date: true
+      type: timeago
+      fallback_to_build_date: true
+  # Macros para contenido dinámico (GitHub stats, etc)
+  - macros:
+      module_name: scripts/main
+
+# =============================================================================
+# MARKDOWN EXTENSIONS
+# =============================================================================
+markdown_extensions:
+  # Admonitions (bloques de nota/warning)
+  - admonition
+  - pymdownx.details
+  
+  # Código
+  - pymdownx.highlight:
+      anchor_linenums: true
+      line_spans: __span
+      pygments_lang_class: true
+  - pymdownx.inlinehilite
+  - pymdownx.snippets
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
+  
+  # Tabs
+  - pymdownx.tabbed:
+      alternate_style: true
+  
+  # Emoji
+  - pymdownx.emoji:
+      emoji_index: !!python/name:material.extensions.emoji.twemoji
+      emoji_generator: !!python/name:material.extensions.emoji.to_svg
+  
+  # Links y referencias
+  - attr_list
+  - md_in_html
+  - def_list
+  - tables
+  - footnotes
+  
+  # ToC
+  - toc:
+      permalink: true
+      toc_depth: 3
+
+# =============================================================================
+# EXTRA CONFIGURATION
+# =============================================================================
+extra:
+  social:
+    - icon: fontawesome/brands/github
+      link: https://github.com/palbina
+    - icon: fontawesome/brands/linkedin
+      link: https://linkedin.com/in/peteralbina
+    - icon: fontawesome/brands/twitter
+      link: https://twitter.com/peteralbina
+  
+  analytics:
+    provider: google
+    property: G-XXXXXXXXXX
+  
+  generator: false
+
+extra_css:
+  - stylesheets/extra.css
