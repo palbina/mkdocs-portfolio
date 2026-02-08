@@ -1,12 +1,12 @@
 # Sobre Mí
 
-## :material-account: Peter Albina
+## Peter Albina
 
 **Senior DevOps/SRE Engineer** especializado en infraestructura cloud-native, automatización y observabilidad.
 
 ---
 
-## :material-briefcase: Experiencia
+## Experiencia
 
 Mi enfoque técnico se centra en:
 
@@ -18,7 +18,7 @@ Mi enfoque técnico se centra en:
 
 ---
 
-## :material-certificate: Certificaciones
+## Certificaciones
 
 | Certificación | Estado |
 |:--------------|:-------|
@@ -29,38 +29,49 @@ Mi enfoque técnico se centra en:
 
 ---
 
-```yaml
-# Mi toolbox preferido
-infrastructure:
-  os: [Talos Linux, Ubuntu, Debian]
-  orchestration: [Kubernetes, Docker Swarm]
-  cni: [Cilium, Calico]
-  mesh: [Istio Ambient, Linkerd]
+## Stack Tecnológico
 
-gitops:
-  cd: [ArgoCD, Flux]
-  ci: [GitHub Actions, Forgejo Actions, GitLab CI]
-  secrets: [Sealed Secrets, SOPS, Vault]
-
-observability:
-  metrics: [Prometheus, VictoriaMetrics]
-  logs: [Loki, Elasticsearch]
-  traces: [Tempo, Jaeger]
-  visualization: [Grafana]
-
-iac:
-  provisioning: [Terraform, Pulumi]
-  config: [Ansible, Talos machineconfig]
-  templating: [Helm, Kustomize]
-
-languages:
-  primary: [Python, Go, Bash]
-  secondary: [TypeScript, Rust]
+```mermaid
+mindmap
+  root((DevOps))
+    Infrastructure
+      Talos Linux
+      Ubuntu
+      Debian
+    Orchestration
+      Kubernetes
+      Docker
+      containerd
+    Networking
+      Cilium
+      Istio
+      Traefik
+    GitOps
+      ArgoCD
+      Flux
+      GitHub Actions
+    Observability
+      Prometheus
+      Grafana
+      Loki
+      Tempo
+    IaC
+      Terraform
+      Ansible
+      Pulumi
+    Security
+      CrowdSec
+      Authentik
+      Sealed Secrets
+    Languages
+      Python
+      Go
+      Bash
 ```
 
 ---
 
-## :material-email: Contacto
+## Contacto
 
 - :fontawesome-brands-github: [github.com/palbina](https://github.com/palbina)
 - :fontawesome-brands-linkedin: [linkedin.com/in/peteralbina](https://linkedin.com/in/peteralbina)
