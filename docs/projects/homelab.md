@@ -23,30 +23,30 @@ graph TB
         
         subgraph Workers["Worker Nodes"]
             W1[worker-01]
+            W2[worker-02]
         end
         
         subgraph Networking
-            Cilium[Cilium CNI] # (1)!
-            Istio[Istio Ambient] # (2)!
+            Cilium[Cilium CNI]
+            Istio[Istio Ambient]
             Traefik[Traefik Ingress]
         end
         
         subgraph Storage
-            Longhorn[Longhorn] # (3)!
+            Longhorn[Longhorn]
         end
     end
     
     CF -->|Tunnel| Traefik
     Traefik --> Istio
     Istio --> W1
+    Istio --> W2
 ```
 
-1. Cilium reemplaza a kube-proxy usando eBPF para un performance superior en el networking L3/L4.
-2. Istio Ambient permite seguridad L7 y mTLS sin la sobrecarga de inyectar sidecars en cada Pod.
-3. Longhorn proporciona almacenamiento distribuido con replicación síncrona para alta disponibilidad de los datos.
-
-!!! info "Filosofía del Cluster"
-    Este cluster no es solo un entorno de pruebas; está diseñado siguiendo principios de **SRE** (Site Reliability Engineering) para garantizar un uptime del 99.9% en servicios personales.
+!!! info "Componentes Clave"
+    - **Cilium** reemplaza a kube-proxy usando eBPF para un performance superior en el networking L3/L4.
+    - **Istio Ambient** permite seguridad L7 y mTLS sin la sobrecarga de inyectar sidecars en cada Pod.
+    - **Longhorn** proporciona almacenamiento distribuido con replicación síncrona para alta disponibilidad.
 
 ---
 
@@ -82,7 +82,7 @@ graph TB
 !!! tip "Zero Trust Security"
     La seguridad se implementa en capas (Defense in Depth), desde el borde con Cloudflare hasta las políticas a nivel de red con Cilium.
 
-- **Cilium Network Policies**: Default deny con whitelists explífitas
+- **Cilium Network Policies**: Default deny con whitelists explícitas
 - **Istio mTLS**: Encriptación automática service-to-service
 - **CrowdSec WAF**: IP reputation blocking
 - **Authentik SSO**: Identity provider centralizado
