@@ -4,62 +4,85 @@ hide:
   - toc
 ---
 
-# Peter Albina { .hero-title }
+<div class="hero" markdown>
 
-**Senior DevOps/SRE Engineer • Cloud Native Specialist** { .tagline }
+# Peter Albina
 
-{{ skills_grid(['Kubernetes', 'Terraform', 'ArgoCD', 'GitOps', 'Prometheus', 'Istio', 'Cilium', 'Python', 'Go']) }}
+<p class="tagline">Senior DevOps/SRE Engineer • Cloud Native Specialist</p>
 
+<div class="skills-grid" markdown>
+<span class="skill-badge">Kubernetes</span>
+<span class="skill-badge">Terraform</span>
+<span class="skill-badge">ArgoCD</span>
+<span class="skill-badge">GitOps</span>
+<span class="skill-badge">Prometheus</span>
+<span class="skill-badge">Istio</span>
+<span class="skill-badge">Cilium</span>
+<span class="skill-badge">Python</span>
+<span class="skill-badge">Go</span>
+</div>
+
+<div class="hero-buttons" markdown>
 [:fontawesome-brands-github: GitHub](https://github.com/palbina){ .md-button }
 [:fontawesome-brands-linkedin: LinkedIn](https://linkedin.com/in/peteralbina){ .md-button }
 [:material-file-document: CV](about.md){ .md-button .md-button--primary }
+</div>
+
+</div>
 
 ---
 
 ## :material-server-network: Proyectos Destacados
 
-### :material-kubernetes: HomeLab Kubernetes { .project-header }
+<div class="grid cards" markdown>
 
-Cluster Kubernetes de 3 nodos bare-metal con Talos Linux, Cilium CNI (eBPF), Istio Ambient Mode y stack completo de observabilidad LGTM.
+- :material-kubernetes:{ .lg .middle } **HomeLab Kubernetes**
 
-* Talos Linux { .tech-tag }
-* K8s 1.35 { .tech-tag }
-* Cilium { .tech-tag }
-* Istio { .tech-tag }
-* ArgoCD { .tech-tag }
-* Prometheus { .tech-tag }
-{ .tech-list }
+    ---
 
-[:octicons-arrow-right-24: Ver proyecto](projects/homelab.md)
+    Cluster Kubernetes de 3 nodos bare-metal con Talos Linux, Cilium CNI (eBPF), Istio Ambient Mode y stack completo de observabilidad LGTM.
 
----
+    <div class="tech-tags">
+    <span class="tech-tag">Talos Linux</span>
+    <span class="tech-tag">K8s 1.35</span>
+    <span class="tech-tag">Cilium</span>
+    <span class="tech-tag">Istio</span>
+    <span class="tech-tag">ArgoCD</span>
+    </div>
 
-### :material-git: GitOps con ArgoCD { .project-header }
+    [:octicons-arrow-right-24: Ver proyecto](projects/homelab.md)
 
-Implementación completa de GitOps con ApplicationSets, sync waves, y patrón App-of-Apps para gestión declarativa de 30+ aplicaciones.
+- :material-git:{ .lg .middle } **GitOps con ArgoCD**
 
-* ArgoCD { .tech-tag }
-* Helm { .tech-tag }
-* Kustomize { .tech-tag }
-* Sealed Secrets { .tech-tag }
-{ .tech-list }
+    ---
 
-[:octicons-arrow-right-24: Ver proyecto](projects/gitops.md)
+    Implementación completa de GitOps con ApplicationSets, sync waves, y patrón App-of-Apps para gestión declarativa de 30+ aplicaciones.
 
----
+    <div class="tech-tags">
+    <span class="tech-tag">ArgoCD</span>
+    <span class="tech-tag">Helm</span>
+    <span class="tech-tag">Kustomize</span>
+    <span class="tech-tag">Sealed Secrets</span>
+    </div>
 
-### :material-chart-line: Observabilidad LGTM { .project-header }
+    [:octicons-arrow-right-24: Ver proyecto](projects/gitops.md)
 
-Stack completo de observabilidad con Loki (logs), Grafana (visualización), Tempo (traces) y Prometheus (métricas) con correlación completa.
+- :material-chart-line:{ .lg .middle } **Observabilidad LGTM**
 
-* Prometheus { .tech-tag }
-* Loki { .tech-tag }
-* Tempo { .tech-tag }
-* Grafana { .tech-tag }
-* Alertmanager { .tech-tag }
-{ .tech-list }
+    ---
 
-[:octicons-arrow-right-24: Ver proyecto](projects/observability.md)
+    Stack completo de observabilidad con Loki (logs), Grafana (visualización), Tempo (traces) y Prometheus (métricas) con correlación completa.
+
+    <div class="tech-tags">
+    <span class="tech-tag">Prometheus</span>
+    <span class="tech-tag">Loki</span>
+    <span class="tech-tag">Tempo</span>
+    <span class="tech-tag">Grafana</span>
+    </div>
+
+    [:octicons-arrow-right-24: Ver proyecto](projects/observability.md)
+
+</div>
 
 ---
 
@@ -80,7 +103,8 @@ Stack completo de observabilidad con Loki (logs), Grafana (visualización), Temp
 
 ---
 
+<p class="footer-text">
 Última actualización: {{ build_time() }} •
-[:material-react: Portfolio React](https://arkenops.cc) •
-[:fontawesome-brands-github: Código fuente](https://github.com/palbina/mkdocs-portfolio)
-{ .footer-text }
+<a href="https://arkenops.cc">Portfolio React</a> •
+<a href="https://github.com/palbina/mkdocs-portfolio">Código fuente</a>
+</p>

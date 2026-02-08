@@ -7,29 +7,33 @@
  * CSS Variables - Colores de marca minimalistas
  * ----------------------------------------------------------------------------- */
 :root {
-  --md-primary-fg-color:        #000000;
-  --md-primary-fg-color--light: #333333;
-  --md-primary-fg-color--dark:  #000000;
-  --md-accent-fg-color:         #00E5FF; /* Cian cibernético */
+    --md-primary-fg-color: #0d1117;
+    --md-primary-fg-color--light: #161b22;
+    --md-primary-fg-color--dark: #010409;
+    --md-accent-fg-color: #00E5FF;
+    /* Cian cibernético */
 }
 
 /* -----------------------------------------------------------------------------
  * Dark Mode (Slate) - Configuración principal
  * ----------------------------------------------------------------------------- */
 [data-md-color-scheme="slate"] {
-  --md-default-bg-color: #0d1117;        /* GitHub Dark Dimmed */
-  --md-code-bg-color: #161b22;           /* Bloques de código */
-  --md-default-fg-color: #c9d1d9;        /* Texto gris claro */
-  --md-default-fg-color--light: #8b949e;
-  --md-default-fg-color--lighter: #6e7681;
-  --md-default-fg-color--lightest: #30363d;
-  
-  /* Accent colors */
-  --md-accent-fg-color: #00E5FF;
-  --md-accent-bg-color: rgba(0, 229, 255, 0.1);
-  
-  /* Typeset */
-  --md-typeset-a-color: #58a6ff;
+    --md-default-bg-color: #0d1117;
+    /* GitHub Dark Dimmed */
+    --md-code-bg-color: #161b22;
+    /* Bloques de código */
+    --md-default-fg-color: #e6edf3;
+    /* Texto blanco suave */
+    --md-default-fg-color--light: #8b949e;
+    --md-default-fg-color--lighter: #6e7681;
+    --md-default-fg-color--lightest: #30363d;
+
+    /* Accent colors */
+    --md-accent-fg-color: #00E5FF;
+    --md-accent-bg-color: rgba(0, 229, 255, 0.1);
+
+    /* Typeset */
+    --md-typeset-a-color: #58a6ff;
 }
 
 /* -----------------------------------------------------------------------------
@@ -39,48 +43,54 @@
 .md-tabs,
 .md-sidebar,
 .md-footer {
-  box-shadow: none !important;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: none !important;
 }
 
 .md-header {
-  background-color: var(--md-default-bg-color);
+    background-color: var(--md-default-bg-color);
+    border-bottom: 1px solid var(--md-default-fg-color--lightest);
+}
+
+.md-tabs {
+    background-color: var(--md-default-bg-color);
+    border-bottom: 1px solid var(--md-default-fg-color--lightest);
 }
 
 /* -----------------------------------------------------------------------------
  * Tipografía
  * ----------------------------------------------------------------------------- */
-h1, h2, h3 {
-  font-weight: 600;
-  letter-spacing: -0.02em;
+h1,
+h2,
+h3 {
+    font-weight: 700;
+    letter-spacing: -0.03em;
 }
 
 h1 {
-  font-size: 2.2em;
-  margin-bottom: 0.8em;
+    font-size: 2.4em;
+    margin-bottom: 0.8em;
 }
 
 /* Efectos sutiles en links */
 .md-typeset a:hover {
-  color: var(--md-accent-fg-color);
-  text-decoration: underline;
+    color: var(--md-accent-fg-color);
 }
 
 /* -----------------------------------------------------------------------------
  * Bloques de código - Estilo terminal
  * ----------------------------------------------------------------------------- */
-.md-typeset pre > code {
-  border: 1px solid #30363d;
-  border-radius: 6px;
+.md-typeset pre>code {
+    border: 1px solid #30363d;
+    border-radius: 8px;
 }
 
 .md-typeset pre {
-  background-color: var(--md-code-bg-color);
+    background-color: var(--md-code-bg-color);
 }
 
 /* Line numbers */
 .md-typeset .highlight .linenos {
-  color: #6e7681;
+    color: #6e7681;
 }
 
 /* -----------------------------------------------------------------------------
@@ -88,141 +98,297 @@ h1 {
  * ----------------------------------------------------------------------------- */
 .md-typeset .admonition,
 .md-typeset details {
-  border: 1px solid var(--md-default-fg-color--lightest);
-  box-shadow: none;
-  background-color: transparent;
-  border-radius: 6px;
+    border: 1px solid var(--md-default-fg-color--lightest);
+    box-shadow: none;
+    background-color: rgba(255, 255, 255, 0.02);
+    border-radius: 8px;
 }
 
 .md-typeset .admonition-title,
 .md-typeset details summary {
-  background-color: rgba(255, 255, 255, 0.05);
+    background-color: rgba(255, 255, 255, 0.05);
 }
 
 /* -----------------------------------------------------------------------------
  * Navigation
  * ----------------------------------------------------------------------------- */
 .md-nav__link--active {
-  color: var(--md-accent-fg-color) !important;
-  font-weight: 600;
+    color: var(--md-accent-fg-color) !important;
+    font-weight: 600;
+}
+
+.md-tabs__link--active {
+    color: var(--md-accent-fg-color) !important;
 }
 
 /* -----------------------------------------------------------------------------
  * Tables
  * ----------------------------------------------------------------------------- */
 .md-typeset table:not([class]) {
-  border: 1px solid var(--md-default-fg-color--lightest);
-  border-radius: 6px;
-  overflow: hidden;
+    border: 1px solid var(--md-default-fg-color--lightest);
+    border-radius: 8px;
+    overflow: hidden;
 }
 
 .md-typeset table:not([class]) th {
-  background-color: rgba(255, 255, 255, 0.05);
+    background-color: rgba(0, 229, 255, 0.1);
+    color: var(--md-accent-fg-color);
+    font-weight: 600;
+}
+
+.md-typeset table:not([class]) td,
+.md-typeset table:not([class]) th {
+    border-color: var(--md-default-fg-color--lightest);
 }
 
 /* -----------------------------------------------------------------------------
  * Hero Section (homepage)
  * ----------------------------------------------------------------------------- */
 .hero {
-  text-align: center;
-  padding: 4rem 1rem;
+    text-align: center;
+    padding: 5rem 2rem;
+    max-width: 800px;
+    margin: 0 auto;
 }
 
 .hero h1 {
-  font-size: 3rem;
-  background: linear-gradient(135deg, #00E5FF 0%, #00B8D4 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+    font-size: 3.5rem;
+    font-weight: 800;
+    background: linear-gradient(135deg, #00E5FF 0%, #00B8D4 50%, #00ACC1 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 0.3em;
 }
 
 .hero .tagline {
-  font-size: 1.3rem;
-  color: var(--md-default-fg-color--light);
-  margin-top: 0.5rem;
+    font-size: 1.3rem;
+    color: var(--md-default-fg-color--light);
+    margin-top: 0;
+    margin-bottom: 2rem;
+    font-weight: 500;
 }
 
 /* Skills badges */
 .skills-grid {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.5rem;
-  justify-content: center;
-  margin-top: 2rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+    justify-content: center;
+    margin: 2rem 0;
 }
 
 .skill-badge {
-  background-color: rgba(0, 229, 255, 0.1);
-  border: 1px solid rgba(0, 229, 255, 0.3);
-  color: var(--md-accent-fg-color);
-  padding: 0.4rem 0.8rem;
-  border-radius: 20px;
-  font-size: 0.85rem;
-  font-weight: 500;
+    background: linear-gradient(135deg, rgba(0, 229, 255, 0.15) 0%, rgba(0, 184, 212, 0.1) 100%);
+    border: 1px solid rgba(0, 229, 255, 0.4);
+    color: var(--md-accent-fg-color);
+    padding: 0.5rem 1rem;
+    border-radius: 25px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    transition: all 0.2s ease;
+}
+
+.skill-badge:hover {
+    background: linear-gradient(135deg, rgba(0, 229, 255, 0.25) 0%, rgba(0, 184, 212, 0.2) 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 229, 255, 0.2);
+}
+
+/* Hero buttons */
+.hero-buttons {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    margin-top: 2.5rem;
+    flex-wrap: wrap;
+}
+
+.hero-buttons .md-button {
+    min-width: 140px;
 }
 
 /* -----------------------------------------------------------------------------
- * Project Cards
+ * Grid Cards (Material for MkDocs)
  * ----------------------------------------------------------------------------- */
-.project-card {
-  border: 1px solid var(--md-default-fg-color--lightest);
-  border-radius: 8px;
-  padding: 1.5rem;
-  margin-bottom: 1rem;
-  transition: border-color 0.2s ease;
+.grid.cards>ul {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem;
+    padding: 0;
+    list-style: none;
 }
 
-.project-card:hover {
-  border-color: var(--md-accent-fg-color);
+.grid.cards>ul>li {
+    background-color: var(--md-code-bg-color);
+    border: 1px solid var(--md-default-fg-color--lightest);
+    border-radius: 12px;
+    padding: 1.5rem;
+    transition: all 0.3s ease;
 }
 
-.project-card h3 {
-  margin-top: 0;
+.grid.cards>ul>li:hover {
+    border-color: var(--md-accent-fg-color);
+    transform: translateY(-4px);
+    box-shadow: 0 8px 24px rgba(0, 229, 255, 0.15);
 }
 
-.project-card .tech-stack {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.3rem;
-  margin-top: 1rem;
+.grid.cards>ul>li>p:first-child {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--md-default-fg-color);
+    margin-bottom: 0.5rem;
 }
 
-.project-card .tech-tag {
-  background-color: rgba(255, 255, 255, 0.05);
-  padding: 0.2rem 0.5rem;
-  border-radius: 4px;
-  font-size: 0.75rem;
-  color: var(--md-default-fg-color--light);
+.grid.cards>ul>li hr {
+    border: none;
+    border-top: 1px solid var(--md-default-fg-color--lightest);
+    margin: 1rem 0;
+}
+
+/* Tech tags for cards */
+.tech-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    margin: 1rem 0;
+}
+
+.tech-tag {
+    background-color: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 0.3rem 0.7rem;
+    border-radius: 6px;
+    font-size: 0.75rem;
+    font-weight: 500;
+    color: var(--md-default-fg-color--light);
+    transition: all 0.2s ease;
+}
+
+.tech-tag:hover {
+    background-color: rgba(0, 229, 255, 0.1);
+    border-color: rgba(0, 229, 255, 0.3);
+    color: var(--md-accent-fg-color);
 }
 
 /* -----------------------------------------------------------------------------
- * GitHub Stats (from macros)
+ * Footer text
  * ----------------------------------------------------------------------------- */
-.repo-stats {
-  font-size: 0.85rem;
-  color: var(--md-default-fg-color--light);
+.footer-text {
+    text-align: center;
+    color: var(--md-default-fg-color--light);
+    font-size: 0.85rem;
+    margin-top: 3rem;
 }
 
-.repo-stats-error {
-  font-size: 0.85rem;
-  color: #f85149;
+.footer-text a {
+    color: var(--md-accent-fg-color);
+}
+
+/* -----------------------------------------------------------------------------
+ * Project page styles
+ * ----------------------------------------------------------------------------- */
+.project-header {
+    border-bottom: 2px solid var(--md-accent-fg-color);
+    padding-bottom: 0.5rem;
 }
 
 /* -----------------------------------------------------------------------------
  * Responsive adjustments
  * ----------------------------------------------------------------------------- */
 @media screen and (max-width: 76.25em) {
-  .hero h1 {
-    font-size: 2.2rem;
-  }
+    .hero h1 {
+        font-size: 2.5rem;
+    }
+
+    .hero .tagline {
+        font-size: 1.1rem;
+    }
 }
 
 @media screen and (max-width: 60em) {
-  .hero {
-    padding: 2rem 1rem;
-  }
-  
-  .hero h1 {
-    font-size: 1.8rem;
-  }
+    .hero {
+        padding: 3rem 1rem;
+    }
+
+    .hero h1 {
+        font-size: 2rem;
+    }
+
+    .hero .tagline {
+        font-size: 1rem;
+    }
+
+    .skill-badge {
+        font-size: 0.75rem;
+        padding: 0.4rem 0.8rem;
+    }
+
+    .grid.cards>ul {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* -----------------------------------------------------------------------------
+ * Content Tabs styling
+ * ----------------------------------------------------------------------------- */
+.md-typeset .tabbed-labels {
+    border-bottom: 1px solid var(--md-default-fg-color--lightest);
+}
+
+.md-typeset .tabbed-labels>label {
+    color: var(--md-default-fg-color--light);
+    font-weight: 600;
+}
+
+.md-typeset .tabbed-labels>label:hover {
+    color: var(--md-accent-fg-color);
+}
+
+.md-typeset [type="radio"]:checked+.tabbed-labels>label {
+    color: var(--md-accent-fg-color);
+    border-color: var(--md-accent-fg-color);
+}
+
+/* -----------------------------------------------------------------------------
+ * Mermaid diagram styling
+ * ----------------------------------------------------------------------------- */
+.mermaid {
+    background-color: transparent !important;
+}
+
+/* -----------------------------------------------------------------------------
+ * Buttons enhancement
+ * ----------------------------------------------------------------------------- */
+.md-button {
+    border-radius: 8px !important;
+    font-weight: 600 !important;
+    transition: all 0.2s ease !important;
+}
+
+.md-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.md-button--primary {
+    background-color: var(--md-accent-fg-color) !important;
+    border-color: var(--md-accent-fg-color) !important;
+    color: #000 !important;
+}
+
+.md-button--primary:hover {
+    background-color: #00B8D4 !important;
+    border-color: #00B8D4 !important;
+}
+
+/* Large icons for grid cards */
+.lg {
+    font-size: 1.5em;
+    vertical-align: middle;
+    margin-right: 0.3em;
+}
+
+.middle {
+    vertical-align: middle;
 }
