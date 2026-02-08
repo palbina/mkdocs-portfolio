@@ -53,16 +53,28 @@ theme:
   features:
     - navigation.instant
     - navigation.instant.prefetch
+    - navigation.instant.progress
     - navigation.tracking
+    - navigation.tabs
+    - navigation.tabs.sticky
+    - navigation.sections
+    - navigation.expand
+    - navigation.path
+    - navigation.prune
+    - navigation.indexes
     - navigation.top
     - navigation.footer
-    - navigation.indexes
-    - content.code.copy
-    - content.code.annotate
-    - content.tabs.link
     - toc.follow
+    - toc.integrate
     - search.suggest
     - search.highlight
+    - search.share
+    - content.tabs.link
+    - content.code.copy
+    - content.code.select
+    - content.code.annotate
+    - content.tooltips
+    - announce.dismiss
 
 # =============================================================================
 # NAVIGATION
@@ -100,37 +112,43 @@ plugins:
 # MARKDOWN EXTENSIONS
 # =============================================================================
 markdown_extensions:
-  # Admonitions (bloques de nota/warning)
+  - abbr
   - admonition
+  - attr_list
+  - def_list
+  - footnotes
+  - md_in_html
+  - tables
+  - toc:
+      permalink: true
+      toc_depth: 3
+  - pymdownx.arithmatex:
+      generic: true
+  - pymdownx.betterem:
+      smart_enable: all
+  - pymdownx.caret
   - pymdownx.details
-  
-  # Código
+  - pymdownx.emoji:
+      emoji_index: !!python/name:material.extensions.emoji.twemoji
+      emoji_generator: !!python/name:material.extensions.emoji.to_svg
   - pymdownx.highlight:
       anchor_linenums: true
       line_spans: __span
       pygments_lang_class: true
   - pymdownx.inlinehilite
+  - pymdownx.keys
+  - pymdownx.magiclink:
+      repo_url_shorthand: true
+  - pymdownx.mark
   - pymdownx.snippets
+  - pymdownx.smartsymbols
   - pymdownx.superfences:
       custom_fences:
         - name: mermaid
           class: mermaid
           format: !!python/name:pymdownx.superfences.fence_code_format
-  
-  # Tabs
   - pymdownx.tabbed:
       alternate_style: true
-  
-  # Emoji
-  - pymdownx.emoji:
-      emoji_index: !!python/name:material.extensions.emoji.twemoji
-      emoji_generator: !!python/name:material.extensions.emoji.to_svg
-  
-  # Links y referencias
-  - attr_list
-  - md_in_html
-  - def_list
-  - tables
   - footnotes
   
   # ToC

@@ -29,8 +29,6 @@ Mi enfoque técnico se centra en:
 
 ---
 
-## :material-language-python: Stack Técnico
-
 ```yaml
 # Mi toolbox preferido
 infrastructure:
