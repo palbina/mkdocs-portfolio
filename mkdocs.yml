@@ -86,6 +86,11 @@ nav:
       - 'HomeLab Kubernetes': projects/homelab.md
       - 'GitOps con ArgoCD': projects/gitops.md
       - 'Observabilidad LGTM': projects/observability.md
+      - 'Zero Trust Security': projects/security.md
+      - 'Progressive Delivery': projects/progressive-delivery.md
+      - 'Database HA (CNPG)': projects/database-ha.md
+      - 'AI Chat con RAG': projects/ai-rag.md
+      - 'Backup & DR': projects/backup-dr.md
   - Blog:
       - blog/index.md
   - Sobre Mí: about.md
