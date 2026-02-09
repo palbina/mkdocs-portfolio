@@ -28,15 +28,23 @@
     --md-typeset-a-color: #58a6ff;
 }
 
-/* Dark mode button fixes */
-[data-md-color-scheme="slate"] .md-button--primary {
+/* Dark mode button fixes - aggressive specificity */
+[data-md-color-scheme="slate"] .md-button--primary,
+[data-md-color-scheme="slate"] a.md-button--primary,
+[data-md-color-scheme="slate"] .md-typeset .md-button--primary,
+[data-md-color-scheme="slate"] .md-content .md-button--primary {
     background-color: #00E5FF !important;
     border-color: #00E5FF !important;
     color: #000 !important;
 }
 
 [data-md-color-scheme="slate"] .md-button--primary:hover,
-[data-md-color-scheme="slate"] .md-button--primary:focus {
+[data-md-color-scheme="slate"] .md-button--primary:focus,
+[data-md-color-scheme="slate"] .md-button--primary:active,
+[data-md-color-scheme="slate"] a.md-button--primary:hover,
+[data-md-color-scheme="slate"] a.md-button--primary:focus,
+[data-md-color-scheme="slate"] .md-typeset .md-button--primary:hover,
+[data-md-color-scheme="slate"] .md-content .md-button--primary:hover {
     background-color: #00B8D4 !important;
     border-color: #00B8D4 !important;
     color: #000 !important;
