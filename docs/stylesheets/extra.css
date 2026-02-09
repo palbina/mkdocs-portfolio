@@ -28,6 +28,20 @@
     --md-typeset-a-color: #58a6ff;
 }
 
+/* Dark mode button fixes */
+[data-md-color-scheme="slate"] .md-button--primary {
+    background-color: #00E5FF !important;
+    border-color: #00E5FF !important;
+    color: #000 !important;
+}
+
+[data-md-color-scheme="slate"] .md-button--primary:hover,
+[data-md-color-scheme="slate"] .md-button--primary:focus {
+    background-color: #00B8D4 !important;
+    border-color: #00B8D4 !important;
+    color: #000 !important;
+}
+
 /* -----------------------------------------------------------------------------
  * Header and Navigation
  * ----------------------------------------------------------------------------- */
