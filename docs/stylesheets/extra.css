@@ -39,6 +39,30 @@
     --md-typeset-a-color: var(--brand-primary);
 }
 
+/* -----------------------------------------------------------------------------
+ * Light Mode - Override Variables
+ * ----------------------------------------------------------------------------- */
+[data-md-color-scheme="default"] {
+    /* Backgrounds for light mode */
+    --bg-dark: #FFFFFF;
+    --bg-surface: #F8FAFC;
+    --bg-card: #FFFFFF;
+
+    /* Text for light mode */
+    --text-primary: #1E293B;
+    --text-secondary: #475569;
+    --text-muted: #94A3B8;
+
+    /* Borders for light mode */
+    --border-subtle: rgba(0, 0, 0, 0.08);
+    --border-default: rgba(0, 0, 0, 0.12);
+    --border-accent: rgba(0, 180, 212, 0.5);
+
+    /* Brand stays the same but slightly darker for contrast */
+    --brand-primary: #0891B2;
+    --brand-secondary: #0E7490;
+}
+
 body {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
@@ -1007,4 +1031,134 @@ h6 {
         padding: 1rem;
         overflow-x: auto;
     }
+}
+
+/* -----------------------------------------------------------------------------
+ * Light Mode - Specific Overrides
+ * ----------------------------------------------------------------------------- */
+[data-md-color-scheme="default"] .hero {
+    background: linear-gradient(180deg, #F1F5F9 0%, #FFFFFF 100%);
+}
+
+[data-md-color-scheme="default"] .hero h1 {
+    color: #1E293B;
+}
+
+[data-md-color-scheme="default"] .hero-headline {
+    background: linear-gradient(135deg, #0891B2, #0E7490);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+[data-md-color-scheme="default"] .project-card,
+[data-md-color-scheme="default"] .value-card,
+[data-md-color-scheme="default"] .tech-category,
+[data-md-color-scheme="default"] .expertise-card,
+[data-md-color-scheme="default"] .cert-badge,
+[data-md-color-scheme="default"] .contact-item {
+    background: #FFFFFF;
+    border-color: rgba(0, 0, 0, 0.1);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+[data-md-color-scheme="default"] .project-card:hover,
+[data-md-color-scheme="default"] .value-card:hover,
+[data-md-color-scheme="default"] .tech-category:hover,
+[data-md-color-scheme="default"] .expertise-card:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+[data-md-color-scheme="default"] .tech-item {
+    background: #F8FAFC;
+    border-color: rgba(0, 0, 0, 0.08);
+    color: #475569;
+}
+
+[data-md-color-scheme="default"] .tech-item:hover {
+    background: rgba(8, 145, 178, 0.08);
+    border-color: #0891B2;
+    color: #0891B2;
+}
+
+[data-md-color-scheme="default"] .cta-section {
+    background: #F8FAFC;
+    border-color: rgba(0, 0, 0, 0.08);
+}
+
+[data-md-color-scheme="default"] .cta-section h3 {
+    color: #1E293B;
+}
+
+[data-md-color-scheme="default"] .hero-stats {
+    border-color: rgba(0, 0, 0, 0.06);
+}
+
+[data-md-color-scheme="default"] .stat-number {
+    color: #0891B2;
+}
+
+[data-md-color-scheme="default"] .stat-label {
+    color: #64748B;
+}
+
+[data-md-color-scheme="default"] .featured-badge {
+    background: linear-gradient(135deg, #0891B2, #0E7490);
+}
+
+[data-md-color-scheme="default"] .impact-metric {
+    background: rgba(8, 145, 178, 0.08);
+    border-left-color: #0891B2;
+}
+
+[data-md-color-scheme="default"] .impact-metric code {
+    background: transparent;
+    color: #0891B2;
+}
+
+[data-md-color-scheme="default"] .tech-tag {
+    background: #F1F5F9;
+    color: #475569;
+    border-color: rgba(0, 0, 0, 0.08);
+}
+
+[data-md-color-scheme="default"] .project-link {
+    color: #0891B2;
+}
+
+/* Light mode - Project index cards */
+[data-md-color-scheme="default"] .md-content .project-card {
+    background: #FFFFFF;
+    border-color: rgba(0, 0, 0, 0.1);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+[data-md-color-scheme="default"] .md-content .project-card:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* Light mode - Tables */
+[data-md-color-scheme="default"] .md-content table {
+    background: #FFFFFF;
+}
+
+[data-md-color-scheme="default"] .md-content table th {
+    background: rgba(8, 145, 178, 0.08);
+    color: #0891B2;
+}
+
+[data-md-color-scheme="default"] .md-content table tr:hover td {
+    background: #F8FAFC;
+}
+
+/* Light mode - About page */
+[data-md-color-scheme="default"] .about-hero h2 {
+    background: linear-gradient(135deg, #0891B2, #0E7490);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+/* Light mode - Mermaid diagrams */
+[data-md-color-scheme="default"] .md-content .mermaid {
+    background: #FFFFFF;
+    border-color: rgba(0, 0, 0, 0.1);
 }
