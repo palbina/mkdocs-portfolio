@@ -5,6 +5,9 @@
 Implementación completa de GitOps para gestión declarativa del cluster Kubernetes.
 Git como fuente única de verdad para infraestructura y aplicaciones.
 
+!!! success "Impacto"
+    **30+ aplicaciones** gestionadas declarativamente • **Zero drift** con self-healing automático • **100% reproducible** desde Git
+
 ---
 
 ## Arquitectura
@@ -33,13 +36,36 @@ flowchart LR
     Cluster -.->|Drift Detection| AC
 ```
 
+!!! info "Flujo Unidireccional"
+    Todos los cambios fluyen desde Git hacia el cluster. Cualquier modificación manual es detectada y revertida automáticamente.
+
 ---
 
-## Componentes
+## Stack Tecnológico
+
+=== "Core GitOps"
+
+    | Componente | Tecnología | Función |
+    |:-----------|:-----------|:--------|
+    | **CD Engine** | ArgoCD v2.10 | Continuous delivery declarativo |
+    | **App Generator** | ApplicationSets | Multi-app desde directorios |
+    | **Secrets** | Sealed Secrets | Encriptación en Git |
+
+=== "Progressive Delivery"
+
+    | Componente | Tecnología | Función |
+    |:-----------|:-----------|:--------|
+    | **Rollouts** | Argo Rollouts | Canary/Blue-Green |
+    | **Mesh** | Istio | Traffic splitting |
+    | **Analysis** | Prometheus | Métricas para rollback |
+
+---
+
+## Componentes Clave
 
 ### ApplicationSets
 
-Generación automática de Applications basada en la estructura de directorios:
+Generación automática de Applications basada en estructura de directorios:
 
 ```yaml
 # Un directorio = Una aplicación
@@ -54,21 +80,21 @@ k8s/02-apps/
 
 Orden de deployment garantizado mediante anotaciones:
 
-| Wave | Componentes |
-|:----:|:------------|
-| 0 | CRDs, Cilium CNI |
-| 1-2 | Istio Base + Control Plane |
-| 3 | Sealed Secrets |
-| 4 | Longhorn Storage |
-| 5 | Traefik, Cloudflared |
-| 10 | Databases, Monitoring |
-| 20+ | User Applications |
+| Wave | Componentes | Descripción |
+|:----:|:------------|:------------|
+| 0 | CRDs, Cilium CNI | Fundamentos de red |
+| 1-2 | Istio Base + CP | Service mesh |
+| 3 | Sealed Secrets | Gestión de secrets |
+| 4 | Longhorn | Storage distribuido |
+| 5 | Traefik, Cloudflared | Ingress y túneles |
+| 10 | DBs, Monitoring | Datos y observabilidad |
+| 20+ | User Applications | Apps de usuario |
 
 ---
 
-## Features
+## Features Destacadas
 
-### Self-Healing
+### Self-Healing Automático
 
 ```yaml
 syncPolicy:
@@ -77,9 +103,12 @@ syncPolicy:
     selfHeal: true   # Corrige drift automáticamente
 ```
 
-### Sealed Secrets
+!!! tip "Zero Drift Guarantee"
+    Cualquier cambio manual en el cluster es detectado en segundos y revertido al estado declarado en Git.
 
-Secrets encriptados que pueden vivir en Git:
+### Sealed Secrets para Git
+
+Secrets encriptados que pueden vivir seguros en repositorios públicos:
 
 ```bash
 # Crear y sellar un secret
@@ -88,26 +117,36 @@ kubectl create secret generic my-secret \
   --dry-run=client -o yaml | kubeseal > sealed-secret.yaml
 ```
 
-### Progressive Delivery
+### Progressive Delivery con Canary
 
-Integración con Argo Rollouts para Canary deployments:
+Integración completa con Argo Rollouts:
 
-- Traffic splitting con Istio
-- Análisis automático de métricas Prometheus
-- Rollback automático si métricas fallan
+- ✅ Traffic splitting gradual con Istio
+- ✅ Análisis automático de métricas Prometheus
+- ✅ Rollback automático si métricas fallan
+- ✅ Promoción manual o automática
 
 ---
 
-## Flujo de Trabajo
+## Flujo de Trabajo CI/CD
 
-1. **Developer** → Push cambios a `main`
-2. **GitHub Actions** → Build image, push a GHCR
-3. **CI** → Actualiza manifest con nuevo tag
-4. **ArgoCD** → Detecta cambio, aplica sync
-5. **Rollouts** → Canary deployment progresivo
+```mermaid
+flowchart LR
+    Dev[Developer] -->|Push| GH[GitHub]
+    GH -->|Trigger| GA[GitHub Actions]
+    GA -->|Build| IMG[Container Image]
+    IMG -->|Push| GHCR[GitHub Registry]
+    GA -->|Update| Manifest[K8s Manifest]
+    Manifest -->|Detect| Argo[ArgoCD]
+    Argo -->|Deploy| K8s[Kubernetes]
+    K8s -->|Canary| Rollout[Argo Rollouts]
+```
 
 ---
 
 ## Repositorio
 
 [:fontawesome-brands-github: HOMELAB-INFRA](https://github.com/palbina/HOMELAB-INFRA){ .md-button }
+
+!!! quote "Principio GitOps"
+    *"Si no está en Git, no existe"* - Todo el estado del cluster es 100% reproducible desde el repositorio.

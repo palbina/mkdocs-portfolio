@@ -5,6 +5,9 @@
 Cluster Kubernetes de 3 nodos bare-metal diseñado para simular un entorno de producción
 enterprise con alta disponibilidad, seguridad Zero Trust y observabilidad completa.
 
+!!! success "Impacto"
+    **3 nodos** bare-metal en producción 24/7 • **Zero Trust** desde el edge hasta los pods • **100% GitOps** sin configuración manual
+
 ---
 
 ## Arquitectura
@@ -75,17 +78,65 @@ graph TB
     | **GitOps** | ArgoCD | Declarative deployments |
     | **Secrets** | Sealed Secrets | Encriptación asimétrica |
 
+=== "Observability"
+
+    | Componente | Tecnología | Descripción |
+    |:-----------|:-----------|:------------|
+    | **Metrics** | Prometheus + Grafana | Time-series y dashboards |
+    | **Logs** | Loki + Promtail | Log aggregation |
+    | **Traces** | Tempo | Distributed tracing |
+    | **Alerting** | Alertmanager + Telegram | Notificaciones en tiempo real |
+
 ---
 
 ## Features Destacadas
 
-!!! tip "Zero Trust Security"
-    La seguridad se implementa en capas (Defense in Depth), desde el borde con Cloudflare hasta las políticas a nivel de red con Cilium.
+### Zero Trust Security
 
-- **Cilium Network Policies**: Default deny con whitelists explícitas
-- **Istio mTLS**: Encriptación automática service-to-service
-- **CrowdSec WAF**: IP reputation blocking
-- **Authentik SSO**: Identity provider centralizado
+!!! tip "Defense in Depth"
+    La seguridad se implementa en capas, desde el borde con Cloudflare hasta las políticas a nivel de red con Cilium.
+
+| Capa | Tecnología | Función |
+|:-----|:-----------|:--------|
+| **Edge** | Cloudflare WAF | DDoS protection, bot filtering |
+| **Ingress** | CrowdSec | IPS colaborativo, IP reputation |
+| **Network** | Cilium Policies | Default deny, whitelist explícita |
+| **Service** | Istio mTLS | Encriptación automática pod-to-pod |
+| **Identity** | Authentik SSO | OIDC/SAML centralizado |
+
+### High Availability
+
+- ✅ **3 nodos** con quorum para etcd
+- ✅ **Longhorn** con replicación 2x para storage
+- ✅ **Anti-affinity** para spreads de pods críticos
+- ✅ **PodDisruptionBudgets** para rolling updates seguros
+
+### Progressive Delivery
+
+Canary deployments con análisis automático de métricas:
+
+```yaml
+strategy:
+  canary:
+    steps:
+      - setWeight: 10
+      - analysis:
+          templates:
+            - templateName: success-rate
+      - setWeight: 50
+      - pause: {}
+      - setWeight: 100
+```
+
+---
+
+## Hardware
+
+| Nodo | Rol | CPU | RAM | Storage |
+|:-----|:----|:----|:----|:--------|
+| **node-01** | Control Plane | Intel i5-12400 | 32GB DDR5 | 500GB NVMe |
+| **node-02** | Worker | Intel i5-12400 | 32GB DDR5 | 1TB NVMe |
+| **node-03** | Worker | Intel i5-12400 | 32GB DDR5 | 1TB NVMe |
 
 ---
 
@@ -95,5 +146,5 @@ El código fuente de la infraestructura está disponible en GitHub:
 
 [:fontawesome-brands-github: HOMELAB-INFRA](https://github.com/palbina/HOMELAB-INFRA){ .md-button }
 
-!!! success "Open Source"
-    Toda la configuración de este cluster es pública para fomentar el aprendizaje y la transparencia en la comunidad DevOps.
+!!! quote "Filosofía"
+    *"Production-grade infrastructure starts at home"* - Un HomeLab real que simula entornos enterprise para aprendizaje continuo.

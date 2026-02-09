@@ -5,6 +5,9 @@
 Stack completo de observabilidad siguiendo el paradigma LGTM (Loki, Grafana, Tempo, Mimir/Prometheus)
 con correlación de señales para debugging end-to-end.
 
+!!! success "Impacto"
+    **3 pilares** de observabilidad integrados • **Full correlation** entre métricas, logs y traces • **Alerting** a Telegram en tiempo real
+
 ---
 
 ## Arquitectura
@@ -46,31 +49,61 @@ graph TB
     Tempo --> Grafana
 ```
 
----
-
-## Componentes
-
-| Componente | Función | Retención |
-|:-----------|:--------|:----------|
-| **Prometheus** | Métricas time-series | 15 días |
-| **Loki** | Agregación de logs | 30 días |
-| **Tempo** | Distributed tracing | 7 días |
-| **Grafana** | Dashboards y alerting | N/A |
-| **Alertmanager** | Routing de alertas | N/A |
+!!! info "Los 3 Pilares"
+    **Métricas** para saber QUÉ pasó • **Logs** para saber POR QUÉ pasó • **Traces** para saber DÓNDE pasó
 
 ---
 
-## Features
+## Stack Tecnológico
+
+=== "Métricas"
+
+    | Componente | Función | Retención |
+    |:-----------|:--------|:----------|
+    | **Prometheus** | Scraping y almacenamiento | 15 días |
+    | **Alertmanager** | Routing de alertas | N/A |
+    | **ServiceMonitors** | Autodiscovery de targets | N/A |
+
+=== "Logs"
+
+    | Componente | Función | Retención |
+    |:-----------|:--------|:----------|
+    | **Loki** | Agregación y query | 30 días |
+    | **Promtail** | Collection agent | N/A |
+    | **LogQL** | Query language | N/A |
+
+=== "Traces"
+
+    | Componente | Función | Retención |
+    |:-----------|:--------|:----------|
+    | **Tempo** | Trace storage | 7 días |
+    | **OpenTelemetry** | Instrumentation | N/A |
+    | **TraceQL** | Query language | N/A |
+
+=== "Visualización"
+
+    | Componente | Función | Retención |
+    |:-----------|:--------|:----------|
+    | **Grafana** | Dashboards unificados | N/A |
+    | **Explore** | Query interactivo | N/A |
+    | **Alerting** | Reglas y notificaciones | N/A |
+
+---
+
+## Features Destacadas
 
 ### Correlación de Señales
 
 Grafana permite saltar entre métricas, logs y traces usando el mismo TraceID:
 
 ```
-Metric Spike → Logs at that time → Trace of failed request
+📈 Metric Spike → 📜 Logs at that time → 🔍 Trace of failed request
 ```
 
-### Alerting Pipeline
+!!! tip "Debugging End-to-End"
+    Desde una alerta de latencia alta, puedes navegar directamente a los logs del momento y luego al trace específico de la request lenta.
+
+### Pipeline de Alerting
 
 ```mermaid
 flowchart LR
@@ -79,26 +112,31 @@ flowchart LR
     AM --> Slack[Slack Channel]
 ```
 
-Alertas configuradas para:
+**Alertas configuradas:**
 
-- **Infrastructure**: Node down, disk full, memory pressure
-- **Kubernetes**: Pod crashes, OOMKilled, pending pods
-- **Applications**: High latency, error rates
-- **Security**: CrowdSec decisions, auth failures
+| Categoría | Ejemplos |
+|:----------|:---------|
+| **Infrastructure** | Node down, disk full, memory pressure |
+| **Kubernetes** | Pod crashes, OOMKilled, pending pods |
+| **Applications** | High latency p99, error rates > 1% |
+| **Security** | CrowdSec decisions, auth failures |
 
 ### Dashboards Pre-configurados
 
-| Dashboard | Descripción |
-|:----------|:------------|
-| Cluster Overview | Recursos de nodos y namespaces |
-| Kubernetes Pods | Estado y recursos de pods |
-| Traefik | Request rates, latencies |
-| Loki Logs | Explorer y queries |
-| ArgoCD | Sync status de aplicaciones |
+| Dashboard | Métricas Clave |
+|:----------|:---------------|
+| **Cluster Overview** | CPU/Memory por nodo, pods por namespace |
+| **Kubernetes Pods** | Restarts, OOMKills, resource usage |
+| **Traefik** | RPS, latency p50/p95/p99, error rate |
+| **Loki Explorer** | Log volume, error patterns |
+| **ArgoCD** | Sync status, app health |
+| **CrowdSec** | Blocked IPs, attack types |
 
 ---
 
 ## LogQL Cookbook
+
+### Queries Útiles
 
 ```logql
 # Errores en los últimos 15 minutos
@@ -106,11 +144,19 @@ Alertas configuradas para:
 
 # Top 5 pods por volumen de logs
 topk(5, sum by (pod) (rate({namespace=~".+"}[5m])))
+```
 
+### PromQL para Alertas
+
+```promql
 # Latencia p99 de requests
 histogram_quantile(0.99, 
   sum(rate(http_request_duration_seconds_bucket[5m])) by (le)
 )
+
+# Error rate > 1%
+sum(rate(http_requests_total{status=~"5.."}[5m])) / 
+sum(rate(http_requests_total[5m])) > 0.01
 ```
 
 ---
@@ -118,3 +164,6 @@ histogram_quantile(0.99,
 ## Repositorio
 
 [:fontawesome-brands-github: HOMELAB-INFRA](https://github.com/palbina/HOMELAB-INFRA){ .md-button }
+
+!!! quote "Observability Mindset"
+    *"No puedes mejorar lo que no puedes medir"* - Full visibility del sistema con métricas, logs y traces correlacionados.
