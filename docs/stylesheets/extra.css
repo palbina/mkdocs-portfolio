@@ -50,6 +50,13 @@
     color: #000 !important;
 }
 
+/* Fix: Override the Material theme's .md-typeset .md-button:hover rule
+   that sets color to var(--md-accent-bg-color) which is nearly transparent */
+[data-md-color-scheme="slate"] .md-typeset .md-button--primary:hover,
+[data-md-color-scheme="slate"] .md-typeset a.md-button--primary:hover {
+    color: #000 !important;
+}
+
 /* -----------------------------------------------------------------------------
  * Header and Navigation
  * ----------------------------------------------------------------------------- */
