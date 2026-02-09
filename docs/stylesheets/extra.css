@@ -57,6 +57,14 @@
     color: #000 !important;
 }
 
+/* Fix for secondary buttons (non-primary) - text visible on hover */
+[data-md-color-scheme="slate"] .md-typeset .md-button:not(.md-button--primary):hover,
+[data-md-color-scheme="slate"] .md-typeset a.md-button:not(.md-button--primary):hover {
+    background-color: #00E5FF !important;
+    border-color: #00E5FF !important;
+    color: #000 !important;
+}
+
 /* -----------------------------------------------------------------------------
  * Header and Navigation
  * ----------------------------------------------------------------------------- */
