@@ -503,6 +503,7 @@ h1 {
 .md-button--primary:hover {
     background-color: #00B8D4 !important;
     border-color: #00B8D4 !important;
+    color: #000 !important;
 }
 
 /* -----------------------------------------------------------------------------
