@@ -21,20 +21,20 @@ theme:
   name: material
   custom_dir: docs/overrides
   
-  # Paleta minimalista con modo oscuro por defecto
+  # Paleta Neon Volt (Alto Impacto)
   palette:
     # Light mode
     - scheme: default
-      primary: white
-      accent: cyan
+      primary: lime
+      accent: lime
       toggle:
         icon: material/weather-night
         name: Cambiar a modo oscuro
 
     # Dark mode (default)
     - scheme: slate
-      primary: black
-      accent: cyan
+      primary: lime
+      accent: lime
       toggle:
         icon: material/weather-sunny
         name: Cambiar a modo claro
@@ -180,4 +180,4 @@ extra:
   generator: false
 
 extra_css:
-  - stylesheets/extra.css?v=3.0
+  - stylesheets/extra.css?v=4.0

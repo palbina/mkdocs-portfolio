@@ -1,4 +1,26 @@
-# Observabilidad LGTM
+<div class="project-header">
+<h1>Observabilidad LGTM</h1>
+<p>Correlación total de señales para visibilidad profunda del sistema en tiempo real.</p>
+
+<div class="project-meta-grid">
+<div class="meta-item">
+<span class="meta-label">Status</span>
+<span class="meta-value">ACTIVE_MONITORING</span>
+</div>
+<div class="meta-item">
+<span class="meta-label">Stack</span>
+<span class="meta-value">GRAFANA_LGTM</span>
+</div>
+<div class="meta-item">
+<span class="meta-label">Alerting</span>
+<span class="meta-value">TELEGRAM_ENDPOINT</span>
+</div>
+<div class="meta-item">
+<span class="meta-label">Granularity</span>
+<span class="meta-value">HIGH_RES_METRICS</span>
+</div>
+</div>
+</div>
 
 ## Visión General
 

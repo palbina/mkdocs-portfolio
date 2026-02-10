@@ -1,11 +1,33 @@
-# HomeLab Kubernetes
+<div class="project-header">
+<h1>HomeLab Kubernetes</h1>
+<p>Infraestructura inmutable, alta disponibilidad y seguridad Zero Trust.</p>
+
+<div class="project-meta-grid">
+<div class="meta-item">
+<span class="meta-label">Status</span>
+<span class="meta-value">PRODUCTION_READY</span>
+</div>
+<div class="meta-item">
+<span class="meta-label">Environment</span>
+<span class="meta-value">BARE_METAL_CLUSTER</span>
+</div>
+<div class="meta-item">
+<span class="meta-label">Network CNI</span>
+<span class="meta-value">CILIUM_EBPF</span>
+</div>
+<div class="meta-item">
+<span class="meta-label">Uptime Target</span>
+<span class="meta-value">99.9%_YEARLY</span>
+</div>
+</div>
+</div>
 
 ## Visión General
 
 Cluster Kubernetes de 3 nodos bare-metal diseñado para simular un entorno de producción
 enterprise con alta disponibilidad, seguridad Zero Trust y observabilidad completa.
 
-!!! success "Impacto"
+!!! impact "Key Metrics & Impact"
     **3 nodos** bare-metal en producción 24/7 • **Zero Trust** desde el edge hasta los pods • **100% GitOps** sin configuración manual
 
 ---

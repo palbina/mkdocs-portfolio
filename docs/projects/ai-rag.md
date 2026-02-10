@@ -1,4 +1,26 @@
-# AI Chat con RAG
+<div class="project-header">
+<h1>AI Chat con RAG</h1>
+<p>Asistente inteligente con recuperación aumentada para consulta de documentación técnica.</p>
+
+<div class="project-meta-grid">
+<div class="meta-item">
+<span class="meta-label">Status</span>
+<span class="meta-value">AGENT_READY</span>
+</div>
+<div class="meta-item">
+<span class="meta-label">Architecture</span>
+<span class="meta-value">RAG_LANGGRAPH</span>
+</div>
+<div class="meta-item">
+<span class="meta-label">Vector DB</span>
+<span class="meta-value">QDRANT_STAGING</span>
+</div>
+<div class="meta-item">
+<span class="meta-label">LLM Core</span>
+<span class="meta-value">LLAMA_3.1_8B</span>
+</div>
+</div>
+</div>
 
 ## Visión General
 

@@ -1,4 +1,26 @@
-# Database HA con CloudNativePG
+<div class="project-header">
+<h1>Database HA con CloudNativePG</h1>
+<p>Clusters PostgreSQL de alta disponibilidad con failover automático y backups inmutables.</p>
+
+<div class="project-meta-grid">
+<div class="meta-item">
+<span class="meta-label">Status</span>
+<span class="meta-value">CLUSTER_STABLE</span>
+</div>
+<div class="meta-item">
+<span class="meta-label">Engine</span>
+<span class="meta-value">POSTGRES_V16</span>
+</div>
+<div class="meta-item">
+<span class="meta-label">Replication</span>
+<span class="meta-value">SYNC_STREAMING</span>
+</div>
+<div class="meta-item">
+<span class="meta-label">Backups</span>
+<span class="meta-value">S3_CONTINUOUS</span>
+</div>
+</div>
+</div>
 
 ## Visión General
 

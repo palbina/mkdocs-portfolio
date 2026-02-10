@@ -1,11 +1,33 @@
-# GitOps con ArgoCD
+<div class="project-header">
+<h1>GitOps con ArgoCD</h1>
+<p>Gestión declarativa del ciclo de vida de aplicaciones y sincronización automática de estado.</p>
+
+<div class="project-meta-grid">
+<div class="meta-item">
+<span class="meta-label">Status</span>
+<span class="meta-value">OPERATIONAL</span>
+</div>
+<div class="meta-item">
+<span class="meta-label">Delivery Type</span>
+<span class="meta-value">PROGRESSIVE_CANARY</span>
+</div>
+<div class="meta-item">
+<span class="meta-label">Engine</span>
+<span class="meta-value">ARGO_CD_V2.10</span>
+</div>
+<div class="meta-item">
+<span class="meta-label">Reproduction</span>
+<span class="meta-value">100%_DECLARATIVE</span>
+</div>
+</div>
+</div>
 
 ## Visión General
 
 Implementación completa de GitOps para gestión declarativa del cluster Kubernetes.
 Git como fuente única de verdad para infraestructura y aplicaciones.
 
-!!! success "Impacto"
+!!! impact "Key Metrics & Impact"
     **30+ aplicaciones** gestionadas declarativamente • **Zero drift** con self-healing automático • **100% reproducible** desde Git
 
 ---

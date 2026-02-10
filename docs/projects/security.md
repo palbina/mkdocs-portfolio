@@ -1,4 +1,26 @@
-# Zero Trust Security
+<div class="project-header">
+<h1>Zero Trust Security</h1>
+<p>Arquitectura de defensa en profundidad multicapa con verificación continua de identidad.</p>
+
+<div class="project-meta-grid">
+<div class="meta-item">
+<span class="meta-label">Status</span>
+<span class="meta-value">SHIELD_ACTIVE</span>
+</div>
+<div class="meta-item">
+<span class="meta-label">Security Level</span>
+<span class="meta-value">ZERO_TRUST_L5</span>
+</div>
+<div class="meta-item">
+<span class="meta-label">Network</span>
+<span class="meta-value">CILIUM_POLICIES</span>
+</div>
+<div class="meta-item">
+<span class="meta-label">Identity</span>
+<span class="meta-value">AUTHENTIK_OIDC</span>
+</div>
+</div>
+</div>
 
 ## Visión General
 
