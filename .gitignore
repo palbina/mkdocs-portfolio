@@ -22,3 +22,10 @@ Thumbs.db
 
 # Docker
 *.log
+
+# AI & Project Documentation
+imagenes-opencode/actual
+.ai-context/context-docs
+.agents/skills
+CLAUDE.md
+DESIGN.md
