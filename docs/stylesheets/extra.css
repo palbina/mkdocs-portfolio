@@ -896,7 +896,20 @@ body {
 }
 
 /* Force solid backgrounds on Header to prevent see-through on scroll */
-[data-md-color-scheme="slate"] .md-header { background-color: #0A0A0A !important; }
+[data-md-color-scheme="slate"] .md-header { 
+    background-color: var(--brand-primary) !important; 
+    box-shadow: 0 2px 8px rgba(0,0,0,0.6) !important;
+}
+
+/* Contrast adjustment for bright Dark Mode header (Black on Lime) */
+[data-md-color-scheme="slate"] .md-header__title,
+[data-md-color-scheme="slate"] .md-header__button,
+[data-md-color-scheme="slate"] .md-header__topic,
+[data-md-color-scheme="slate"] .md-header .md-icon,
+[data-md-color-scheme="slate"] .md-header .md-logo {
+    color: #000000 !important;
+}
+
 [data-md-color-scheme="default"] .md-header { background-color: #FFFFFF !important; }
 
 /* Layer 200: Overlay (Backdrop) - Must cover the Header */
