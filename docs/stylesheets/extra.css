@@ -31,6 +31,12 @@
 
 /* Light Mode Variables Override */
 [data-md-color-scheme="default"] {
+    /* Brand Colors - Darker Lime for Light Mode Contrast */
+    --brand-primary: #6a8a1a;
+    --brand-secondary: #5f7d15;
+    --brand-glow: rgba(106, 138, 26, 0.15);
+    --brand-glow-strong: rgba(106, 138, 26, 0.3);
+
     /* Backgrounds - Light Theme */
     --bg-dark: #FAFAFA;
     --bg-surface: #FFFFFF;
@@ -44,7 +50,7 @@
     /* Borders */
     --border-subtle: rgba(0, 0, 0, 0.06);
     --border-default: rgba(0, 0, 0, 0.12);
-    --border-accent: rgba(204, 255, 0, 0.5);
+    --border-accent: rgba(106, 138, 26, 0.5);
 }
 
 /* -----------------------------------------------------------------------------
@@ -53,6 +59,14 @@
 [data-md-color-scheme="slate"] {
     --md-default-bg-color: var(--bg-dark);
     --md-code-bg-color: var(--bg-surface);
+    --md-default-fg-color: var(--text-primary);
+    --md-accent-fg-color: var(--brand-primary);
+    --md-typeset-a-color: var(--brand-primary);
+}
+
+[data-md-color-scheme="default"] {
+    --md-default-bg-color: var(--bg-surface);
+    --md-code-bg-color: var(--bg-card);
     --md-default-fg-color: var(--text-primary);
     --md-accent-fg-color: var(--brand-primary);
     --md-typeset-a-color: var(--brand-primary);
@@ -122,7 +136,7 @@ body {
 }
 
 .hero-subline strong {
-    color: #FFF;
+    color: var(--text-primary);
     border-bottom: 2px solid var(--brand-primary);
 }
 
@@ -481,7 +495,7 @@ body {
     font-weight: 900;
     text-transform: uppercase;
     margin-bottom: 0.5rem;
-    color: #FFF;
+    color: var(--md-default-fg-color);
     letter-spacing: -0.05em;
 }
 
@@ -544,6 +558,135 @@ body {
 .md-typeset table:not([class]) tr:hover td {
     background: rgba(255, 255, 255, 0.02);
     color: #FFF;
+}
+
+/* -------------------------------------------------------------------------
+ * Responsive Tables - Card Pattern for Mobile
+ * Full-width cards that adapt to screen size
+ * ------------------------------------------------------------------------- */
+@media screen and (max-width: 768px) {
+    /* Override table wrapper constraints */
+    .md-typeset__table {
+        display: block;
+        width: 100%;
+        margin: 0;
+        padding: 0;
+        overflow-x: visible;
+    }
+
+    .md-typeset__scrollwrap {
+        margin: 0;
+        padding: 0;
+        overflow-x: visible;
+    }
+
+    .md-typeset table:not([class]) {
+        display: block;
+        width: 100%;
+        min-width: 100%;
+        max-width: 100%;
+        border: none;
+        background: transparent;
+        table-layout: fixed;
+    }
+
+    .md-typeset table:not([class]) thead {
+        display: none;
+    }
+
+    .md-typeset table:not([class]) tbody {
+        display: block;
+        width: 100%;
+    }
+
+    .md-typeset table:not([class]) tr {
+        display: block;
+        width: 100%;
+        background: var(--bg-card);
+        border: 1px solid var(--border-default);
+        border-radius: 8px;
+        margin-bottom: 0.75rem;
+        padding: 0;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease;
+        will-change: transform;
+        -webkit-tap-highlight-color: rgba(204, 255, 0, 0.1);
+        box-sizing: border-box;
+    }
+
+    .md-typeset table:not([class]) tr:active {
+        transform: scale(0.98);
+    }
+
+    .md-typeset table:not([class]) td {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        max-width: 100%;
+        padding: 0.75rem 1rem;
+        border-bottom: 1px solid var(--border-subtle);
+        font-size: 0.875rem;
+        line-height: 1.5;
+        min-height: 44px;
+        justify-content: center;
+        box-sizing: border-box;
+        word-wrap: break-word;
+        overflow-wrap: break-word;
+        hyphens: auto;
+    }
+
+    .md-typeset table:not([class]) td:last-child {
+        border-bottom: none;
+    }
+
+    .md-typeset table:not([class]) td::before {
+        content: attr(data-label);
+        display: block;
+        font-size: 0.625rem;
+        font-weight: 800;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        color: var(--text-muted);
+        margin-bottom: 0.375rem;
+        line-height: 1.2;
+    }
+
+    .md-typeset table:not([class]) td:first-child {
+        font-weight: 700;
+        color: var(--brand-primary);
+        font-size: 1rem;
+        padding-top: 1rem;
+        padding-bottom: 1rem;
+        background: rgba(204, 255, 0, 0.03);
+        border-bottom: 2px solid var(--border-accent);
+    }
+
+    .md-typeset table:not([class]) td:first-child::before {
+        color: var(--brand-primary);
+        opacity: 0.7;
+    }
+
+    .md-typeset table:not([class]) tr:hover,
+    .md-typeset table:not([class]) tr:focus-within {
+        border-color: var(--brand-primary);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12), 0 0 0 1px var(--brand-glow);
+        transform: translateY(-1px);
+    }
+
+    .md-typeset table:not([class]) tr:hover td:first-child,
+    .md-typeset table:not([class]) tr:focus-within td:first-child {
+        background: rgba(204, 255, 0, 0.06);
+    }
+
+    /* Light mode specific adjustments */
+    [data-md-color-scheme="default"] .md-typeset table:not([class]) tr {
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08), 0 1px 2px rgba(0, 0, 0, 0.06);
+    }
+
+    [data-md-color-scheme="default"] .md-typeset table:not([class]) td:first-child {
+        background: rgba(106, 138, 26, 0.04);
+        border-bottom-color: rgba(106, 138, 26, 0.3);
+    }
 }
 
 /* Mermaid Customization - Cyber Style */
@@ -703,7 +846,7 @@ body {
     font-size: 1.25rem;
     font-weight: 800;
     text-transform: uppercase;
-    color: #FFF;
+    color: var(--md-default-fg-color);
     margin-bottom: 0.75rem;
 }
 
@@ -965,5 +1108,130 @@ body {
         white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis;
+    }
+}
+
+/* -----------------------------------------------------------------------------
+ * ArkenOps Brand Identity - .cc Domain Concept
+ * Cloud Computing & Complex Code
+ * -----------------------------------------------------------------------------
+ */
+
+/* Domain highlight with tooltip */
+.arkenops-domain {
+    position: relative;
+    display: inline-block;
+    font-family: 'JetBrains Mono', monospace;
+    font-weight: 700;
+}
+
+.arkenops-domain .cc-highlight {
+    color: var(--brand-primary);
+    font-weight: 800;
+    text-shadow: 0 0 8px var(--brand-glow);
+}
+
+.arkenops-domain:hover .cc-highlight {
+    animation: cc-pulse 1s ease-in-out infinite;
+}
+
+@keyframes cc-pulse {
+    0%, 100% { text-shadow: 0 0 8px var(--brand-glow); }
+    50% { text-shadow: 0 0 20px var(--brand-glow-strong); }
+}
+
+/* Tooltip for domain explanation */
+.arkenops-domain::after {
+    content: "Cloud Computing & Complex Code";
+    position: absolute;
+    bottom: 120%;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--bg-card);
+    border: 1px solid var(--border-accent);
+    padding: 0.5rem 1rem;
+    font-size: 0.7rem;
+    font-weight: 600;
+    white-space: nowrap;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.2s ease;
+    z-index: 1000;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+}
+
+.arkenops-domain:hover::after {
+    opacity: 1;
+    visibility: visible;
+    bottom: 130%;
+}
+
+/* Footer styling for .cc concept */
+.ark-ops-footer {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem;
+    color: var(--text-muted);
+    margin-top: 0.25rem;
+}
+
+/* Domain explanation cards */
+.domain-concept {
+    background: var(--bg-card);
+    border: 1px solid var(--border-default);
+    padding: 2rem;
+    margin: 1.5rem 0;
+}
+
+.domain-concept h3 {
+    color: var(--brand-primary);
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: 1.5rem;
+    font-weight: 800;
+}
+
+.domain-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+}
+
+.domain-item {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.domain-item .cc-letter {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 2rem;
+    font-weight: 900;
+    color: var(--brand-primary);
+    line-height: 1;
+}
+
+.domain-item h4 {
+    font-size: 0.85rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin: 0;
+}
+
+.domain-item p {
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+    margin: 0;
+    line-height: 1.5;
+}
+
+@media screen and (max-width: 768px) {
+    .domain-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .ark-header-badge {
+        display: none;
     }
 }

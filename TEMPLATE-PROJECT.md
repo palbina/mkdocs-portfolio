@@ -1,28 +1,46 @@
 ---
-title: Nombre del Proyecto
-description: Breve descripción del proyecto para SEO
+title: NOMBRE_DEL_PROYECTO
+description: Breve descripción del proyecto para SEO y navegación.
 ---
 
-# Nombre del Proyecto
-
 <div class="project-header">
-<span class="project-badge">CATEGORÍA</span>
-<span class="project-status">ESTADO: En Producción</span>
+<h1>NOMBRE_DEL_PROYECTO</h1>
+<p>Subtítulo descriptivo breve que explique el propósito y valor del proyecto en una línea.</p>
+
+<div class="project-meta-grid">
+<div class="meta-item">
+<span class="meta-label">Status</span>
+<span class="meta-value">ESTADO_ACTUAL</span>
+</div>
+<div class="meta-item">
+<span class="meta-label">Environment</span>
+<span class="meta-value">ENTORNO</span>
+</div>
+<div class="meta-item">
+<span class="meta-label">Category</span>
+<span class="meta-value">CATEGORIA</span>
+</div>
+<div class="meta-item">
+<span class="meta-label">Uptime</span>
+<span class="meta-value">XX.X%</span>
+</div>
+</div>
 </div>
 
-!!! summary "Overview"
-    Descripción breve y concisa del proyecto.
-    
-    **Impacto**: Métrica clave o resultado principal.
+## Visión General
+
+Descripción concisa del proyecto, su propósito y el problema que resuelve.
+Explica el contexto y por qué es importante en tu infraestructura.
+
+!!! impact "Key Metrics & Impact"
+    **Métrica clave** destacada • **Impacto medible** • **Beneficio principal** logrado
 
 ---
 
 ## Arquitectura
 
-### Diagrama de Componentes
-
 ```mermaid
-flowchart TB
+graph TB
     subgraph External["External"]
         User["👤 User"]
         DNS["🌐 DNS/Cloudflare"]
@@ -47,35 +65,37 @@ flowchart TB
     App --> Cache
 ```
 
-### Componentes Principales
-
-| Componente | Tecnología | Propósito |
-|:-----------|:-----------|:----------|
-| **Componente 1** | Tech 1 | Descripción |
-| **Componente 2** | Tech 2 | Descripción |
-| **Componente 3** | Tech 3 | Descripción |
+!!! info "Componentes Clave"
+    - **Componente 1**: Descripción breve de su función y valor.
+    - **Componente 2**: Descripción breve de su función y valor.
+    - **Componente 3**: Descripción breve de su función y valor.
 
 ---
 
-## Tecnologías
+## Stack Tecnológico
 
-### Stack Principal
+=== "Infraestructura"
 
-<div class="tech-stack">
+    | Componente | Tecnología | Descripción |
+    |:-----------|:-----------|:------------|
+    | **Capa 1** | Tech 1 | Propósito específico |
+    | **Capa 2** | Tech 2 | Propósito específico |
+    | **Capa 3** | Tech 3 | Propósito específico |
 
-- **Infrastructure**: Talos Linux, Kubernetes, Cilium
-- **Platform**: ArgoCD, Istio, Traefik
-- **Observability**: Prometheus, Grafana, Loki
-- **Security**: CrowdSec, Authentik, mTLS
+=== "Plataforma"
 
-</div>
+    | Componente | Tecnología | Descripción |
+    |:-----------|:-----------|:------------|
+    | **Componente A** | Tech A | Función en el stack |
+    | **Componente B** | Tech B | Función en el stack |
 
-### Versiones
+=== "Observabilidad"
 
-| Software | Versión | Notas |
-|:---------|:--------|:------|
-| Software 1 | v1.0.0 | Requerido |
-| Software 2 | v2.0.0 | Opcional |
+    | Componente | Tecnología | Descripción |
+    |:-----------|:-----------|:------------|
+    | **Métricas** | Prometheus | Time-series monitoring |
+    | **Logs** | Loki | Log aggregation |
+    | **Alertas** | Alertmanager | Notificaciones |
 
 ---
 
@@ -85,8 +105,9 @@ flowchart TB
 
 !!! example "Paso 1 - Configuración Inicial"
     ```bash
-    # Comandos para configuración
+    # Comandos para configuración inicial
     kubectl apply -f namespace.yaml
+    kubectl apply -f prerequisites.yaml
     ```
 
 ### Fase 2: Despliegue
@@ -119,8 +140,8 @@ flowchart TB
 
 | Variable | Descripción | Default | Requerido |
 |:---------|:------------|:--------|:----------|
-| `VAR_1` | Descripción 1 | `default` | Sí |
-| `VAR_2` | Descripción 2 | `false` | No |
+| `VAR_1` | Descripción de la variable | `default` | Sí |
+| `VAR_2` | Descripción de la variable | `false` | No |
 
 ### Secrets
 
@@ -136,7 +157,7 @@ flowchart TB
 
 ```bash
 # Verificar estado
-kubectl get all -n <namespace>
+curl -s https://status.endpoint/health | jq .
 
 # Logs
 gkubectl logs -f deployment/<app> -n <namespace>
@@ -185,14 +206,10 @@ Las alertas se envían a Telegram via Alertmanager.
 
 ### Métricas de Éxito
 
-<div class="metrics-grid">
-
 | Métrica | Antes | Después | Mejora |
 |:--------|:------|:--------|:-------|
 | Métrica 1 | Valor | Valor | +X% |
 | Métrica 2 | Valor | Valor | -Y% |
-
-</div>
 
 ### Lecciones Aprendidas
 
@@ -218,7 +235,7 @@ Las alertas se envían a Telegram via Alertmanager.
 
 ---
 
-!!! quote "Arquitectura"
+!!! quote "Filosofía"
     "Breve quote o filosofía aplicada en este proyecto."
 
 **Última actualización**: {{ git_revision_date_localized }}

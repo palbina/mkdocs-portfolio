@@ -3,16 +3,20 @@
 # DevOps Portfolio Minimalista con filosofía "Docs as Code"
 # =============================================================================
 
-site_name: Cloud Native Engineer
+site_name: ArkenOps
 site_url: https://docs.arkenops.cc
 site_author: Peter Albina
 site_description: >-
-  Portfolio de ingeniería DevOps/SRE especializado en Kubernetes, GitOps, 
-  observabilidad y automatización de infraestructura cloud-native.
+  ArkenOps: Cloud Computing & Complex Code Solved. Portfolio de ingeniería 
+  DevOps/SRE especializado en Kubernetes, GitOps, observabilidad y 
+  automatización de infraestructura cloud-native.
 repo_name: palbina/mkdocs-portfolio
 repo_url: https://github.com/palbina/mkdocs-portfolio
 edit_uri: edit/main/docs/
-copyright: Copyright © 2026 Peter Albina. Licencia MIT.
+copyright: >-
+  .cc stands for Cloud Computing & Complex Code.<br>
+  // ArkenOps System v1.0 | Logic deployed on .cc infrastructure.<br>
+  Copyright © 2026 Peter Albina. Licencia MIT.
 
 # =============================================================================
 # THEME CONFIGURATION

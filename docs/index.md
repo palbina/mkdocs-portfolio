@@ -11,7 +11,7 @@ hide:
 
 <h1>Peter Albina</h1>
 
-<p class="hero-headline">Construyendo el Futuro Cloud-Native</p>
+<p class="hero-headline">Cloud Computing & Complex Code Solved</p>
 
 <p class="hero-subline">Sistemas de alta disponibilidad, seguridad <strong>Zero Trust</strong> y automatización extrema mediante <strong>GitOps</strong> e infraestructura como código.</p>
 
@@ -141,6 +141,26 @@ hide:
 
 ---
 
+<h2 style="text-align: center; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 3rem;">About the Domain</h2>
+
+<div class="domain-concept">
+<h3>// System Specification: <span class="arkenops-domain">arkenops.<span class="cc-highlight">cc</span></span></h3>
+<div class="domain-grid">
+<div class="domain-item">
+<span class="cc-letter">C</span>
+<h4>Complex Code</h4>
+<p>Abstracción de problemas difíciles. Arquitecturas distribuidas, algoritmos eficientes y soluciones escalables para desafíos técnicos reales.</p>
+</div>
+<div class="domain-item">
+<span class="cc-letter">C</span>
+<h4>Cloud Computing</h4>
+<p>Infraestructura escalable y resiliente. Kubernetes nativo, alta disponibilidad y orquestación automatizada en entornos cloud-native.</p>
+</div>
+</div>
+</div>
+
+---
+
 <h2 style="text-align: center; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 3rem;">Arsenal Tecnológico</h2>
 
 <div class="tech-showcase">
@@ -200,6 +220,9 @@ hide:
 </div>
 
 <p class="footer-text">
-SYSTEM_STATUS: ONLINE • BUILD: {{ build_time() }} •
+<span class="arkenops-domain">arkenops.<span class="cc-highlight">cc</span></span> //
+.cc stands for <strong>Cloud Computing</strong> & <strong>Complex Code</strong> //
+ArkenOps System v1.0 | Logic deployed on .cc infrastructure //
+BUILD: {{ build_time() }} •
 <a href="https://github.com/palbina/mkdocs-portfolio">SOURCE_CODE</a>
 </p>
