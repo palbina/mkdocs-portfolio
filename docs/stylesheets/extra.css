@@ -862,177 +862,123 @@ body {
 }
 
 /* -----------------------------------------------------------------------------
- * Z-INDEX HIERARCHY - Sistema de Capas Robusto (Escala 1-20)
- * Jerarquía: Drawer (20) > Overlay (15) > Header (10) > Cards (5) > Content (1)
+ * Z-INDEX & LAYER HIERARCHY (Consolidated Fix)
+ * Scale: 1-100 (Safe range for MkDocs Material)
  * ----------------------------------------------------------------------------- */
 
-/* Capa 10: Header - Siempre por encima del contenido base */
-.md-header {
-    z-index: 10 !important;
-    position: sticky !important;
-    top: 0 !important;
-}
-
-/* Capa 15: Overlay - Capa oscura entre el contenido y el drawer */
-.md-overlay,
-[data-md-component="overlay"] {
-    z-index: 15 !important;
-}
-
-/* Capa 20: Drawer/Sidebar - Máxima prioridad cuando está activo */
-.md-sidebar--primary,
-.md-drawer,
-[data-md-component="drawer"] {
-    z-index: 20 !important;
-}
-
-/* Fondo sólido para el sidebar y navegación - EVITA CONTENIDO TRANSPARENTE */
-.md-sidebar--primary,
-.md-sidebar,
-.md-nav {
-    background-color: var(--md-default-bg-color) !important;
-}
-
-/* Estabilidad en animaciones del drawer */
-.md-sidebar,
-.md-sidebar--primary {
-    transform: translateZ(0);
-    backface-visibility: hidden;
-}
-
-/* En móvil, el drawer necesita posición fixed */
-@media screen and (max-width: 76.1875em) {
-    .md-sidebar--primary,
-    .md-drawer,
-    [data-md-component="drawer"] {
-        z-index: 20 !important;
-        position: fixed !important;
-    }
-}
-
-/* Contexto de apilamiento aislado para contenedores principales */
-.md-container,
-.md-main,
-.md-content {
-    isolation: isolate;
-}
-
-/* Resetear z-index conflictivos en el contenedor principal */
-.md-container {
-    z-index: auto !important;
-}
-
-/* -----------------------------------------------------------------------------
- * HEADER STYLING - FIXED FOR MOBILE & DARK MODE
- * ----------------------------------------------------------------------------- */
-
-/* Dark Mode Header */
-[data-md-color-scheme="slate"] .md-header {
-    background-color: var(--md-primary-fg-color--dark, #1a1a1a) !important;
-    border-bottom: 1px solid var(--brand-primary);
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
-}
-
-[data-md-color-scheme="slate"] .md-header__inner {
-    background-color: transparent;
-}
-
-[data-md-color-scheme="slate"] .md-header__title {
-    color: #FFFFFF;
-    font-weight: 700;
-}
-
-[data-md-color-scheme="slate"] .md-header__button.md-logo {
-    color: var(--brand-primary);
-}
-
-/* Light Mode Header */
-[data-md-color-scheme="default"] .md-header {
-    background-color: var(--md-primary-fg-color--light, #ffffff) !important;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
-}
-
-[data-md-color-scheme="default"] .md-header__inner {
-    background-color: transparent;
-}
-
-[data-md-color-scheme="default"] .md-header__title {
-    color: #1A1A1A;
-    font-weight: 700;
-}
-
-[data-md-color-scheme="default"] .md-header__button.md-logo {
-    color: var(--brand-primary);
-}
-
-/* -----------------------------------------------------------------------------
- * CONTENT LAYERING - Capas Inferiores
- * ----------------------------------------------------------------------------- */
-
-/* Capa 1: Contenido base */
-.md-main,
+/* Layer 1: Base Containers */
+.md-container, 
+.md-main, 
 .md-content {
     position: relative;
-    z-index: 1;
+    z-index: 1 !important;
+    isolation: isolate; /* Create new stacking context */
 }
 
-/* Capa 5: Tarjetas y elementos con position - DEBAJO del header (z-index: 10) */
+/* Layer 10: Content Elements (Cards, Code Blocks, Admonitions) */
 .project-card,
 .value-card,
 .expertise-card,
 .tech-category,
 .contact-item,
-.md-typeset .admonition,
-.md-typeset details,
 .highlight,
 .md-typeset pre,
-.md-typeset code {
+.md-typeset .admonition,
+.md-typeset details {
     position: relative;
-    z-index: 5;
+    z-index: 10 !important;
 }
 
-/* Sobreescribir transforms que crean stacking contexts no deseados */
+/* Hover state: Slightly higher but still below header */
 .project-card:hover,
-.value-card:hover,
-.expertise-card:hover,
-.contact-item:hover {
-    transform: translateY(-2px);
-    z-index: 6; /* Un poco más alto al hacer hover, pero sigue debajo del header (10) */
+.value-card:hover {
+    z-index: 11 !important;
+    transform: translateY(-4px);
+}
+
+/* Layer 50: Header & Tabs (Sticky area) */
+.md-header {
+    z-index: 50 !important;
+    position: sticky !important;
+    top: 0 !important;
+}
+
+.md-tabs {
+    z-index: 45 !important; /* Slightly below main header */
+}
+
+/* Layer 70: Overlay (Backdrop) */
+.md-overlay {
+    z-index: 70 !important;
+    background-color: rgba(0, 0, 0, 0.5) !important;
+}
+
+/* Layer 80: Mobile Drawer / Sidebar (THE WINNER) */
+.md-sidebar--primary,
+.md-drawer,
+[data-md-component="drawer"],
+.md-nav--primary {
+    z-index: 80 !important;
+    background-color: var(--bg-dark) !important;
+    opacity: 1 !important;
+    visibility: visible;
+}
+
+/* Solid background for all navigation levels in mobile */
+@media screen and (max-width: 76.1875em) {
+    .md-nav, 
+    .md-nav__list, 
+    .md-nav__item,
+    .md-sidebar__inner {
+        background-color: var(--bg-dark) !important;
+    }
+    
+    [data-md-color-scheme="default"] .md-nav,
+    [data-md-color-scheme="default"] .md-sidebar__inner {
+        background-color: var(--bg-surface) !important;
+    }
+
+    .md-sidebar--primary {
+        position: fixed !important;
+        top: 0;
+        height: 100vh !important;
+        width: 12.1rem; /* Material default */
+        box-shadow: 10px 0 30px rgba(0,0,0,0.8) !important;
+    }
 }
 
 /* -----------------------------------------------------------------------------
- * MOBILE HEADER ADJUSTMENTS
+ * VISUAL STABILITY & MOBILE HEADER FIXES
  * ----------------------------------------------------------------------------- */
+
+/* GPU Acceleration for smooth, stable layers */
+.md-sidebar, 
+.md-header, 
+.md-overlay {
+    transform: translateZ(0);
+    backface-visibility: hidden;
+}
+
 @media screen and (max-width: 768px) {
-    /* Mejoras visuales del header en móvil */
-    [data-md-color-scheme="slate"] .md-header {
-        background-color: #1a1a1a !important;
-        border-bottom: 2px solid var(--brand-primary) !important;
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5) !important;
+    /* Header Opacity Fix */
+    .md-header {
+        background-color: #1a1a1a !important; /* Force solid */
     }
     
     [data-md-color-scheme="default"] .md-header {
         background-color: #ffffff !important;
-        border-bottom: 2px solid rgba(0, 0, 0, 0.2) !important;
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1) !important;
     }
-    
-    /* Fix para solapamiento entre título y repo link en móvil */
-    .md-header__inner {
-        flex-wrap: nowrap;
-        overflow: hidden;
-    }
-    
+
+    /* Title Solapamiento Fix */
     .md-header__title {
-        max-width: 60%;
+        max-width: 55vw;
+        white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis;
-        white-space: nowrap;
     }
     
-    /* El botón de menú hereda el z-index del header (10) - suficiente para estar visible */
-    .md-header__button {
-        position: relative;
+    /* Repo icon visibility */
+    .md-header__source {
+        z-index: 51;
     }
 }
