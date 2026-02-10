@@ -1,0 +1,39 @@
+# MkDocs Portfolio
+
+> Portfolio profesional de DevOps/SRE con documentación técnica detallada.
+
+## Core Files
+
+- [docs/index.md]: Homepage con hero section y proyectos destacados
+- [docs/about.md]: Perfil profesional, stack tecnológico y contacto
+- [docs/projects/]: Documentación de proyectos técnicos
+  - [homelab.md]: Cluster Kubernetes bare-metal
+  - [gitops.md]: ArgoCD y GitOps workflow
+  - [observability.md]: Stack LGTM (Loki, Grafana, Tempo, Mimir)
+  - [security.md]: Zero Trust security architecture
+  - [database-ha.md]: PostgreSQL HA con CNPG
+  - [ai-rag.md]: AI Chat con RAG implementation
+- [docs/blog/]: Artículos técnicos y blog posts
+- [mkdocs.yml]: Configuración del sitio
+
+## Key Concepts
+
+- **Docs as Code**: Documentación versionada en Git con CI/CD
+- **Material Theme**: Dark mode default con acentos lime/neon
+- **Terminal Aesthetic**: Diseño minimalista inspirado en terminales
+- **GitOps**: ArgoCD para despliegue automático
+- **Cloud Native**: Kubernetes, containers, microservicios
+
+## Architecture
+
+- Static site generator: MkDocs
+- Theme: Material for MkDocs
+- Hosting: GitHub Pages
+- Domain: docs.arkenops.cc
+- Custom CSS: Terminal-style overrides
+
+## AI Context
+
+Este proyecto utiliza AI context documentation:
+- [CLAUDE.md]: Índice de documentación de contexto
+- [.ai-context/]: Documentación detallada por categorías
