@@ -861,19 +861,23 @@ body {
     .stat-number { font-size: 2rem; }
 }
 
+/* -----------------------------------------------------------------------------
+ * HEADER STYLING - FIXED FOR MOBILE & DARK MODE
+ * ----------------------------------------------------------------------------- */
+
+/* Base header styles - NO z-index override to avoid drawer issues */
 [data-md-color-scheme="slate"] .md-header,
 [data-md-color-scheme="default"] .md-header {
     position: sticky;
     top: 0;
-    z-index: 9999;
+    /* z-index: removed - use Material's default (2) to avoid drawer overlay issues */
 }
 
+/* Dark Mode Header - Use lighter background for visibility */
 [data-md-color-scheme="slate"] .md-header {
-    background-color: rgba(5, 5, 5, 0.95);
-    border-bottom: 1px solid var(--border-default);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    background-color: var(--md-primary-fg-color--dark, #1a1a1a) !important;
+    border-bottom: 1px solid var(--brand-primary);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
 }
 
 [data-md-color-scheme="slate"] .md-header__inner {
@@ -889,11 +893,10 @@ body {
     color: var(--brand-primary);
 }
 
+/* Light Mode Header */
 [data-md-color-scheme="default"] .md-header {
-    background-color: rgba(250, 250, 250, 0.95);
+    background-color: var(--md-primary-fg-color--light, #ffffff) !important;
     border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
 }
 
@@ -910,16 +913,27 @@ body {
     color: var(--brand-primary);
 }
 
-/* Mobile Header Fix - Force solid background */
+/* Mobile Header - Ensure drawer works properly */
 @media screen and (max-width: 768px) {
+    /* Remove any z-index conflicts on mobile */
+    [data-md-color-scheme="slate"] .md-header,
+    [data-md-color-scheme="default"] .md-header {
+        z-index: auto;
+    }
+    
+    /* Ensure drawer overlay is above header */
+    .md-overlay {
+        z-index: 3;
+    }
+    
     [data-md-color-scheme="slate"] .md-header {
-        background-color: #0A0A0A !important;
+        background-color: #1a1a1a !important;
         border-bottom: 2px solid var(--brand-primary) !important;
         box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5) !important;
     }
     
     [data-md-color-scheme="default"] .md-header {
-        background-color: #FFFFFF !important;
+        background-color: #ffffff !important;
         border-bottom: 2px solid rgba(0, 0, 0, 0.2) !important;
         box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1) !important;
     }
