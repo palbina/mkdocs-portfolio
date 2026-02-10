@@ -220,9 +220,6 @@ hide:
 </div>
 
 <p class="footer-text">
-<span class="arkenops-domain">arkenops.<span class="cc-highlight">cc</span></span> //
-.cc stands for <strong>Cloud Computing</strong> & <strong>Complex Code</strong> //
-ArkenOps System v1.0 | Logic deployed on .cc infrastructure //
 BUILD: {{ build_time() }} •
 <a href="https://github.com/palbina/mkdocs-portfolio">SOURCE_CODE</a>
 </p>

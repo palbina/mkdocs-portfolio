@@ -13,10 +13,7 @@ site_description: >-
 repo_name: palbina/mkdocs-portfolio
 repo_url: https://github.com/palbina/mkdocs-portfolio
 edit_uri: edit/main/docs/
-copyright: >-
-  .cc stands for Cloud Computing & Complex Code.<br>
-  // ArkenOps System v1.0 | Logic deployed on .cc infrastructure.<br>
-  Copyright © 2026 Peter Albina. Licencia MIT.
+copyright: "© 2026 Peter Albina · MIT License"
 
 # =============================================================================
 # THEME CONFIGURATION

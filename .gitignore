@@ -24,8 +24,8 @@ Thumbs.db
 *.log
 
 # AI & Project Documentation
-imagenes-opencode/actual
-.ai-context/context-docs
-.agents/skills
+_archive/
+.ai-context/
+.agents/
 CLAUDE.md
 DESIGN.md
