@@ -865,12 +865,18 @@ body {
  * HEADER STYLING - FIXED FOR MOBILE & DARK MODE
  * ----------------------------------------------------------------------------- */
 
-/* Base header styles - NO z-index override to avoid drawer issues */
+/* 
+ * Z-INDEX STRATEGY:
+ * - Header: z-index: 4 (above content, below drawer)
+ * - Material Drawer: z-index: 5 (default)
+ * - Material Overlay: z-index: 4 (we match this)
+ * - Content: z-index: 1 (below header)
+ */
 [data-md-color-scheme="slate"] .md-header,
 [data-md-color-scheme="default"] .md-header {
     position: sticky;
     top: 0;
-    /* z-index: removed - use Material's default (2) to avoid drawer overlay issues */
+    z-index: 4; /* Above content (1), matches overlay (4), below drawer (5) */
 }
 
 /* Dark Mode Header - Use lighter background for visibility */
@@ -913,17 +919,34 @@ body {
     color: var(--brand-primary);
 }
 
-/* Mobile Header - Ensure drawer works properly */
+/* Content Layering - Ensure content scrolls UNDER header */
+.md-main,
+.md-content {
+    position: relative;
+    z-index: 1; /* Below header (4) */
+}
+
+/* Cards should not create new stacking contexts above header */
+.project-card,
+.value-card,
+.expertise-card,
+.tech-category,
+.contact-item {
+    position: relative;
+    z-index: auto; /* Let parent control stacking */
+    transform: none; /* Remove transform that creates new stacking context */
+}
+
+/* Mobile Header - Maintain z-index hierarchy */
 @media screen and (max-width: 768px) {
-    /* Remove any z-index conflicts on mobile */
     [data-md-color-scheme="slate"] .md-header,
     [data-md-color-scheme="default"] .md-header {
-        z-index: auto;
+        z-index: 4; /* Keep consistent with desktop */
     }
     
-    /* Ensure drawer overlay is above header */
+    /* Ensure drawer overlay is above header (Material uses z-index: 5) */
     .md-overlay {
-        z-index: 3;
+        z-index: 5; /* Above header (4), matches drawer behavior */
     }
     
     [data-md-color-scheme="slate"] .md-header {
