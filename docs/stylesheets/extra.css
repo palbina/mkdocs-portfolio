@@ -29,6 +29,24 @@
     --border-accent: rgba(204, 255, 0, 0.25);
 }
 
+/* Light Mode Variables Override */
+[data-md-color-scheme="default"] {
+    /* Backgrounds - Light Theme */
+    --bg-dark: #FAFAFA;
+    --bg-surface: #FFFFFF;
+    --bg-card: #FFFFFF;
+
+    /* Text - Dark for Light Background */
+    --text-primary: #1A1A1A;
+    --text-secondary: #4A4A4A;
+    --text-muted: #888888;
+
+    /* Borders */
+    --border-subtle: rgba(0, 0, 0, 0.06);
+    --border-default: rgba(0, 0, 0, 0.12);
+    --border-accent: rgba(204, 255, 0, 0.5);
+}
+
 /* -----------------------------------------------------------------------------
  * Global Styles & Textures
  * ----------------------------------------------------------------------------- */
@@ -748,6 +766,89 @@ body {
 
 .footer-text a:hover {
     text-decoration: underline;
+}
+
+/* -----------------------------------------------------------------------------
+ * Light Mode Specific Overrides
+ * ----------------------------------------------------------------------------- */
+[data-md-color-scheme="default"] .project-card,
+[data-md-color-scheme="default"] .value-card,
+[data-md-color-scheme="default"] .expertise-card,
+[data-md-color-scheme="default"] .tech-category,
+[data-md-color-scheme="default"] .contact-item,
+[data-md-color-scheme="default"] .md-content .meta-item {
+    background: #FFFFFF;
+    border-color: rgba(0, 0, 0, 0.1);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+}
+
+[data-md-color-scheme="default"] .project-card:hover,
+[data-md-color-scheme="default"] .value-card:hover,
+[data-md-color-scheme="default"] .expertise-card:hover,
+[data-md-color-scheme="default"] .tech-category:hover,
+[data-md-color-scheme="default"] .contact-item:hover {
+    background: #FAFAFA;
+    border-color: var(--brand-primary);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1), 0 0 20px rgba(204, 255, 0, 0.15);
+}
+
+[data-md-color-scheme="default"] .project-card h3,
+[data-md-color-scheme="default"] .value-card h4,
+[data-md-color-scheme="default"] .timeline-content h4 {
+    color: #1A1A1A;
+}
+
+[data-md-color-scheme="default"] .hero h1,
+[data-md-color-scheme="default"] .about-hero h2 {
+    color: #1A1A1A;
+}
+
+[data-md-color-scheme="default"] .hero-subline,
+[data-md-color-scheme="default"] .project-card p,
+[data-md-color-scheme="default"] .value-card p,
+[data-md-color-scheme="default"] .expertise-content p {
+    color: #4A4A4A;
+}
+
+[data-md-color-scheme="default"] .hero-stats,
+[data-md-color-scheme="default"] .stat {
+    background: #FFFFFF;
+    border-color: rgba(0, 0, 0, 0.1);
+}
+
+[data-md-color-scheme="default"] .cta-section {
+    background: #FFFFFF;
+    box-shadow: 0 0 30px rgba(204, 255, 0, 0.2);
+}
+
+[data-md-color-scheme="default"] .cta-section h3 {
+    color: #1A1A1A;
+}
+
+[data-md-color-scheme="default"] .md-button:not(.md-button--primary) {
+    background: rgba(0, 0, 0, 0.03) !important;
+    border-color: rgba(0, 0, 0, 0.15) !important;
+    color: #1A1A1A !important;
+}
+
+[data-md-color-scheme="default"] .md-button:not(.md-button--primary):hover {
+    background: rgba(204, 255, 0, 0.1) !important;
+    border-color: var(--brand-primary) !important;
+    color: var(--brand-primary) !important;
+}
+
+[data-md-color-scheme="default"] .mermaid {
+    background: #F5F5F5 !important;
+    border-color: rgba(0, 0, 0, 0.1) !important;
+}
+
+[data-md-color-scheme="default"] .md-typeset table:not([class]) tr:hover td {
+    background: rgba(0, 0, 0, 0.02);
+    color: #1A1A1A;
+}
+
+[data-md-color-scheme="default"] .contact-item span {
+    color: #1A1A1A;
 }
 
 /* -----------------------------------------------------------------------------
