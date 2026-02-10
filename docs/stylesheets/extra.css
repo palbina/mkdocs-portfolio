@@ -866,17 +866,20 @@ body {
  * ----------------------------------------------------------------------------- */
 
 /* 
- * Z-INDEX STRATEGY:
- * - Header: z-index: 4 (above content, below drawer)
- * - Material Drawer: z-index: 5 (default)
- * - Material Overlay: z-index: 4 (we match this)
- * - Content: z-index: 1 (below header)
+ * Z-INDEX HIERARCHY (Strict Layering):
+ * - Layer 0 (Base): Content - z-index: 1
+ * - Layer 1 (Header): Sticky header - z-index: 100  
+ * - Layer 2 (Overlay): Backdrop - z-index: 300
+ * - Layer 3 (Drawer): Menu - z-index: 400
  */
+
+/* Layer 1: Header - Above content, below drawer */
 [data-md-color-scheme="slate"] .md-header,
-[data-md-color-scheme="default"] .md-header {
-    position: sticky;
-    top: 0;
-    z-index: 4; /* Above content (1), matches overlay (4), below drawer (5) */
+[data-md-color-scheme="default"] .md-header,
+.md-header {
+    position: sticky !important;
+    top: 0 !important;
+    z-index: 100 !important; /* Above content (1), below drawer (200+) */
 }
 
 /* Dark Mode Header - Use lighter background for visibility */
@@ -919,11 +922,11 @@ body {
     color: var(--brand-primary);
 }
 
-/* Content Layering - Ensure content scrolls UNDER header */
+/* Content Layering - Level 0: Base content */
 .md-main,
 .md-content {
     position: relative;
-    z-index: 1; /* Below header (4) */
+    z-index: 1; /* Below header (20), below drawer (30) */
 }
 
 /* Cards should not create new stacking contexts above header */
@@ -937,16 +940,47 @@ body {
     transform: none; /* Remove transform that creates new stacking context */
 }
 
-/* Mobile Header - Maintain z-index hierarchy */
+/* Layer 2: Overlay - Covers everything including header */
+.md-overlay {
+    z-index: 300 !important; /* Above header (100), below drawer (400) */
+}
+
+/* Layer 3: Drawer - Absolute winner, above all */
+.md-sidebar--primary,
+.md-sidebar,
+.md-drawer,
+[data-md-component="drawer"] {
+    z-index: 400 !important; /* Highest priority, above overlay (300) */
+}
+
+/* Specific override for mobile drawer */
+@media screen and (max-width: 76.1875em) {
+    .md-sidebar--primary,
+    .md-drawer,
+    [data-md-component="drawer"] {
+        z-index: 400 !important;
+        position: fixed !important; /* Ensure it's not trapped in stacking context */
+    }
+}
+
+/* Mobile Header - Maintain strict z-index hierarchy */
 @media screen and (max-width: 768px) {
     [data-md-color-scheme="slate"] .md-header,
-    [data-md-color-scheme="default"] .md-header {
-        z-index: 4; /* Keep consistent with desktop */
+    [data-md-color-scheme="default"] .md-header,
+    .md-header {
+        z-index: 100 !important; /* Keep consistent with desktop */
     }
     
-    /* Ensure drawer overlay is above header (Material uses z-index: 5) */
+    /* Mobile drawer must be absolute winner */
+    .md-sidebar--primary,
+    .md-drawer,
+    [data-md-component="drawer"],
+    [data-md-toggle="drawer"]:checked ~ .md-sidebar--primary {
+        z-index: 400 !important;
+    }
+    
     .md-overlay {
-        z-index: 5; /* Above header (4), matches drawer behavior */
+        z-index: 300 !important; /* Above header (100), below drawer (400) */
     }
     
     [data-md-color-scheme="slate"] .md-header {
@@ -960,4 +994,35 @@ body {
         border-bottom: 2px solid rgba(0, 0, 0, 0.2) !important;
         box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1) !important;
     }
+}
+
+/* --- FIX DE CAPAS (Z-INDEX LAYERING) --- */
+
+/* 1. Header: Lo bajamos a 10. Suficiente para tapar el contenido (que es 0), 
+   pero fácil de superar por el menú. */
+.md-header, 
+[data-md-component="header"] {
+  z-index: 10 !important;
+  position: sticky;
+}
+
+/* 2. Overlay (Fondo oscuro): Nivel 20. Tapa al header. */
+.md-overlay,
+[data-md-component="overlay"] {
+  z-index: 20 !important;
+}
+
+/* 3. Menú Lateral (Drawer/Sidebar): Nivel 30 (EL GANADOR).
+   Usamos múltiples selectores para asegurar que atrapamos el elemento correcto 
+   sin importar la versión del tema. */
+.md-sidebar--primary,
+.md-drawer,
+[data-md-component="drawer"],
+[data-md-component="navigation"] {
+  z-index: 30 !important;
+}
+
+/* Fix adicional: Asegurar que el contenedor padre de la sidebar no limite el z-index */
+.md-container {
+    z-index: auto !important;
 }
