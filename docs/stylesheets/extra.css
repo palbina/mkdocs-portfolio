@@ -862,28 +862,42 @@ body {
 }
 
 /* -----------------------------------------------------------------------------
- * Z-INDEX HIERARCHY - Sistema de Capas Consolidado
- * Jerarquía: Drawer (40) > Overlay (30) > Header (20) > Cards (5) > Content (1)
+ * Z-INDEX HIERARCHY - Sistema de Capas Robusto (Escala 1-20)
+ * Jerarquía: Drawer (20) > Overlay (15) > Header (10) > Cards (5) > Content (1)
  * ----------------------------------------------------------------------------- */
 
-/* Capa 20: Header - Siempre por encima del contenido, debajo del drawer */
+/* Capa 10: Header - Siempre por encima del contenido base */
 .md-header {
-    z-index: 20 !important;
+    z-index: 10 !important;
     position: sticky !important;
     top: 0 !important;
 }
 
-/* Capa 30: Overlay - Cubre todo cuando el drawer está abierto */
+/* Capa 15: Overlay - Capa oscura entre el contenido y el drawer */
 .md-overlay,
 [data-md-component="overlay"] {
-    z-index: 30 !important;
+    z-index: 15 !important;
 }
 
-/* Capa 40: Drawer/Sidebar - Máxima prioridad cuando está activo */
+/* Capa 20: Drawer/Sidebar - Máxima prioridad cuando está activo */
 .md-sidebar--primary,
 .md-drawer,
 [data-md-component="drawer"] {
-    z-index: 40 !important;
+    z-index: 20 !important;
+}
+
+/* Fondo sólido para el sidebar y navegación - EVITA CONTENIDO TRANSPARENTE */
+.md-sidebar--primary,
+.md-sidebar,
+.md-nav {
+    background-color: var(--md-default-bg-color) !important;
+}
+
+/* Estabilidad en animaciones del drawer */
+.md-sidebar,
+.md-sidebar--primary {
+    transform: translateZ(0);
+    backface-visibility: hidden;
 }
 
 /* En móvil, el drawer necesita posición fixed */
@@ -891,12 +905,19 @@ body {
     .md-sidebar--primary,
     .md-drawer,
     [data-md-component="drawer"] {
-        z-index: 40 !important;
+        z-index: 20 !important;
         position: fixed !important;
     }
 }
 
-/* Resetear stacking contexts conflictivos en el contenedor principal */
+/* Contexto de apilamiento aislado para contenedores principales */
+.md-container,
+.md-main,
+.md-content {
+    isolation: isolate;
+}
+
+/* Resetear z-index conflictivos en el contenedor principal */
 .md-container {
     z-index: auto !important;
 }
@@ -956,7 +977,7 @@ body {
     z-index: 1;
 }
 
-/* Capa 5: Tarjetas y elementos con position - DEBAJO del header (z-index: 20) */
+/* Capa 5: Tarjetas y elementos con position - DEBAJO del header (z-index: 10) */
 .project-card,
 .value-card,
 .expertise-card,
@@ -969,7 +990,6 @@ body {
 .md-typeset code {
     position: relative;
     z-index: 5;
-    isolation: isolate; /* Crear stacking context independiente pero controlado */
 }
 
 /* Sobreescribir transforms que crean stacking contexts no deseados */
@@ -978,7 +998,7 @@ body {
 .expertise-card:hover,
 .contact-item:hover {
     transform: translateY(-2px);
-    z-index: 6; /* Un poco más alto al hacer hover, pero sigue debajo del header */
+    z-index: 6; /* Un poco más alto al hacer hover, pero sigue debajo del header (10) */
 }
 
 /* -----------------------------------------------------------------------------
@@ -1011,8 +1031,8 @@ body {
         white-space: nowrap;
     }
     
-    /* Asegurar que el botón de menú hamburguesa siempre sea visible */
+    /* El botón de menú hereda el z-index del header (10) - suficiente para estar visible */
     .md-header__button {
-        z-index: 25;
+        position: relative;
     }
 }
