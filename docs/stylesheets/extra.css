@@ -82,6 +82,31 @@ body {
 }
 
 /* -----------------------------------------------------------------------------
+ * Announcement Banner - Neon Volt Utility
+ * ----------------------------------------------------------------------------- */
+.md-banner {
+    background-color: var(--bg-dark) !important;
+    border-bottom: 1px solid var(--brand-primary) !important;
+}
+
+.md-announce {
+    color: var(--brand-primary) !important;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.75rem;
+    font-weight: 600;
+    padding: 0.5rem 0;
+}
+
+.md-announce strong {
+    color: var(--brand-primary) !important;
+    text-shadow: 0 0 10px var(--brand-glow);
+}
+
+.md-banner .md-banner__inner .md-icon {
+    color: var(--brand-primary) !important;
+}
+
+/* -----------------------------------------------------------------------------
  * Hero Section - Neon Impact
  * ----------------------------------------------------------------------------- */
 .hero {
@@ -269,6 +294,7 @@ body {
     margin-bottom: 2rem;
     display: block;
     line-height: 1;
+    text-align: center;
 }
 
 /* Icon Glow Utility - Unified for Unicode Emojis */
@@ -566,132 +592,93 @@ body {
 }
 
 /* -------------------------------------------------------------------------
- * Responsive Tables - Card Pattern for Mobile
- * Full-width cards that adapt to screen size
+ * Data Tables - Industrial Precision
  * ------------------------------------------------------------------------- */
+.md-typeset__table {
+    margin: 2rem 0;
+    overflow-x: auto;
+    scrollbar-width: thin;
+    scrollbar-color: var(--brand-primary) transparent;
+}
+
+.md-typeset table:not([class]) {
+    width: 100% !important;
+    display: table !important;
+    /* Ensure it stays as a table */
+    border-collapse: collapse;
+    border: 1px solid var(--border-default);
+    background: rgba(255, 255, 255, 0.02);
+    font-size: 0.8rem;
+    margin: 1.5rem 0;
+}
+
+.md-typeset table:not([class]) thead {
+    background: rgba(204, 255, 0, 0.03);
+}
+
+.md-typeset table:not([class]) th {
+    color: var(--brand-primary);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.75rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    padding: 1rem 1.25rem;
+    border-bottom: 2px solid var(--border-accent);
+    text-align: left;
+}
+
+.md-typeset table:not([class]) td {
+    padding: 1rem 1.25rem;
+    border-bottom: 1px solid var(--border-subtle);
+    color: var(--text-secondary);
+    line-height: 1.6;
+    vertical-align: middle;
+}
+
+/* Unified style for code/references inside tables */
+.md-typeset table:not([class]) td code {
+    background: transparent !important;
+    border: none !important;
+    padding: 0 !important;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.85rem;
+    font-weight: 600;
+    box-shadow: none !important;
+    color: inherit;
+    /* Inherit from the cell to maintain consistency */
+}
+
+.md-typeset table:not([class]) tr:hover td {
+    background: rgba(204, 255, 0, 0.02);
+}
+
+/* Highlight for first column - THE IDENTITY COLUMN */
+.md-typeset table:not([class]) td:first-child,
+.md-typeset table:not([class]) td:first-child code,
+.md-typeset table:not([class]) td:first-child strong {
+    font-weight: 800 !important;
+    color: var(--brand-primary) !important;
+    font-family: 'JetBrains Mono', monospace !important;
+}
+
+/* Data columns - Neutral for readability */
+.md-typeset table:not([class]) td:not(:first-child) {
+    color: var(--text-secondary);
+}
+
+/* Mobile specific: ensure the scroll is obvious */
 @media screen and (max-width: 768px) {
-
-    /* Override table wrapper constraints */
     .md-typeset__table {
-        display: block;
-        width: 100%;
-        margin: 0;
-        padding: 0;
-        overflow-x: visible;
+        border-radius: 4px;
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
     }
 
-    .md-typeset__scrollwrap {
-        margin: 0;
-        padding: 0;
-        overflow-x: visible;
-    }
-
-    .md-typeset table:not([class]) {
-        display: block;
-        width: 100%;
-        min-width: 100%;
-        max-width: 100%;
-        border: none;
-        background: transparent;
-        table-layout: fixed;
-    }
-
-    .md-typeset table:not([class]) thead {
-        display: none;
-    }
-
-    .md-typeset table:not([class]) tbody {
-        display: block;
-        width: 100%;
-    }
-
-    .md-typeset table:not([class]) tr {
-        display: block;
-        width: 100%;
-        background: var(--bg-card);
-        border: 1px solid var(--border-default);
-        border-radius: 8px;
-        margin-bottom: 0.75rem;
-        padding: 0;
-        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-        transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease;
-        will-change: transform;
-        -webkit-tap-highlight-color: rgba(204, 255, 0, 0.1);
-        box-sizing: border-box;
-    }
-
-    .md-typeset table:not([class]) tr:active {
-        transform: scale(0.98);
-    }
-
+    .md-typeset table:not([class]) th,
     .md-typeset table:not([class]) td {
-        display: flex;
-        flex-direction: column;
-        width: 100%;
-        max-width: 100%;
-        padding: 0.75rem 1rem;
-        border-bottom: 1px solid var(--border-subtle);
-        font-size: 0.875rem;
-        line-height: 1.5;
-        min-height: 44px;
-        justify-content: center;
-        box-sizing: border-box;
-        word-wrap: break-word;
-        overflow-wrap: break-word;
-        hyphens: auto;
-    }
-
-    .md-typeset table:not([class]) td:last-child {
-        border-bottom: none;
-    }
-
-    .md-typeset table:not([class]) td::before {
-        content: attr(data-label);
-        display: block;
-        font-size: 0.625rem;
-        font-weight: 800;
-        text-transform: uppercase;
-        letter-spacing: 0.08em;
-        color: var(--text-muted);
-        margin-bottom: 0.375rem;
-        line-height: 1.2;
-    }
-
-    .md-typeset table:not([class]) td:first-child {
-        font-weight: 700;
-        color: var(--brand-primary);
-        font-size: 1rem;
-        padding-top: 1rem;
-        padding-bottom: 1rem;
-        background: rgba(204, 255, 0, 0.03);
-        border-bottom: 2px solid var(--border-accent);
-    }
-
-    .md-typeset table:not([class]) td:first-child::before {
-        color: var(--brand-primary);
-        opacity: 0.7;
-    }
-
-    .md-typeset table:not([class]) tr:hover,
-    .md-typeset table:not([class]) tr:focus-within {
-        border-color: var(--brand-primary);
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12), 0 0 0 1px var(--brand-glow);
-        transform: translateY(-1px);
-    }
-
-    .md-typeset table:not([class]) tr:hover td:first-child,
-    .md-typeset table:not([class]) tr:focus-within td:first-child {
-        background: rgba(204, 255, 0, 0.06);
-    }
-
-    /* Light mode specific adjustments */
-    [data-md-color-scheme="default"] .md-typeset table:not([class]) tr {
-        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08), 0 1px 2px rgba(0, 0, 0, 0.06);
-    }
-
-    [data-md-color-scheme="default"] .md-typeset table:not([class]) td:first-child {
-        background: rgba(106, 138, 26, 0.04);
-        border-bottom-color: rgba(106, 138, 26, 0.3);
+        padding: 0.8rem 1rem;
+        min-width: 120px;
+        /* Prevent extreme squishing */
     }
 }
 

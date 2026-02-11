@@ -6,7 +6,6 @@ hide:
 
 <div class="hero">
 
-<div class="hero-content">
 <span class="hero-label">DevOps Engineer • Platform Specialist</span>
 
 <h1>Peter Albina</h1>
@@ -15,28 +14,12 @@ hide:
 
 <p class="hero-subline">Sistemas de alta disponibilidad, seguridad <strong>Zero Trust</strong> y automatización extrema mediante <strong>GitOps</strong> e infraestructura como código.</p>
 
-<div class="hero-stats">
-<div class="stat">
-<span class="stat-number">30+</span>
-<span class="stat-label">Apps en producción</span>
-</div>
-<div class="stat">
-<span class="stat-number">99.9%</span>
-<span class="stat-label">Uptime target</span>
-</div>
-<div class="stat">
-<span class="stat-number">3</span>
-<span class="stat-label">Nodos K8s</span>
-</div>
-</div>
-
 <div class="hero-buttons">
 <a href="#proyectos" class="md-button md-button--primary">Explorar Proyectos ↓</a>
 <a href="https://github.com/palbina/HOMELAB-INFRA" class="md-button" target="_blank">View GitHub</a>
 </div>
-</div>
 
-</div>
+</div> <!-- hero -->
 
 ---
 

@@ -1,10 +1,10 @@
 {% extends "base.html" %}
 
 {% block extrahead %}
-  {{ super() }}
-  
-  <!-- JSON-LD Structured Data for SEO -->
-  <script type="application/ld+json">
+{{ super() }}
+
+<!-- JSON-LD Structured Data for SEO -->
+<script type="application/ld+json">
   {
     "@context": "https://schema.org",
     "@type": "Person",
@@ -26,14 +26,15 @@
   }
   </script>
 
-  <!-- Open Graph / Social Cards -->
-  <meta property="og:type" content="website">
-  <meta property="og:locale" content="es_ES">
-  
-  <!-- Theme color for mobile browsers -->
-  <meta name="theme-color" content="#0d1117">
+<!-- Open Graph / Social Cards -->
+<meta property="og:type" content="website">
+<meta property="og:locale" content="es_ES">
+
+<!-- Theme color for mobile browsers -->
+<meta name="theme-color" content="#0d1117">
 {% endblock %}
 
 {% block announce %}
-  <!-- Optional: Announcement banner -->
+<!-- Optional: Announcement banner -->
+🚀 **Peter Albina** | Senior DevOps Engineer disponible para proyectos.
 {% endblock %}
