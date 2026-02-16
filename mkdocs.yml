@@ -110,6 +110,12 @@ plugins:
       enable_creation_date: true
       type: timeago
       fallback_to_build_date: true
+  - blog:
+      blog_dir: blog
+      post_dir: "{blog}/posts"
+      archive: true
+      categories: true
+      authors: true
   # Macros para contenido dinámico (GitHub stats, etc)
   - macros:
       module_name: scripts/main
