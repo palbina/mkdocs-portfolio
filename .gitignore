@@ -23,9 +23,11 @@ Thumbs.db
 # Docker
 *.log
 
+# Git
+.git/
+
 # AI & Project Documentation
 _archive/
 .ai-context/
 .agents/
 CLAUDE.md
-DESIGN.md
