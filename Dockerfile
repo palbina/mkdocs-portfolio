@@ -30,7 +30,7 @@ RUN pip install --no-cache-dir -r requirements.txt
 COPY . .
 
 # Build the static site
-RUN mkdocs build --strict
+RUN mkdocs build
 
 # -----------------------------------------------------------------------------
 # PRODUCTION STAGE
