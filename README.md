@@ -45,6 +45,7 @@ Visita `http://localhost:8000` para ver las actualizaciones en tiempo real. Opci
 ## 🧠 Arquitectura y Cómo Funciona
 
 Bajo el capó, las carpetas y estructuras principales funcionan bajo la convención *docs-as-code*:
+
 - **`docs/`**: Todo el corazón Markdown y assets. Separado por `projects/` (arquitecturas Cloud), `blog/` (artículos cronológicos), y sobre mí.
 - **`zensical.toml`**: Configuración unificada equivalente al backend, define barra de navegación, el ruteo del blog, la inyección del plugin de búsqueda, Google Analytics y anulación CSS estricto.
 - **`docs/stylesheets/extra.css`**: Modificaciones avanzadas de UI para forzar la estética deseada de las pestañas en fondos oscuros vs verdes neon de material (Zensical Layout Fixes).
