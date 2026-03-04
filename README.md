@@ -1,123 +1,75 @@
-# MkDocs Portfolio
+# ArkenOps Portfolio
 
-Portfolio profesional de DevOps/SRE construido con MkDocs y Material theme. Sitio estático de alto rendimiento con filosofía "Docs as Code" y diseño terminal-style minimalista.
+Portfolio profesional de DevOps/SRE construido con **Zensical** (generador rápido en Rust) y el tema Material. Se trata de un sitio estático de alto rendimiento con filosofía "Docs as Code" y un diseño terminal-style minimalista inspirado en interfaces Cyber/Volt.
 
 ![Build Status](https://img.shields.io/badge/build-passing-brightgreen)
+![Zensical](https://img.shields.io/badge/Zensical-0.0.24-orange)
 ![License](https://img.shields.io/badge/license-MIT-blue)
-![MkDocs](https://img.shields.io/badge/MkDocs-1.6+-blue)
-![Material](https://img.shields.io/badge/Material-9.5+-purple)
 
----
+## 🚀 Qué hace este proyecto
 
-## Quick Start
+Este repositorio contiene la configuración, infraestructura como código, documentación y blog personal del ecosistema **ArkenOps**. Su propósito es doble:
+
+1. Actuar como una carta de presentación profesional altamente técnica que demuestre mis habilidades en Kubernetes, GitOps, Observabilidad y arquitecturas Cloud-Native de manera viva.
+2. Funcionar como una base de conocimiento rigurosa para estructurar toda la configuración del **HomeLab** interno y diversos proyectos de I+D (como Inteligencia Artificial RAG o High Availability).
+
+## 🌐 Demo
+
+El sitio es desplegado de forma automatizada y está vivo en: **[docs.arkenops.cc](https://docs.arkenops.cc)**
+
+## 💻 Tech Stack
+
+- **[Static Site Generator]**: **Zensical** - Elegido por estar basado en Rust para una compilación súper rápida, permitiendo un pipeline de CI casi instantáneo frente al backend previo de Python (MkDocs).
+- **[Aesthetics]**: **Material Theme Overrides** - CSS custom extendido e inyectado con variables Cyber para un feel estilo "hacker terminal", logrando un contraste preciso.
+- **[Content Parsing]**: **MarkdownLint** - Utilizado para estandarizar rígidamente la documentación y aplicar consistencia transversal a lo largo de todos los logs y bitácoras del sitio.
+- **[Automation]**: **GitHub Actions** - Emparejado con imágenes nativas Dockerizadas para la etapa de Build y distribución del artefacto optimizado final.
+
+## 🛠️ Getting Started
+
+Puedes ejecutar el proyecto directamente de forma local para contribuir a la documentación, leer el código o testear integraciones y configuraciones CSS nuevas:
 
 ```bash
 # Clonar repositorio
 git clone https://github.com/palbina/mkdocs-portfolio.git
 cd mkdocs-portfolio
 
-# Instalar dependencias
-pip install -r requirements.txt
+# Construir sitio e inicializar entorno (Zensical virtual env recomendado)
+zensical build --clean
 
-# Servir localmente
+# Servir localmente con Hot-Reloading
 zensical serve
-
-# Construir sitio
-zensical build
 ```
 
-Visita `http://localhost:8000` para ver el sitio.
+Visita `http://localhost:8000` para ver las actualizaciones en tiempo real. Opcionalmente, puedes utilizar el `Dockerfile` para ejecutarlo como en producción.
 
----
+## 🧠 Arquitectura y Cómo Funciona
 
-## Features
+Bajo el capó, las carpetas y estructuras principales funcionan bajo la convención *docs-as-code*:
+- **`docs/`**: Todo el corazón Markdown y assets. Separado por `projects/` (arquitecturas Cloud), `blog/` (artículos cronológicos), y sobre mí.
+- **`zensical.toml`**: Configuración unificada equivalente al backend, define barra de navegación, el ruteo del blog, la inyección del plugin de búsqueda, Google Analytics y anulación CSS estricto.
+- **`docs/stylesheets/extra.css`**: Modificaciones avanzadas de UI para forzar la estética deseada de las pestañas en fondos oscuros vs verdes neon de material (Zensical Layout Fixes).
 
-- **Diseño Terminal-Style**: Estética minimalista con acentos neon volt
-- **Material for MkDocs**: Tema moderno con dark/light mode
-- **Docs as Code**: Documentación versionada en Git
-- **SEO Optimizado**: Meta tags, sitemap, robots.txt automáticos
-- **Alto Rendimiento**: Minificación HTML/CSS/JS, lazy loading
-- **Responsive**: Optimizado para todos los dispositivos
-- **Search Integrado**: Búsqueda en tiempo real con lunr.js
-- **Mermaid Diagrams**: Diagramas de arquitectura embebidos
-
----
-
-## Configuration
-
-### Variables de Entorno
-
-| Variable | Descripción | Default |
-|----------|-------------|---------|
-| `SITE_URL` | URL del sitio | `https://docs.arkenops.cc` |
-| `GOOGLE_ANALYTICS` | ID de GA | `G-XXXXXXXXXX` |
-
-### Estructura de Archivos
+## 📁 Estructura Principal
 
 ```
 .
 ├── docs/                     # Documentación fuente
-│   ├── index.md             # Homepage
-│   ├── about.md             # Sobre mí
-│   ├── projects/            # Proyectos
-│   │   ├── index.md
-│   │   ├── homelab.md
-│   │   └── ...
-│   ├── blog/                # Blog posts
-│   ├── stylesheets/         # CSS custom
-│   └── javascripts/         # JS custom
-├── docs/overrides/          # Templates overrides
-├── scripts/                 # Macros y utilidades
-├── mkdocs.yml              # Configuración MkDocs
-└── requirements.txt        # Dependencias Python
+│   ├── index.md              # Homepage
+│   ├── about.md              # Sobre mí
+│   ├── projects/             # Documentación técnica por Arquitectura
+│   ├── blog/                 # Entradas de blog organizadas
+│   └── stylesheets/          # CSS custom para overrides del theme
+├── docs/overrides/           # Custom templates HTML para inyecciones (ej: Layouts del anuncio)
+├── zensical.toml             # Configuración Root (Navegación, Branding, Metadata)
+├── .github/workflows/        # Pipelines CI/CD Serverless
+└── Dockerfile                # Empaquetado de producción
 ```
 
----
+## 📖 Lecciones Aprendidas de Ingeniería
 
-## Documentation
+- **Migración Python a Rust**: Transicionar exitosamente de MkDocs a Zensical requirió reconstruir arquitecturas dinámicas (macros de python que controlaban fechas a base del git rev hash) en implementaciones más estáticas y estables para evadir regresiones del backend puro de Zensical.
+- **Control CSS Multi-Capa**: Adaptar el `scheme=slate` nativo de material con inyecciones forzadas que permitiesen un color `primary=lime` (Verde Brillante). Decouplar los headers para que la UI no generase "melting" (falta de contraste de negro sobre oscuridad o falta sobre el verde radioactivo de la barra nativa principal).
 
-- [Arquitectura](./docs/architecture.md)
-- [Guía de Contribución](./CONTRIBUTING.md)
-- [Changelog](./CHANGELOG.md)
-
----
-
-## Deployment
-
-### GitHub Pages (Automático)
-
-El sitio se despliega automáticamente via GitHub Actions en cada push a `main`.
-
-### Docker Local
-
-```bash
-# Construir imagen
-docker build -t mkdocs-portfolio .
-
-# Ejecutar
-docker run -p 8080:80 mkdocs-portfolio
-```
-
-### Kubernetes
-
-```bash
-kubectl apply -f k8s/
-```
-
----
-
-## Tech Stack
-
-| Componente | Tecnología |
-|:-----------|:-----------|
-| **Static Site** | MkDocs + Material |
-| **Hosting** | GitHub Pages |
-| **CI/CD** | GitHub Actions |
-| **Container** | Docker + Nginx |
-| **CDN** | Cloudflare |
-
----
-
-## License
+## 📝 Licencia
 
 MIT © 2026 Peter Albina
