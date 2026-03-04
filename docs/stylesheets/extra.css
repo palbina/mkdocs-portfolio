@@ -1142,7 +1142,8 @@ body {
 }
 
 /* Force solid backgrounds on Header to prevent see-through on scroll */
-[data-md-color-scheme="slate"] .md-header {
+[data-md-color-scheme="slate"] .md-header,
+[data-md-color-scheme="slate"] .md-tabs {
     background-color: var(--brand-primary) !important;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.6) !important;
 }
@@ -1152,8 +1153,50 @@ body {
 [data-md-color-scheme="slate"] .md-header__button,
 [data-md-color-scheme="slate"] .md-header__topic,
 [data-md-color-scheme="slate"] .md-header .md-icon,
-[data-md-color-scheme="slate"] .md-header .md-logo {
+[data-md-color-scheme="slate"] .md-header .md-logo,
+[data-md-color-scheme="slate"] .md-source__repository,
+[data-md-color-scheme="slate"] .md-source__fact,
+[data-md-color-scheme="slate"] .md-search__button,
+[data-md-color-scheme="slate"] .md-search__input,
+[data-md-color-scheme="slate"] .md-search__key,
+[data-md-color-scheme="slate"] .md-tabs__link {
     color: #000000 !important;
+}
+
+[data-md-color-scheme="slate"] label.md-header__button[for="__drawer"] svg,
+[data-md-color-scheme="slate"] label.md-header__button[for="__search"] svg,
+[data-md-color-scheme="slate"] .md-search__icon svg,
+[data-md-color-scheme="slate"] .md-search__button svg {
+    stroke: #000000 !important;
+    color: #000000 !important;
+}
+
+[data-md-color-scheme="slate"] .md-search__button::before {
+    background-color: #000000 !important;
+}
+
+[data-md-color-scheme="slate"] .md-search__input {
+    background-color: rgba(0, 0, 0, 0.1) !important;
+}
+
+[data-md-color-scheme="slate"] .md-search__input::placeholder {
+    color: rgba(0, 0, 0, 0.7) !important;
+}
+
+[data-md-color-scheme="slate"] .md-search__key {
+    background-color: rgba(0, 0, 0, 0.15) !important;
+    border-color: rgba(0, 0, 0, 0.4) !important;
+}
+
+[data-md-color-scheme="slate"] .md-tabs__link {
+    opacity: 0.7;
+    font-weight: 600;
+}
+
+[data-md-color-scheme="slate"] .md-tabs__item--active .md-tabs__link,
+[data-md-color-scheme="slate"] .md-tabs__link:hover {
+    opacity: 1;
+    font-weight: 800;
 }
 
 [data-md-color-scheme="default"] .md-header {
@@ -1348,4 +1391,52 @@ body {
     .ark-header-badge {
         display: none;
     }
+}
+
+/* =============================================================================
+ * Zensical Layout Fixes 
+ * ============================================================================= */
+
+/* 1. Header Text Colors: Improve contrast against bright lime background */
+.md-header__button,
+.md-header__title,
+.md-source,
+.md-tabs__link {
+    color: rgba(0, 0, 0, 0.7) !important;
+}
+
+.md-header__button:hover,
+.md-header__title:hover,
+.md-tabs__link:hover {
+    color: #000000 !important;
+}
+
+/* Make the active tab HIGH CONTRAST (solid black and bolded) */
+.md-tabs__item--active .md-tabs__link {
+    color: #000000 !important;
+    font-weight: 900 !important;
+}
+
+/* Sidebar active link (Neon impact on dark background) */
+.md-nav__item--active>.md-nav__link,
+.md-nav__link--active {
+    color: var(--brand-primary) !important;
+    font-weight: 800 !important;
+}
+
+/* 2. Fix Header Layout Breaking (Search & Repo overlapping) */
+.md-search-result,
+.md-custom-search-text {
+    display: none !important;
+    /* Hide un-styled search text */
+}
+
+.md-source__repository {
+    display: none !important;
+    /* Hide repo name text, keep only icon */
+}
+
+.md-banner {
+    background-color: var(--bg-card) !important;
+    border-bottom: 1px solid var(--border-default) !important;
 }

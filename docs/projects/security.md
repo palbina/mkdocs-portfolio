@@ -123,7 +123,7 @@ graph TB
     # - Rate limiting: 100 req/min por IP
     # - Bot Fight Mode: Enabled
     # - DDoS Protection: Automatic
-    
+
     # Cloudflare Tunnel para zero-port exposure
     cloudflared tunnel create homelab
     cloudflared tunnel route dns homelab homelab.example.com
@@ -139,7 +139,7 @@ graph TB
       --create-namespace \
       --set agent.acquisition[0].namespace=ingress \
       --set agent.acquisition[0].podName=traefik-*
-    
+
     # Instalar bouncer para Traefik
     helm install crowdsec-traefik-bouncer \
       crowdsec/crowdsec-traefik-bouncer \
@@ -222,12 +222,12 @@ kubectl logs -f -n auth -l app=authentik
 
 !!! tip "CrowdSec no detecta ataques"
     **Síntoma**: IPs maliciosas no son bloqueadas.
-    
+
     **Solución**: Verificar que los logs estén llegando a CrowdSec (`cscli metrics`). Revisar que los parsers estén correctamente configurados. Verificar que el bouncer esté funcionando (`cscli bouncers list`).
 
 !!! tip "Cilium policies bloquean tráfico legítimo"
     **Síntoma**: Pods no pueden comunicarse entre sí.
-    
+
     **Solución**: Verificar CiliumNetworkPolicies con `cilium policy get`. Usar Hubble UI para visualizar tráfico bloqueado. Aplicar labels correctos en los selectors de las policies.
 
 ---
@@ -304,4 +304,4 @@ kubectl logs -f -n auth -l app=authentik
 !!! quote "Zero Trust Philosophy"
     *"Never trust, always verify"* - Cada request es autenticada y autorizada, sin importar origen.
 
-**Última actualización**: {{ git_revision_date_localized }}
+**Última actualización**: 2026-03-03

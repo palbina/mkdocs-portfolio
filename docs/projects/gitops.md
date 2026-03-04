@@ -96,7 +96,7 @@ flowchart LR
     ```bash
     # Crear namespace
     kubectl create namespace argocd
-    
+
     # Instalar ArgoCD
     kubectl apply -n argocd -f \
       https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml
@@ -123,16 +123,16 @@ flowchart LR
               - path: k8s/02-apps/*
       template:
         metadata:
-          name: '{% raw %}{{path.basename}}{% endraw %}'
+          name: '{{ "{{" }}path.basename{{ "}}" }}'
         spec:
           project: default
           source:
             repoURL: https://github.com/palbina/HOMELAB-INFRA
             targetRevision: main
-            path: '{% raw %}{{path}}{% endraw %}'
+            path: '{{ "{{" }}path{{ "}}" }}'
           destination:
             server: https://kubernetes.default.svc
-            namespace: '{% raw %}{{path.basename}}{% endraw %}'
+            namespace: '{{ "{{" }}path.basename{{ "}}" }}'
           syncPolicy:
             automated:
               prune: true
@@ -150,7 +150,7 @@ flowchart LR
     # Wave 5: Traefik, Cloudflared
     # Wave 10: DBs, Monitoring
     # Wave 20+: User Applications
-    
+
     metadata:
       annotations:
         argocd.argoproj.io/sync-wave: "5"
@@ -211,12 +211,12 @@ kubectl logs -f deployment/argocd-application-controller -n argocd
 
 !!! tip "Drift no se corrige automáticamente"
     **Síntoma**: Cambios manuales en el cluster no se revierten.
-    
+
     **Solución**: Verificar que `selfHeal: true` esté configurado en el syncPolicy. Revisar que el Application Controller esté funcionando. Revisar logs del controller por errores RBAC.
 
 !!! tip "ApplicationSet no genera Applications"
     **Síntoma**: Directorios en Git no crean Applications automáticamente.
-    
+
     **Solución**: Verificar que el path en el generator sea correcto. Revisar que el repositorio esté correctamente conectado en ArgoCD. Verificar permisos del token de Git.
 
 ---
@@ -241,6 +241,7 @@ kubectl logs -f deployment/argocd-application-controller -n argocd
 ### Alertas
 
 Las alertas se envían a Telegram via Alertmanager cuando:
+
 - Una sincronización falla 3 veces consecutivas
 - Se detecta drift en aplicaciones críticas
 - El repositorio Git no es accesible
@@ -289,4 +290,4 @@ Las alertas se envían a Telegram via Alertmanager cuando:
 !!! quote "Principio GitOps"
     *"Si no está en Git, no existe"* - Todo el estado del cluster es 100% reproducible desde el repositorio.
 
-**Última actualización**: {{ git_revision_date_localized }}
+**Última actualización**: 2026-03-03

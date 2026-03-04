@@ -116,12 +116,12 @@ graph TB
     ```python
     collections = [
         "docs_portfolio",
-        "blog_posts", 
+        "blog_posts",
         "homelab_infra",
         "projects",
         "context_docs"
     ]
-    
+
     for collection in collections:
         client.create_collection(
             collection_name=collection,
@@ -141,7 +141,7 @@ graph TB
         embeddings = embedding_model.embed_documents(
             [doc.content for doc in docs]
         )
-        
+
         client.upsert(
             collection_name=collection_name,
             points=[
@@ -160,7 +160,7 @@ graph TB
 !!! example "Paso 3 - Definir nodos y edges"
     ```python
     workflow = StateGraph(GraphState)
-    
+
     # Definir nodos
     workflow.add_node("retrieve", retrieve_parallel)
     workflow.add_node("grade_documents", grade_documents)
@@ -228,12 +228,12 @@ kubectl logs -f deployment/rag-service -n ai
 
 !!! tip "Búsqueda retorna resultados irrelevantes"
     **Síntoma**: Los documentos recuperados no responden a la pregunta del usuario.
-    
+
     **Solución**: Verificar que los embeddings estén correctamente generados. Reindexar si es necesario. Ajustar el threshold de relevancia en el grader LLM.
 
 !!! tip "Latencia alta en respuestas"
     **Síntoma**: Tiempo de respuesta > 5 segundos.
-    
+
     **Solución**: Verificar carga del servidor Ollama. Considerar usar GPU para inferencia. Revisar que las colecciones no estén sobrecargadas de documentos irrelevantes.
 
 ---
@@ -258,6 +258,7 @@ kubectl logs -f deployment/rag-service -n ai
 ### Alertas
 
 Las alertas se envían a Telegram via Alertmanager cuando:
+
 - Latencia de queries supera 3 segundos consistentemente
 - Error rate del servicio supera 5%
 - Qdrant o Ollama están offline
@@ -305,4 +306,4 @@ Las alertas se envían a Telegram via Alertmanager cuando:
 !!! quote "AI-Powered Documentation"
     *"Ask questions, get contextual answers"* - Tu documentación técnica, accesible mediante conversación natural.
 
-**Última actualización**: {{ git_revision_date_localized }}
+**Última actualización**: 2026-03-03

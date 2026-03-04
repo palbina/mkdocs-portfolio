@@ -1,0 +1,116 @@
+[project]
+site_name = "ArkenOps"
+site_url = "https://docs.arkenops.cc"
+site_author = "Peter Albina"
+site_description = "ArkenOps: Cloud Computing & Complex Code Solved. Portfolio de ingeniería DevOps/SRE especializado en Kubernetes, GitOps, observabilidad y automatización de infraestructura cloud-native."
+repo_name = "palbina/mkdocs-portfolio"
+repo_url = "https://github.com/palbina/mkdocs-portfolio"
+edit_uri = "edit/main/docs/"
+copyright = "© 2026 Peter Albina · MIT License"
+
+extra_css = ["stylesheets/extra.css?v=4.2"]
+
+nav = [
+  { "Inicio" = "index.md" },
+  { "Proyectos" = [
+      "projects/index.md",
+      { "HomeLab Kubernetes" = "projects/homelab.md" },
+      { "GitOps con ArgoCD" = "projects/gitops.md" },
+      { "Observabilidad LGTM" = "projects/observability.md" },
+      { "Zero Trust Security" = "projects/security.md" },
+      { "Progressive Delivery" = "projects/progressive-delivery.md" },
+      { "Database HA (CNPG)" = "projects/database-ha.md" },
+      { "AI Chat con RAG" = "projects/ai-rag.md" },
+      { "Backup & DR" = "projects/backup-dr.md" }
+  ]},
+  { "Blog" = [
+      "blog/index.md",
+      { "Talos Linux: OS Inmutable" = "blog/posts/2026-02-10-talos-linux-k8s.md" }
+  ]},
+  { "Sobre Mí" = "about.md" }
+]
+
+[project.theme]
+name = "material"
+custom_dir = "docs/overrides"
+language = "es"
+
+features = [
+    "navigation.instant",
+    "navigation.instant.prefetch",
+    "navigation.instant.progress",
+    "navigation.tracking",
+    "navigation.tabs",
+    "navigation.tabs.sticky",
+    "navigation.sections",
+    "navigation.expand",
+    "navigation.path",
+    "navigation.prune",
+    "navigation.indexes",
+    "navigation.top",
+    "navigation.footer",
+    "toc.follow",
+    "toc.integrate",
+    "search.suggest",
+    "search.highlight",
+    "search.share",
+    "content.tabs.link",
+    "content.code.copy",
+    "content.code.select",
+    "content.code.annotate",
+    "content.tooltips",
+    "announce.dismiss"
+]
+
+[[project.theme.palette]]
+scheme = "slate"
+primary = "lime"
+accent = "lime"
+toggle.icon = "material/weather-sunny"
+toggle.name = "Cambiar a modo claro"
+
+[[project.theme.palette]]
+scheme = "default"
+primary = "lime"
+accent = "lime"
+toggle.icon = "material/weather-night"
+toggle.name = "Cambiar a modo oscuro"
+
+[project.theme.font]
+text = "Inter"
+code = "JetBrains Mono"
+
+[project.theme.icon]
+logo = "material/kubernetes"
+repo = "fontawesome/brands/github"
+
+[[project.extra.social]]
+icon = "fontawesome/brands/github"
+link = "https://github.com/palbina"
+
+[[project.extra.social]]
+icon = "fontawesome/brands/linkedin"
+link = "https://linkedin.com/in/peteralbina"
+
+[[project.extra.social]]
+icon = "fontawesome/brands/twitter"
+link = "https://twitter.com/peteralbina"
+
+[project.extra.analytics]
+provider = "google"
+property = "G-XXXXXXXXXX"
+
+[project.extra]
+generator = false
+
+[[project.plugins]]
+name = "search"
+lang = "es"
+
+[[project.plugins]]
+name = "blog"
+blog_dir = "blog"
+post_dir = "{blog}/posts"
+archive = true
+categories = true
+authors = true

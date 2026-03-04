@@ -115,10 +115,10 @@ graph TB
 !!! example "Paso 1 - Desplegar Velero con CLI"
     ```bash
     # Instalar Velero CLI
-    wget https://github.com/vmware-tanzu/velero/releases/download/v1.12.0/velero-v1.12.0-linux-amd64.tar.gz
+    wget <https://github.com/vmware-tanzu/velero/releases/download/v1.12.0/velero-v1.12.0-linux-amd64.tar.gz>
     tar -xvf velero-v1.12.0-linux-amd64.tar.gz
     sudo mv velero /usr/local/bin/
-    
+
     # Instalar en el cluster
     velero install \
       --provider aws \
@@ -224,12 +224,12 @@ kubectl logs -f deployment/velero -n velero
 
 !!! tip "Backup falla con error de snapshots"
     **Síntoma**: Velero reporta "VolumeSnapshot" errors durante el backup.
-    
+
     **Solución**: Verificar que el CSI driver soporte snapshots. Revisar que los volúmenes no estén en uso por pods en estado "Terminating". Para Longhorn, asegurar que el backup target S3 esté configurado correctamente.
 
 !!! tip "Restauración completa tarda demasiado"
     **Síntoma**: RTO excede los 30 minutos objetivo.
-    
+
     **Solución**: Considerar backup de volúmenes más frecuente (cada 1h vs cada 6h). Usar Velero con restic para file-level restore más rápido. Verificar latencia de red al bucket S3.
 
 ---
@@ -254,6 +254,7 @@ kubectl logs -f deployment/velero -n velero
 ### Alertas
 
 Las alertas se envían a Telegram via Alertmanager cuando:
+
 - Un backup diario falla 2 veces consecutivas
 - No se ha ejecutado un restore test en 35 días
 - El espacio en S3 supera el 80% de capacidad
@@ -301,4 +302,4 @@ Las alertas se envían a Telegram via Alertmanager cuando:
 !!! quote "Backup Philosophy"
     *"A backup that hasn't been tested is not a backup"* - Restauraciones mensuales verifican la integridad de los datos.
 
-**Última actualización**: {{ git_revision_date_localized }}
+**Última actualización**: 2026-03-03

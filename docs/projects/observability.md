@@ -124,9 +124,9 @@ graph TB
 !!! example "Paso 1 - Desplegar Prometheus con Helm"
     ```bash
     # Agregar repositorio
-    helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
+    helm repo add prometheus-community <https://prometheus-community.github.io/helm-charts>
     helm repo update
-    
+
     # Instalar kube-prometheus-stack
     helm install prometheus prometheus-community/kube-prometheus-stack \
       --namespace monitoring \
@@ -139,9 +139,9 @@ graph TB
 !!! example "Paso 2 - Instalar stack de logging"
     ```bash
     # Agregar repositorio de Grafana
-    helm repo add grafana https://grafana.github.io/helm-charts
+    helm repo add grafana <https://grafana.github.io/helm-charts>
     helm repo update
-    
+
     # Instalar Loki
     helm install loki grafana/loki-stack \
       --namespace monitoring \
@@ -225,12 +225,12 @@ open http://localhost:9090/targets
 
 !!! tip "Prometheus no scrapea targets"
     **Síntoma**: Targets aparecen como "down" en el status page.
-    
+
     **Solución**: Verificar que los ServiceMonitors tengan los labels correctos. Revisar que los servicios tengan el annotation `prometheus.io/scrape: "true"`. Verificar RBAC permissions de Prometheus.
 
 !!! tip "Loki no recibe logs"
     **Síntoma**: Grafana muestra "No logs found" aunque hay aplicaciones corriendo.
-    
+
     **Solución**: Verificar que Promtail esté desplegado en todos los nodos (`kubectl get pods -n monitoring -l app=promtail`). Revisar configuración de client URL en Promtail. Verificar que los pods tengan logs (`kubectl logs`).
 
 ---
@@ -316,4 +316,4 @@ sum(rate(http_requests_total[5m])) > 0.01
 !!! quote "Observability Mindset"
     *"No puedes mejorar lo que no puedes medir"* - Full visibility del sistema con métricas, logs y traces correlacionados.
 
-**Última actualización**: {{ git_revision_date_localized }}
+**Última actualización**: 2026-03-03

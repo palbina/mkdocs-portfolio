@@ -20,10 +20,10 @@ cd mkdocs-portfolio
 pip install -r requirements.txt
 
 # Servir localmente
-mkdocs serve
+zensical serve
 
 # Construir sitio
-mkdocs build
+zensical build
 ```
 
 Visita `http://localhost:8000` para ver el sitio.

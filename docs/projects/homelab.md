@@ -123,9 +123,9 @@ graph TB
 !!! example "Paso 1 - Preparar nodos con Talos"
     ```bash
     # Generar configuración para control plane
-    talosctl gen config homelab-cluster https://192.168.1.10:6443 \
+    talosctl gen config homelab-cluster <https://192.168.1.10:6443> \
       --output-dir ./_out
-    
+
     # Aplicar configuración al primer nodo (control plane)
     talosctl apply-config --insecure \
       --nodes 192.168.1.10 \
@@ -140,9 +140,9 @@ graph TB
 !!! example "Paso 2 - Instalar Cilium con eBPF"
     ```bash
     # Instalar Cilium CLI
-    curl -L --remote-name-all https://github.com/cilium/cilium-cli/releases/latest/download/cilium-linux-amd64.tar.gz
+    curl -L --remote-name-all <https://github.com/cilium/cilium-cli/releases/latest/download/cilium-linux-amd64.tar.gz>
     tar xzvfC cilium-linux-amd64.tar.gz /usr/local/bin
-    
+
     # Instalar Cilium en el cluster
     cilium install --version 1.15.0 \
       --set kubeProxyReplacement=true \
@@ -158,7 +158,7 @@ graph TB
     talosctl apply-config --insecure \
       --nodes 192.168.1.11 \
       --file ./_out/worker.yaml
-    
+
     talosctl apply-config --insecure \
       --nodes 192.168.1.12 \
       --file ./_out/worker.yaml
@@ -215,12 +215,12 @@ talosctl logs --nodes 192.168.1.10 kubelet
 
 !!! tip "Nodo no se une al cluster"
     **Síntoma**: Worker node aparece como "NotReady" o no se une.
-    
+
     **Solución**: Verificar conectividad de red entre nodos. Revisar logs de kubelet en el nodo (`talosctl logs kubelet`). Verificar que el token de bootstrap sea válido. Reintentar apply-config.
 
 !!! tip "Cilium pods en CrashLoopBackOff"
     **Síntoma**: Pods de Cilium no inician correctamente.
-    
+
     **Solución**: Verificar que el kernel soporte eBPF (`uname -r` >= 5.10). Revisar que kube-proxy esté deshabilitado. Verificar logs de Cilium agent con `kubectl logs -n kube-system -l app.kubernetes.io/name=cilium-agent`.
 
 ---
@@ -247,6 +247,7 @@ talosctl logs --nodes 192.168.1.10 kubelet
 ### Alertas
 
 Las alertas se envían a Telegram via Alertmanager cuando:
+
 - Un nodo está down por más de 2 minutos
 - Uso de CPU o memoria supera el 85%
 - Un pod está en CrashLoopBackOff
@@ -295,4 +296,4 @@ Las alertas se envían a Telegram via Alertmanager cuando:
 !!! quote "Filosofía"
     *"Production-grade infrastructure starts at home"* - Un HomeLab real que simula entornos enterprise para aprendizaje continuo.
 
-**Última actualización**: {{ git_revision_date_localized }}
+**Última actualización**: 2026-03-03

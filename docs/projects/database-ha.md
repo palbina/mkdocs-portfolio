@@ -114,8 +114,8 @@ graph TB
     ```bash
     # Instalar CNPG Operator
     kubectl apply -f \
-      https://raw.githubusercontent.com/cloudnative-pg/cloudnative-pg/release-1.22/releases/cnpg-1.22.0.yaml
-    
+      <https://raw.githubusercontent.com/cloudnative-pg/cloudnative-pg/release-1.22/releases/cnpg-1.22.0.yaml>
+
     # Verificar instalación
     kubectl get deployment -n cnpg-system cnpg-controller-manager
     
@@ -136,7 +136,7 @@ graph TB
       namespace: database
     spec:
       instances: 3
-      
+
       postgresql:
         parameters:
           max_connections: "200"
@@ -170,7 +170,7 @@ graph TB
     # - postgres-cluster-rw: Read/Write (solo Primary)
     # - postgres-cluster-ro: Read Only (balanceado entre Replicas)
     # - postgres-cluster-r: Any instance (para operaciones de maintenance)
-    
+
     # Verificar endpoints
     kubectl get svc -n database | grep postgres-cluster
     ```
@@ -225,12 +225,12 @@ kubectl cnpg status postgres-cluster -n database | grep "Replication Info"
 
 !!! tip "Failover no ocurre automáticamente"
     **Síntoma**: El Primary está caído pero ningún Replica se promueve.
-    
+
     **Solución**: Verificar que el CNPG Operator esté funcionando (`kubectl get pods -n cnpg-system`). Revisar logs del operator. Si es necesario, promover manualmente con `kubectl cnpg promote`.
 
 !!! tip "Lag de replicación alto"
     **Síntoma**: `cnpg_pg_replication_lag_seconds` > 5 segundos.
-    
+
     **Solución**: Verificar recursos de los nodos (CPU/Memory). Revisar red entre nodos. Considerar ajustar `max_wal_size` y `checkpoint_timeout`. Si persiste, investigar queries largas en el Primary.
 
 ---
@@ -272,6 +272,7 @@ cnpg_pg_database_size_bytes / cnpg_pg_settings_disk_size_bytes
 ### Alertas
 
 Las alertas se envían a Telegram via Alertmanager cuando:
+
 - Lag de replicación supera 5 segundos por más de 2 minutos
 - Conexiones activas superan el 90% de `max_connections`
 - Almacenamiento supera el 80% de capacidad
@@ -320,4 +321,4 @@ Las alertas se envían a Telegram via Alertmanager cuando:
 !!! quote "Data Reliability"
     *"Your data is safe even when nodes fail"* - HA nativo, backups continuos, y recovery point < 5 minutos.
 
-**Última actualización**: {{ git_revision_date_localized }}
+**Última actualización**: 2026-03-03

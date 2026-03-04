@@ -228,12 +228,12 @@ kubectl argo rollouts get analysisrun success-rate-xxxxx -n demo
 
 !!! tip "Análisis falla pero métricas son buenas"
     **Síntoma**: AnalysisRun marca failure pero Prometheus muestra success rate > 95%
-    
+
     **Solución**: Verificar que la query de Prometheus esté correctamente configurada con el label `destination_service`. Revisar que el service name en el argumento coincida exactamente.
 
 !!! tip "Traffic no se divide correctamente"
     **Síntoma**: Todo el tráfico va a stable a pesar de setWeight
-    
+
     **Solución**: Verificar que los subsets (stable/canary) estén correctamente definidos en el DestinationRule de Istio. Asegurar que los pods tengan los labels correctos.
 
 ---
@@ -257,6 +257,7 @@ kubectl argo rollouts get analysisrun success-rate-xxxxx -n demo
 ### Alertas
 
 Las alertas se envían a Telegram via Alertmanager cuando:
+
 - Un canary deployment es abortado automáticamente
 - Las métricas de análisis están degradadas
 - Un rollout ha estado en progreso por más de 30 minutos
@@ -302,4 +303,4 @@ Las alertas se envían a Telegram via Alertmanager cuando:
 !!! quote "Progressive Delivery Philosophy"
     *"Deploy with confidence, rollback without fear"* - Cada deployment es validado automáticamente antes de afectar a todos los usuarios.
 
-**Última actualización**: {{ git_revision_date_localized }}
+**Última actualización**: 2026-03-03

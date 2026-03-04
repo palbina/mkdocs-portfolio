@@ -203,6 +203,6 @@ hide:
 </div>
 
 <p class="footer-text">
-BUILD: {{ build_time() }} •
+BUILD: AUTOMATED •
 <a href="https://github.com/palbina/mkdocs-portfolio">SOURCE_CODE</a>
 </p>
