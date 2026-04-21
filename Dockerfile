@@ -35,7 +35,7 @@ RUN zensical build
 # -----------------------------------------------------------------------------
 # PRODUCTION STAGE
 # -----------------------------------------------------------------------------
-FROM nginx:1.27-alpine
+FROM nginx:1.30-alpine
 
 # Copy nginx configuration
 COPY nginx.conf /etc/nginx/conf.d/default.conf
