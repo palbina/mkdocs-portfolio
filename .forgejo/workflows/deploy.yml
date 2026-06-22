@@ -1,7 +1,5 @@
-name: Build and Push to Zot
+name: DISABLED — Build and Push to Zot (migrated to GitLab CI)
 on:
-  push:
-    branches: [main, master]
   workflow_dispatch:
 jobs:
   build:
