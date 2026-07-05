@@ -33,7 +33,7 @@ Implementación completa de GitOps para gestión declarativa del cluster Kuberne
 Git como fuente única de verdad para infraestructura y aplicaciones.
 
 !!! impact "Key Metrics & Impact"
-    **30+ aplicaciones** gestionadas declarativamente • **Zero drift** con self-healing automático • **100% reproducible** desde Git
+**30+ aplicaciones** gestionadas declarativamente • **Zero drift** con self-healing automático • **100% reproducible** desde Git
 
 ---
 
@@ -70,21 +70,23 @@ flowchart LR
 
 ## Stack Tecnológico
 
-=== "Core GitOps"
+### Core GitOps
 
-    | Componente | Tecnología | Función |
-    |:-----------|:-----------|:--------|
-    | **CD Engine** | ArgoCD v2.10 | Continuous delivery declarativo |
-    | **App Generator** | ApplicationSets | Multi-app desde directorios |
-    | **Secrets** | Sealed Secrets | Encriptación en Git |
+| Componente | Tecnología | Función |
+|:-----------|:-----------|:--------|
+| **CD Engine** | ArgoCD v3.4.3 | App of Apps con ApplicationSets |
+| **Exp. CD** | Flux v2.8.8 | Bootstrap CLI, coexistencia GitLab Agent |
+| **GitOps Source** | GitLab (sovereign) | GitLab Agent + workhorse :8181, Renovate SSH |
+| **Secrets** | Sealed Secrets 2.19.0 | Encriptación asimétrica |
+| **Deps** | Renovate v43 | Dual config: repo root + ConfigMap |
 
-=== "Progressive Delivery"
+### Progressive Delivery
 
-    | Componente | Tecnología | Función |
-    |:-----------|:-----------|:--------|
-    | **Rollouts** | Argo Rollouts | Canary/Blue-Green |
-    | **Mesh** | Istio | Traffic splitting |
-    | **Analysis** | Prometheus | Métricas para rollback |
+| Componente | Tecnología | Función |
+|:-----------|:-----------|:--------|
+| **Rollouts** | Argo Rollouts | Canary/Blue-Green |
+| **Mesh** | Istio | Traffic splitting |
+| **Analysis** | Prometheus | Métricas para rollback |
 
 ---
 
@@ -210,14 +212,14 @@ kubectl logs -f deployment/argocd-application-controller -n argocd
 ### Troubleshooting
 
 !!! tip "Drift no se corrige automáticamente"
-    **Síntoma**: Cambios manuales en el cluster no se revierten.
+**Síntoma**: Cambios manuales en el cluster no se revierten.
 
-    **Solución**: Verificar que `selfHeal: true` esté configurado en el syncPolicy. Revisar que el Application Controller esté funcionando. Revisar logs del controller por errores RBAC.
+**Solución**: Verificar que `selfHeal: true` esté configurado en el syncPolicy. Revisar que el Application Controller esté funcionando. Revisar logs del controller por errores RBAC.
 
 !!! tip "ApplicationSet no genera Applications"
-    **Síntoma**: Directorios en Git no crean Applications automáticamente.
+**Síntoma**: Directorios en Git no crean Applications automáticamente.
 
-    **Solución**: Verificar que el path en el generator sea correcto. Revisar que el repositorio esté correctamente conectado en ArgoCD. Verificar permisos del token de Git.
+**Solución**: Verificar que el path en el generator sea correcto. Revisar que el repositorio esté correctamente conectado en ArgoCD. Verificar permisos del token de Git.
 
 ---
 
@@ -288,6 +290,6 @@ Las alertas se envían a Telegram via Alertmanager cuando:
 ---
 
 !!! quote "Principio GitOps"
-    *"Si no está en Git, no existe"* - Todo el estado del cluster es 100% reproducible desde el repositorio.
+*"Si no está en Git, no existe"* - Todo el estado del cluster es 100% reproducible desde el repositorio.
 
-**Última actualización**: 2026-03-03
+**Última actualización**: 2026-07-05

@@ -33,7 +33,7 @@ Stack completo de observabilidad siguiendo el paradigma LGTM (Loki, Grafana, Tem
 con correlación de señales para debugging end-to-end.
 
 !!! impact "Key Metrics & Impact"
-    **3 pilares** de observabilidad integrados • **Full correlation** entre métricas, logs y traces • **Alerting** a Telegram en tiempo real
+**3 pilares** de observabilidad integrados • **Full correlation** entre métricas, logs y traces • **Alerting** a Telegram en tiempo real
 
 ---
 
@@ -77,43 +77,44 @@ graph TB
 ```
 
 !!! info "Los 3 Pilares"
-    **Métricas** para saber QUÉ pasó • **Logs** para saber POR QUÉ pasó • **Traces** para saber DÓNDE pasó
+**Métricas** para saber QUÉ pasó • **Logs** para saber POR QUÉ pasó • **Traces** para saber DÓNDE pasó
 
 ---
 
 ## Stack Tecnológico
 
-=== "Métricas"
+### Métricas
 
-    | Componente | Función | Retención |
-    |:-----------|:--------|:----------|
-    | **Prometheus** | Scraping y almacenamiento | 15 días |
-    | **Alertmanager** | Routing de alertas | N/A |
-    | **ServiceMonitors** | Autodiscovery de targets | N/A |
+| Componente | Función | Retención |
+|:-----------|:--------|:----------|
+| **Prometheus** | v3.8.1 (kube-prometheus-stack 80.9.2) | 15 días |
+| **Grafana** | 12.3.1 | Dashboards unificados |
+| **Kiali** | v2.17.0 | Istio mesh visualization |
+| **Alertmanager** | Telegram integration | Routing de alertas |
 
-=== "Logs"
+### Logs
 
-    | Componente | Función | Retención |
-    |:-----------|:--------|:----------|
-    | **Loki** | Agregación y query | 30 días |
-    | **Promtail** | Collection agent | N/A |
-    | **LogQL** | Query language | N/A |
+| Componente | Función | Retención |
+|:-----------|:--------|:----------|
+| **Loki** | Agregación y query | 30 días |
+| **Promtail** | Collection agent | N/A |
+| **LogQL** | Query language | N/A |
 
-=== "Traces"
+### Traces
 
-    | Componente | Función | Retención |
-    |:-----------|:--------|:----------|
-    | **Tempo** | Trace storage | 7 días |
-    | **OpenTelemetry** | Instrumentation | N/A |
-    | **TraceQL** | Query language | N/A |
+| Componente | Función | Retención |
+|:-----------|:--------|:----------|
+| **Tempo** | Trace storage | 7 días |
+| **OpenTelemetry** | Instrumentation | N/A |
+| **TraceQL** | Query language | N/A |
 
-=== "Visualización"
+### Visualización
 
-    | Componente | Función | Retención |
-    |:-----------|:--------|:----------|
-    | **Grafana** | Dashboards unificados | N/A |
-    | **Explore** | Query interactivo | N/A |
-    | **Alerting** | Reglas y notificaciones | N/A |
+| Componente | Función | Retención |
+|:-----------|:--------|:----------|
+| **Grafana** | Dashboards unificados | N/A |
+| **Explore** | Query interactivo | N/A |
+| **Alerting** | Reglas y notificaciones | N/A |
 
 ---
 
@@ -224,14 +225,14 @@ open http://localhost:9090/targets
 ### Troubleshooting
 
 !!! tip "Prometheus no scrapea targets"
-    **Síntoma**: Targets aparecen como "down" en el status page.
+**Síntoma**: Targets aparecen como "down" en el status page.
 
-    **Solución**: Verificar que los ServiceMonitors tengan los labels correctos. Revisar que los servicios tengan el annotation `prometheus.io/scrape: "true"`. Verificar RBAC permissions de Prometheus.
+**Solución**: Verificar que los ServiceMonitors tengan los labels correctos. Revisar que los servicios tengan el annotation `prometheus.io/scrape: "true"`. Verificar RBAC permissions de Prometheus.
 
 !!! tip "Loki no recibe logs"
-    **Síntoma**: Grafana muestra "No logs found" aunque hay aplicaciones corriendo.
+**Síntoma**: Grafana muestra "No logs found" aunque hay aplicaciones corriendo.
 
-    **Solución**: Verificar que Promtail esté desplegado en todos los nodos (`kubectl get pods -n monitoring -l app=promtail`). Revisar configuración de client URL en Promtail. Verificar que los pods tengan logs (`kubectl logs`).
+**Solución**: Verificar que Promtail esté desplegado en todos los nodos (`kubectl get pods -n monitoring -l app=promtail`). Revisar configuración de client URL en Promtail. Verificar que los pods tengan logs (`kubectl logs`).
 
 ---
 
@@ -314,6 +315,6 @@ sum(rate(http_requests_total[5m])) > 0.01
 ---
 
 !!! quote "Observability Mindset"
-    *"No puedes mejorar lo que no puedes medir"* - Full visibility del sistema con métricas, logs y traces correlacionados.
+*"No puedes mejorar lo que no puedes medir"* - Full visibility del sistema con métricas, logs y traces correlacionados.
 
 **Última actualización**: 2026-03-03

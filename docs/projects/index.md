@@ -84,3 +84,33 @@ Sistema de backup completo con Velero, Longhorn y procedimientos DR.
 [:octicons-arrow-right-24: Ver detalles](backup-dr.md)
 
 </div>
+
+<div class="project-card" markdown>
+
+## :material-shield-check: Deployment Methodology (Molty V2)
+
+Estándar obligatorio de despliegue con 9 manifiestos, Zero Trust y compliance.
+
+[:octicons-arrow-right-24: Ver detalles](deployment-methodology.md)
+
+</div>
+
+<div class="project-card" markdown>
+
+## :material-lock: Zero Trust Networking v2.1
+
+Defensa de 5 capas con Cilium eBPF + Istio Ambient mTLS sin sidecars.
+
+[:octicons-arrow-right-24: Ver detalles](zero-trust-networking.md)
+
+</div>
+
+<div class="project-card" markdown>
+
+## :material-chart-box: Compliance Dashboard
+
+7 CronJobs verificando 29 apps al 100% contra Molty Standard V2.
+
+[:octicons-arrow-right-24: Ver detalles](compliance-dashboard.md)
+
+</div>

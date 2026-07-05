@@ -165,44 +165,6 @@ body {
     border-bottom: 2px solid var(--brand-primary);
 }
 
-/* Hero Stats - Volt Grid */
-.hero-stats {
-    display: flex;
-    justify-content: center;
-    gap: 0;
-    margin-bottom: 3.5rem;
-    border: 1px solid var(--border-default);
-    background: var(--bg-surface);
-}
-
-.stat {
-    padding: 2rem 3rem;
-    border-right: 1px solid var(--border-default);
-    flex: 1;
-}
-
-.stat:last-child {
-    border-right: none;
-}
-
-.stat-number {
-    display: block;
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 2.5rem;
-    font-weight: 800;
-    color: var(--brand-primary);
-    line-height: 1;
-    margin-bottom: 0.5rem;
-}
-
-.stat-label {
-    font-size: 0.65rem;
-    font-weight: 700;
-    color: var(--text-muted);
-    text-transform: uppercase;
-    letter-spacing: 0.15em;
-}
-
 /* -----------------------------------------------------------------------------
  * Buttons - Industrial Neon
  * ----------------------------------------------------------------------------- */
@@ -594,22 +556,33 @@ body {
 /* -------------------------------------------------------------------------
  * Data Tables - Industrial Precision
  * ------------------------------------------------------------------------- */
-.md-typeset__table {
-    margin: 2rem 0;
+
+/* Table wrapper scroll containers — catches both regular and tabbed tables */
+.md-typeset__table,
+.tabbed-block,
+.tabbed-content {
+    display: block !important;
+    max-width: 100%;
     overflow-x: auto;
     scrollbar-width: thin;
     scrollbar-color: var(--brand-primary) transparent;
 }
 
+.md-typeset__table {
+    margin: 2rem 0;
+}
+
+/* Fix: render as proper table — no inline-block or overflow from theme */
 .md-typeset table:not([class]) {
-    width: 100% !important;
     display: table !important;
-    /* Ensure it stays as a table */
+    overflow: visible !important;
+    width: max-content;
+    min-width: 100%;
     border-collapse: collapse;
     border: 1px solid var(--border-default);
     background: rgba(255, 255, 255, 0.02);
     font-size: 0.8rem;
-    margin: 1.5rem 0;
+    margin: 0;
 }
 
 .md-typeset table:not([class]) thead {
@@ -1044,12 +1017,6 @@ body {
     color: #4A4A4A;
 }
 
-[data-md-color-scheme="default"] .hero-stats,
-[data-md-color-scheme="default"] .stat {
-    background: #FFFFFF;
-    border-color: rgba(0, 0, 0, 0.1);
-}
-
 [data-md-color-scheme="default"] .cta-section {
     background: #FFFFFF;
     box-shadow: 0 0 30px rgba(204, 255, 0, 0.2);
@@ -1091,19 +1058,6 @@ body {
 @media screen and (max-width: 768px) {
     .hero h1 {
         font-size: 3rem;
-    }
-
-    .hero-stats {
-        flex-direction: column;
-    }
-
-    .stat {
-        border-right: none;
-        border-bottom: 1px solid var(--border-default);
-    }
-
-    .stat-number {
-        font-size: 2rem;
     }
 }
 
@@ -1439,4 +1393,94 @@ body {
 .md-banner {
     background-color: var(--bg-card) !important;
     border-bottom: 1px solid var(--border-default) !important;
+}
+
+/* =============================================================================
+ * Diátaxis Documentation Cards (Landing Page)
+ * ============================================================================= */
+
+.docs-diataxis-banner {
+    margin: 4rem 0 2rem 0;
+}
+
+.diataxis-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
+    margin: 0 auto;
+    max-width: 1100px;
+}
+
+.diataxis-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border-default);
+    border-radius: 12px;
+    padding: 1.75rem;
+    text-align: center;
+    transition: all 0.25s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.diataxis-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    transition: all 0.25s ease;
+}
+
+.diataxis-card.tutorial::before { background: #58a6ff; }
+.diataxis-card.howto::before { background: #3fb950; }
+.diataxis-card.reference::before { background: #d29922; }
+.diataxis-card.explanation::before { background: #a371f7; }
+
+.diataxis-card:hover {
+    border-color: var(--border-accent);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 24px var(--brand-glow);
+}
+
+.diataxis-card h4 {
+    margin: 0.75rem 0 0.5rem 0;
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.diataxis-card p {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    margin: 0 0 1rem 0;
+    line-height: 1.5;
+}
+
+.diataxis-card .md-button {
+    display: inline-block;
+    padding: 0.4rem 1rem;
+    font-size: 0.8rem;
+    font-weight: 600;
+    border: 1px solid var(--border-accent);
+    border-radius: 6px;
+    color: var(--brand-primary);
+    text-decoration: none;
+    transition: all 0.2s ease;
+    background: transparent;
+}
+
+.diataxis-card .md-button:hover {
+    background: var(--brand-glow);
+    border-color: var(--brand-primary);
+    color: var(--brand-primary);
+}
+
+@media (max-width: 768px) {
+    .diataxis-grid {
+        grid-template-columns: 1fr;
+        padding: 0 1rem;
+    }
 }

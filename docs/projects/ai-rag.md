@@ -33,7 +33,7 @@ Sistema de Retrieval-Augmented Generation que permite consultar documentación t
 Búsqueda semántica paralela en múltiples colecciones con respuestas contextualizadas por LLM.
 
 !!! impact "Key Metrics & Impact"
-    **12K+ documentos** indexados • **5 colecciones** de conocimiento • **Respuestas contextuales** en < 3 segundos
+**12K+ documentos** indexados • **5 colecciones** Qdrant con embeddings nomic-embed-text • **Llama 3.1 8B** vía Ollama local (GPU Coral TPU en Worker 04)
 
 ---
 
@@ -74,37 +74,37 @@ graph TB
 ```
 
 !!! info "Componentes Clave"
-    - **LangGraph**: Orquestación del workflow RAG con nodos para retrieval, grading y generación.
-    - **Qdrant**: Vector database con búsqueda semántica en 5 colecciones paralelas.
-    - **Ollama**: Servidor local de LLMs con Llama 3.1 8B para generación de respuestas.
+- **LangGraph**: Orquestación del workflow RAG con nodos para retrieval, grading y generación.
+- **Qdrant**: Vector database con búsqueda semántica en 5 colecciones paralelas.
+- **Ollama**: Servidor local de LLMs con Llama 3.1 8B para generación de respuestas.
 
 ---
 
 ## Stack Tecnológico
 
-=== "RAG Pipeline"
+### RAG Pipeline
 
-    | Componente | Tecnología | Función |
-    |:-----------|:-----------|:--------|
-    | **Orchestration** | LangGraph | Agentic workflow |
-    | **Embeddings** | nomic-embed-text | 768-dim vectors |
-    | **Retrieval** | Qdrant | Semantic search |
+| Componente | Tecnología | Función |
+|:-----------|:-----------|:--------|
+| **Orchestration** | LangGraph | Agentic workflow |
+| **Embeddings** | nomic-embed-text | 768-dim vectors |
+| **Retrieval** | Qdrant | Semantic search |
 
-=== "Language Model"
+### Language Model
 
-    | Componente | Tecnología | Función |
-    |:-----------|:-----------|:--------|
-    | **Inference** | Ollama | Local LLM serving |
-    | **Model** | Llama 3.1 8B | Response generation |
-    | **Grading** | LLM Chain | Relevance scoring |
+| Componente | Tecnología | Función |
+|:-----------|:-----------|:--------|
+| **Inference** | Ollama | Local LLM serving |
+| **Model** | Llama 3.1 8B | Response generation |
+| **Grading** | LLM Chain | Relevance scoring |
 
-=== "Infrastructure"
+### Infrastructure
 
-    | Componente | Tecnología | Función |
-    |:-----------|:-----------|:--------|
-    | **API** | FastAPI | REST endpoints |
-    | **Streaming** | SSE | Real-time responses |
-    | **Storage** | Qdrant PVC | Persistent vectors |
+| Componente | Tecnología | Función |
+|:-----------|:-----------|:--------|
+| **API** | FastAPI | REST endpoints |
+| **Streaming** | SSE | Real-time responses |
+| **Storage** | Qdrant PVC | Persistent vectors |
 
 ---
 
@@ -227,14 +227,14 @@ kubectl logs -f deployment/rag-service -n ai
 ### Troubleshooting
 
 !!! tip "Búsqueda retorna resultados irrelevantes"
-    **Síntoma**: Los documentos recuperados no responden a la pregunta del usuario.
+**Síntoma**: Los documentos recuperados no responden a la pregunta del usuario.
 
-    **Solución**: Verificar que los embeddings estén correctamente generados. Reindexar si es necesario. Ajustar el threshold de relevancia en el grader LLM.
+**Solución**: Verificar que los embeddings estén correctamente generados. Reindexar si es necesario. Ajustar el threshold de relevancia en el grader LLM.
 
 !!! tip "Latencia alta en respuestas"
-    **Síntoma**: Tiempo de respuesta > 5 segundos.
+**Síntoma**: Tiempo de respuesta > 5 segundos.
 
-    **Solución**: Verificar carga del servidor Ollama. Considerar usar GPU para inferencia. Revisar que las colecciones no estén sobrecargadas de documentos irrelevantes.
+**Solución**: Verificar carga del servidor Ollama. Considerar usar GPU para inferencia. Revisar que las colecciones no estén sobrecargadas de documentos irrelevantes.
 
 ---
 
@@ -304,6 +304,6 @@ Las alertas se envían a Telegram via Alertmanager cuando:
 ---
 
 !!! quote "AI-Powered Documentation"
-    *"Ask questions, get contextual answers"* - Tu documentación técnica, accesible mediante conversación natural.
+*"Ask questions, get contextual answers"* - Tu documentación técnica, accesible mediante conversación natural.
 
 **Última actualización**: 2026-03-03

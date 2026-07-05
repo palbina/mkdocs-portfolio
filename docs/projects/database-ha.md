@@ -33,7 +33,7 @@ Clusters PostgreSQL de alta disponibilidad gestionados como código con CloudNat
 Failover automático, WAL archiving a S3, y backups continuos sin tiempo de inactividad.
 
 !!! impact "Key Metrics & Impact"
-    **3 instancias** PostgreSQL HA • **Backups continuos** a S3 • **Failover automático** en segundos
+**3 instancias** PostgreSQL HA • **Backups continuos** a S3 • **Failover automático** en segundos
 
 ---
 
@@ -72,37 +72,39 @@ graph TB
 ```
 
 !!! info "Componentes Clave"
-    - **CloudNativePG Operator**: Gestión del ciclo de vida del cluster PostgreSQL con failover automático.
-    - **Streaming Replication**: Replicación síncrona entre Primary y Replicas con lag < 1 segundo.
-    - **WAL Archiving**: Archivado continuo de Write-Ahead Logs a S3 para Point-in-Time Recovery.
+- **CloudNativePG Operator**: Gestión del ciclo de vida del cluster PostgreSQL con failover automático.
+- **Streaming Replication**: Replicación síncrona entre Primary y Replicas con lag < 1 segundo.
+- **WAL Archiving**: Archivado continuo de Write-Ahead Logs a S3 para Point-in-Time Recovery.
 
 ---
 
 ## Stack Tecnológico
 
-=== "Database"
+### Database
 
-    | Componente | Tecnología | Función |
-    |:-----------|:-----------|:--------|
-    | **Operator** | CloudNativePG | Lifecycle management |
-    | **Engine** | PostgreSQL 16 | Database engine |
-    | **Pooler** | PgBouncer | Connection pooling |
+| Componente | Tecnología | Función |
+|:-----------|:-----------|:--------|
+| **Operator** | CloudNativePG v1.28.0 | Lifecycle management |
+| **Engine** | PostgreSQL 17 | Vector-ready (palbina/postgres-vector) |
+| **Replication** | Streaming síncrono | <10s failover automático |
+| **Offsite Backup** | SeaweedFS S3 (VPS) | WAL streaming + PITR 7 días |
+| **8 S3 Buckets** | CNPG, MariaDB, Velero, etcd, Longhorn, Forgejo, WordPress, Tempo | Diferenciados por propósito |
 
-=== "High Availability"
+### High Availability
 
-    | Componente | Tecnología | Función |
-    |:-----------|:-----------|:--------|
-    | **Replication** | Streaming | Sync replica lag < 1s |
-    | **Failover** | CNPG Operator | Promoción automática |
-    | **Services** | K8s Services | rw/ro endpoints |
+| Componente | Tecnología | Función |
+|:-----------|:-----------|:--------|
+| **Replication** | Streaming | Sync replica lag < 1s |
+| **Failover** | CNPG Operator | Promoción automática |
+| **Services** | K8s Services | rw/ro endpoints |
 
-=== "Backup & Recovery"
+### Backup & Recovery
 
-    | Componente | Tecnología | Función |
-    |:-----------|:-----------|:--------|
-    | **WAL Archive** | S3 | Continuous archiving |
-    | **Base Backup** | Barman | Scheduled full backups |
-    | **PITR** | WAL + Base | Point-in-time recovery |
+| Componente | Tecnología | Función |
+|:-----------|:-----------|:--------|
+| **WAL Archive** | S3 | Continuous archiving |
+| **Base Backup** | Barman | Scheduled full backups |
+| **PITR** | WAL + Base | Point-in-time recovery |
 
 ---
 
@@ -224,14 +226,14 @@ kubectl cnpg status postgres-cluster -n database | grep "Replication Info"
 ### Troubleshooting
 
 !!! tip "Failover no ocurre automáticamente"
-    **Síntoma**: El Primary está caído pero ningún Replica se promueve.
+**Síntoma**: El Primary está caído pero ningún Replica se promueve.
 
-    **Solución**: Verificar que el CNPG Operator esté funcionando (`kubectl get pods -n cnpg-system`). Revisar logs del operator. Si es necesario, promover manualmente con `kubectl cnpg promote`.
+**Solución**: Verificar que el CNPG Operator esté funcionando (`kubectl get pods -n cnpg-system`). Revisar logs del operator. Si es necesario, promover manualmente con `kubectl cnpg promote`.
 
 !!! tip "Lag de replicación alto"
-    **Síntoma**: `cnpg_pg_replication_lag_seconds` > 5 segundos.
+**Síntoma**: `cnpg_pg_replication_lag_seconds` > 5 segundos.
 
-    **Solución**: Verificar recursos de los nodos (CPU/Memory). Revisar red entre nodos. Considerar ajustar `max_wal_size` y `checkpoint_timeout`. Si persiste, investigar queries largas en el Primary.
+**Solución**: Verificar recursos de los nodos (CPU/Memory). Revisar red entre nodos. Considerar ajustar `max_wal_size` y `checkpoint_timeout`. Si persiste, investigar queries largas en el Primary.
 
 ---
 
@@ -319,6 +321,6 @@ Las alertas se envían a Telegram via Alertmanager cuando:
 ---
 
 !!! quote "Data Reliability"
-    *"Your data is safe even when nodes fail"* - HA nativo, backups continuos, y recovery point < 5 minutos.
+*"Your data is safe even when nodes fail"* - HA nativo, backups continuos, y recovery point < 5 minutos.
 
 **Última actualización**: 2026-03-03

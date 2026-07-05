@@ -29,11 +29,10 @@ description: Cluster Kubernetes de 3 nodos bare-metal con arquitectura enterpris
 
 ## Visión General
 
-Cluster Kubernetes de 3 nodos bare-metal diseñado para simular un entorno de producción
-enterprise con alta disponibilidad, seguridad Zero Trust y observabilidad completa.
+Cluster Kubernetes de 5 nodos bare-metal (3 Control Planes + 2 Workers) con Talos Linux inmutable, consolidado en el servidor SR630 tras decommission de Workers legacy.
 
 !!! impact "Key Metrics & Impact"
-    **3 nodos** bare-metal en producción 24/7 • **Zero Trust** desde el edge hasta los pods • **100% GitOps** sin configuración manual
+**3 nodos** bare-metal en producción 24/7 • **Zero Trust** desde el edge hasta los pods • **100% GitOps** sin configuración manual
 
 ---
 
@@ -74,45 +73,46 @@ graph TB
 ```
 
 !!! info "Componentes Clave"
-    - **Cilium** reemplaza a kube-proxy usando eBPF para un performance superior en el networking L3/L4.
-    - **Istio Ambient** permite seguridad L7 y mTLS sin la sobrecarga de inyectar sidecars en cada Pod.
-    - **Longhorn** proporciona almacenamiento distribuido con replicación síncrona para alta disponibilidad.
+- **Cilium** reemplaza a kube-proxy usando eBPF para un performance superior en el networking L3/L4.
+- **Istio Ambient** permite seguridad L7 y mTLS sin la sobrecarga de inyectar sidecars en cada Pod.
+- **Longhorn** proporciona almacenamiento distribuido con replicación síncrona para alta disponibilidad.
 
 ---
 
 ## Stack Tecnológico
 
-=== "Infraestructura Base"
+### Infraestructura Base
 
-    | Componente | Tecnología | Descripción |
-    |:-----------|:-----------|:------------|
-    | **OS** | Talos Linux v1.12 | Inmutable, API-driven |
-    | **K8s** | Kubernetes v1.35 | Upstream vanilla |
-    | **CNI** | Cilium con eBPF | Kube-proxy replacement |
+| Componente | Tecnología | Descripción |
+|:-----------|:-----------|:------------|
+| **Talos Linux** | v1.13.2 | OS inmutable — 5 nodos (3 CP + 2 Workers) |
+| **Kubernetes** | v1.35.0 | Upstream vanilla, KubePrism @7445 |
+| **Cilium** | v1.18.5 (eBPF) | Kube-proxy replacement, MTU 1230 |
 
-=== "Connectivity & Storage"
+### Connectivity & Storage
 
-    | Componente | Tecnología | Descripción |
-    |:-----------|:-----------|:------------|
-    | **Mesh** | Istio Ambient | Sin sidecars, ztunnel L4 |
-    | **Ingress** | Traefik + Cloudflare Tunnel | Zero-port exposure |
-    | **Storage** | Longhorn | Distributed block storage |
+| Componente | Tecnología | Descripción |
+|:-----------|:-----------|:------------|
+| **Mesh** | Istio Ambient v1.30.0 | Sin sidecars, ztunnel HBONE |
+| **Ingress** | Traefik v3.7.1 + Cloudflare Tunnel | Zero-port exposure, CrowdSec bouncer, Authentik forwardAuth |
+| **Storage** | Longhorn v1.10.2 | Distributed block storage, HDD+SSD tiers |
 
-=== "Automation"
+### Automation
 
-    | Componente | Tecnología | Descripción |
-    |:-----------|:-----------|:------------|
-    | **GitOps** | ArgoCD | Declarative deployments |
-    | **Secrets** | Sealed Secrets | Encriptación asimétrica |
+| Componente | Tecnología | Descripción |
+|:-----------|:-----------|:------------|
+| **GitOps** | ArgoCD v3.4.3 + Flux v2.8.8 | Dual GitOps, GitLab sovereign source |
+| **Secrets** | Sealed Secrets v2.19.0 | Encriptación asimétrica |
+| **Deps** | Renovate v43 | Auto-updates (66 PRs procesados) |
 
-=== "Observability"
+### Observability
 
-    | Componente | Tecnología | Descripción |
-    |:-----------|:-----------|:------------|
-    | **Metrics** | Prometheus + Grafana | Time-series y dashboards |
-    | **Logs** | Loki + Promtail | Log aggregation |
-    | **Traces** | Tempo | Distributed tracing |
-    | **Alerting** | Alertmanager + Telegram | Notificaciones en tiempo real |
+| Componente | Tecnología | Descripción |
+|:-----------|:-----------|:------------|
+| **Metrics** | Prometheus + Grafana | Time-series y dashboards |
+| **Logs** | Loki + Promtail | Log aggregation |
+| **Traces** | Tempo | Distributed tracing |
+| **Alerting** | Alertmanager + Telegram | Notificaciones en tiempo real |
 
 ---
 
@@ -184,9 +184,13 @@ graph TB
 
 | Nodo | Rol | CPU | RAM | Storage |
 |:-----|:----|:----|:----|:--------|
-| **node-01** | Control Plane | Intel i5-12400 | 32GB DDR5 | 500GB NVMe |
-| **node-02** | Worker | Intel i5-12400 | 32GB DDR5 | 1TB NVMe |
-| **node-03** | Worker | Intel i5-12400 | 32GB DDR5 | 1TB NVMe |
+| **node-01 (CP)** | Control Plane | Intel i5-12400 | 32GB DDR5 | 500GB NVMe |
+| **node-02 (CP)** | Control Plane | AMD Ryzen 7 | 32GB DDR5 | 1TB NVMe |
+| **node-03 (CP)** | Control Plane | Intel N305 | 16GB | 512GB SSD |
+| **node-04 (W1)** | Worker (reservado) | AMD Ryzen 7 + Coral TPU | 32GB DDR5 | 1TB NVMe |
+| **node-07 (W4)** | Worker (SR630) | Dual Xeon Gold 6230 | 320GB DDR4 | 4TB SSD + 479GB SSD + 499GB HDD |
+| ~~node-05~~ | Decommissioned | - | - | Mayo 2026 |
+| ~~node-06~~ | Decommissioned | - | - | Mayo 2026 |
 
 ---
 
@@ -214,14 +218,14 @@ talosctl logs --nodes 192.168.1.10 kubelet
 ### Troubleshooting
 
 !!! tip "Nodo no se une al cluster"
-    **Síntoma**: Worker node aparece como "NotReady" o no se une.
+**Síntoma**: Worker node aparece como "NotReady" o no se une.
 
-    **Solución**: Verificar conectividad de red entre nodos. Revisar logs de kubelet en el nodo (`talosctl logs kubelet`). Verificar que el token de bootstrap sea válido. Reintentar apply-config.
+**Solución**: Verificar conectividad de red entre nodos. Revisar logs de kubelet en el nodo (`talosctl logs kubelet`). Verificar que el token de bootstrap sea válido. Reintentar apply-config.
 
 !!! tip "Cilium pods en CrashLoopBackOff"
-    **Síntoma**: Pods de Cilium no inician correctamente.
+**Síntoma**: Pods de Cilium no inician correctamente.
 
-    **Solución**: Verificar que el kernel soporte eBPF (`uname -r` >= 5.10). Revisar que kube-proxy esté deshabilitado. Verificar logs de Cilium agent con `kubectl logs -n kube-system -l app.kubernetes.io/name=cilium-agent`.
+**Solución**: Verificar que el kernel soporte eBPF (`uname -r` >= 5.10). Revisar que kube-proxy esté deshabilitado. Verificar logs de Cilium agent con `kubectl logs -n kube-system -l app.kubernetes.io/name=cilium-agent`.
 
 ---
 
@@ -294,6 +298,6 @@ Las alertas se envían a Telegram via Alertmanager cuando:
 ---
 
 !!! quote "Filosofía"
-    *"Production-grade infrastructure starts at home"* - Un HomeLab real que simula entornos enterprise para aprendizaje continuo.
+*"Production-grade infrastructure starts at home"* - Un HomeLab real que simula entornos enterprise para aprendizaje continuo.
 
-**Última actualización**: 2026-03-03
+**Última actualización**: 2026-07-05

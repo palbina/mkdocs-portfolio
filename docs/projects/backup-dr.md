@@ -33,7 +33,7 @@ Sistema de backup completo para proteger workloads de Kubernetes y datos persist
 Velero para recursos K8s, Longhorn para volúmenes, y scripts automatizados para credenciales críticas.
 
 !!! impact "Key Metrics & Impact"
-    **Backup diario** automático • **RPO < 1 hora** • **RTO < 30 minutos** para restauración completa
+**Guía DR** de 629 líneas documentada • **8 buckets S3** especializados • **export-dr-backup.sh** → 1Password para credenciales críticas
 
 ---
 
@@ -74,37 +74,37 @@ graph TB
 ```
 
 !!! info "Componentes Clave"
-    - **Velero**: Backup de recursos Kubernetes y volúmenes con snapshots CSI integrados.
-    - **Longhorn**: Almacenamiento distribuido con snapshots y backup automático a S3.
-    - **DR Script**: Exportación encriptada de credenciales críticas a 1Password para recuperación de desastres.
+- **Velero**: Backup de recursos Kubernetes y volúmenes con snapshots CSI integrados.
+- **Longhorn**: Almacenamiento distribuido con snapshots y backup automático a S3.
+- **DR Script**: Exportación encriptada de credenciales críticas a 1Password para recuperación de desastres.
 
 ---
 
 ## Stack Tecnológico
 
-=== "Kubernetes Backup"
+### Kubernetes Backup
 
-    | Componente | Tecnología | Función |
-    |:-----------|:-----------|:--------|
-    | **Controller** | Velero | K8s resource backup |
-    | **Provider** | AWS S3 | Object storage |
-    | **Snapshotter** | CSI Plugin | Volume snapshots |
+| Componente | Tecnología | Función |
+|:-----------|:-----------|:--------|
+| **Controller** | Velero | K8s resource backup |
+| **Provider** | AWS S3 | Object storage |
+| **Snapshotter** | CSI Plugin | Volume snapshots |
 
-=== "Volume Backup"
+### Volume Backup
 
-    | Componente | Tecnología | Función |
-    |:-----------|:-----------|:--------|
-    | **Storage** | Longhorn | Distributed storage |
-    | **Snapshots** | Longhorn | Instant snapshots |
-    | **Offsite** | S3 Backend | Remote backup |
+| Componente | Tecnología | Función |
+|:-----------|:-----------|:--------|
+| **Storage** | Longhorn | Distributed storage |
+| **Snapshots** | Longhorn | Instant snapshots |
+| **Offsite** | S3 Backend | Remote backup |
 
-=== "Secret Backup"
+### Secret Backup
 
-    | Componente | Tecnología | Función |
-    |:-----------|:-----------|:--------|
-    | **Script** | export-dr-backup.sh | Credential export |
-    | **Encryption** | Sealed Secrets | At-rest encryption |
-    | **Vault** | 1Password | Secure storage |
+| Componente | Tecnología | Función |
+|:-----------|:-----------|:--------|
+| **Script** | export-dr-backup.sh | Credential export |
+| **Encryption** | Sealed Secrets | At-rest encryption |
+| **Vault** | 1Password | Secure storage |
 
 ---
 
@@ -223,14 +223,14 @@ kubectl logs -f deployment/velero -n velero
 ### Troubleshooting
 
 !!! tip "Backup falla con error de snapshots"
-    **Síntoma**: Velero reporta "VolumeSnapshot" errors durante el backup.
+**Síntoma**: Velero reporta "VolumeSnapshot" errors durante el backup.
 
-    **Solución**: Verificar que el CSI driver soporte snapshots. Revisar que los volúmenes no estén en uso por pods en estado "Terminating". Para Longhorn, asegurar que el backup target S3 esté configurado correctamente.
+**Solución**: Verificar que el CSI driver soporte snapshots. Revisar que los volúmenes no estén en uso por pods en estado "Terminating". Para Longhorn, asegurar que el backup target S3 esté configurado correctamente.
 
 !!! tip "Restauración completa tarda demasiado"
-    **Síntoma**: RTO excede los 30 minutos objetivo.
+**Síntoma**: RTO excede los 30 minutos objetivo.
 
-    **Solución**: Considerar backup de volúmenes más frecuente (cada 1h vs cada 6h). Usar Velero con restic para file-level restore más rápido. Verificar latencia de red al bucket S3.
+**Solución**: Considerar backup de volúmenes más frecuente (cada 1h vs cada 6h). Usar Velero con restic para file-level restore más rápido. Verificar latencia de red al bucket S3.
 
 ---
 
@@ -300,6 +300,6 @@ Las alertas se envían a Telegram via Alertmanager cuando:
 ---
 
 !!! quote "Backup Philosophy"
-    *"A backup that hasn't been tested is not a backup"* - Restauraciones mensuales verifican la integridad de los datos.
+*"A backup that hasn't been tested is not a backup"* - Restauraciones mensuales verifican la integridad de los datos.
 
 **Última actualización**: 2026-03-03

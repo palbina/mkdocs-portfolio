@@ -33,7 +33,7 @@ Arquitectura de seguridad multicapa implementando el principio Zero Trust: nunca
 Defensa en profundidad desde el edge hasta el pod, con encriptación automática y bloqueo proactivo de amenazas.
 
 !!! impact "Key Metrics & Impact"
-    **4 capas** de seguridad activas • **mTLS automático** service-to-service • **IP blocking** colaborativo en tiempo real
+**Zero Trust v2.1** (5 capas) en producción 24/7 • **CrowdSec v1.7.7** con 12 escenarios • **CiliumNetworkPolicy fix** del bug `- {}` → default-deny verdadero con `[]`
 
 ---
 
@@ -78,37 +78,37 @@ graph TB
 
 ## Stack Tecnológico
 
-=== "Edge Security"
+### Edge Security
 
-    | Componente | Tecnología | Función |
-    |:-----------|:-----------|:--------|
-    | **WAF** | Cloudflare WAF | Protección DDoS, bot mitigation |
-    | **SSL** | Cloudflare SSL | Terminación TLS, certificados auto |
-    | **Tunnel** | Cloudflare Tunnel | Zero-port exposure |
+| Componente | Tecnología | Función |
+|:-----------|:-----------|:--------|
+| **WAF** | Cloudflare WAF | Protección DDoS, bot mitigation |
+| **SSL** | Cloudflare SSL | Terminación TLS, certificados auto |
+| **Tunnel** | Cloudflare Tunnel | Zero-port exposure |
 
-=== "Ingress Security"
+### Ingress Security
 
-    | Componente | Tecnología | Función |
-    |:-----------|:-----------|:--------|
-    | **IPS** | CrowdSec | Detección colaborativa de amenazas |
-    | **Bouncer** | Traefik Plugin | Bloqueo automático de IPs |
-    | **Middlewares** | Rate Limiting | Protección contra abuse |
+| Componente | Tecnología | Función |
+|:-----------|:-----------|:--------|
+| **IPS** | CrowdSec | Detección colaborativa de amenazas |
+| **Bouncer** | Traefik Plugin | Bloqueo automático de IPs |
+| **Middlewares** | Rate Limiting | Protección contra abuse |
 
-=== "Network Security"
+### Network Security
 
-    | Componente | Tecnología | Función |
-    |:-----------|:-----------|:--------|
-    | **Policies** | CiliumNetworkPolicy | Default deny, whitelist explícita |
-    | **L7 Filter** | Cilium L7 | Filtrado HTTP/gRPC |
-    | **Hubble** | Cilium Hubble | Observabilidad de red |
+| Componente | Tecnología | Función |
+|:-----------|:-----------|:--------|
+| **Policies** | CiliumNetworkPolicy | Default deny, whitelist explícita |
+| **L7 Filter** | Cilium L7 | Filtrado HTTP/gRPC |
+| **Hubble** | Cilium Hubble | Observabilidad de red |
 
-=== "Service Security"
+### Service Security
 
-    | Componente | Tecnología | Función |
-    |:-----------|:-----------|:--------|
-    | **mTLS** | Istio Ambient | Encriptación automática pod-to-pod |
-    | **AuthZ** | AuthorizationPolicy | Control de acceso L7 |
-    | **Identity** | Authentik | SSO con OIDC/SAML |
+| Componente | Tecnología | Función |
+|:-----------|:-----------|:--------|
+| **mTLS** | Istio Ambient | Encriptación automática pod-to-pod |
+| **AuthZ** | AuthorizationPolicy | Control de acceso L7 |
+| **Identity** | Authentik | SSO con OIDC/SAML |
 
 ---
 
@@ -221,14 +221,14 @@ kubectl logs -f -n auth -l app=authentik
 ### Troubleshooting
 
 !!! tip "CrowdSec no detecta ataques"
-    **Síntoma**: IPs maliciosas no son bloqueadas.
+**Síntoma**: IPs maliciosas no son bloqueadas.
 
-    **Solución**: Verificar que los logs estén llegando a CrowdSec (`cscli metrics`). Revisar que los parsers estén correctamente configurados. Verificar que el bouncer esté funcionando (`cscli bouncers list`).
+**Solución**: Verificar que los logs estén llegando a CrowdSec (`cscli metrics`). Revisar que los parsers estén correctamente configurados. Verificar que el bouncer esté funcionando (`cscli bouncers list`).
 
 !!! tip "Cilium policies bloquean tráfico legítimo"
-    **Síntoma**: Pods no pueden comunicarse entre sí.
+**Síntoma**: Pods no pueden comunicarse entre sí.
 
-    **Solución**: Verificar CiliumNetworkPolicies con `cilium policy get`. Usar Hubble UI para visualizar tráfico bloqueado. Aplicar labels correctos en los selectors de las policies.
+**Solución**: Verificar CiliumNetworkPolicies con `cilium policy get`. Usar Hubble UI para visualizar tráfico bloqueado. Aplicar labels correctos en los selectors de las policies.
 
 ---
 
@@ -302,6 +302,6 @@ kubectl logs -f -n auth -l app=authentik
 ---
 
 !!! quote "Zero Trust Philosophy"
-    *"Never trust, always verify"* - Cada request es autenticada y autorizada, sin importar origen.
+*"Never trust, always verify"* - Cada request es autenticada y autorizada, sin importar origen.
 
 **Última actualización**: 2026-03-03

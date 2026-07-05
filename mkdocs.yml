@@ -1,4 +1,8 @@
 # =============================================================================
+# HISTORICAL REFERENCE — This file is retained for documentation purposes.
+# The active/canonical configuration is zensical.toml. Builds use zensical
+# exclusively. See docs/MIGRATION-ZENSICAL.md for the migration record.
+# =============================================================================
 # MkDocs Portfolio - Configuration
 # DevOps Portfolio Minimalista con filosofía "Docs as Code"
 # =============================================================================
@@ -82,6 +86,31 @@ theme:
 # =============================================================================
 nav:
   - Inicio: index.md
+  - Documentación:
+      - Tutoriales:
+          - tutorials/index.md
+          - 'HomeLab Kubernetes': tutorials/kubernetes-homelab.md
+          - 'GitOps con ArgoCD': tutorials/gitops-argocd.md
+          - 'Observabilidad LGTM': tutorials/observability-lgtm.md
+          - 'Zero Trust Security': tutorials/zero-trust-security.md
+      - 'Guías How-To':
+          - how-to/index.md
+          - 'Desplegar Talos Cluster': how-to/deploy-talos-cluster.md
+          - 'Configurar ArgoCD': how-to/configure-argocd.md
+          - 'Monitoreo y Alertas': how-to/setup-monitoring.md
+          - 'Backup con Velero': how-to/backup-velero.md
+          - 'PostgreSQL HA (CNPG)': how-to/deploy-postgresql-ha.md
+      - Referencia:
+          - reference/index.md
+          - 'Stacks Tecnológicos': reference/tech-stacks.md
+          - 'Comandos Útiles': reference/kubernetes-commands.md
+          - 'Configuración': reference/configuration-reference.md
+      - Explicación:
+          - explanation/index.md
+          - 'Arquitectura Cloud Native': explanation/cloud-native-architecture.md
+          - 'Filosofía GitOps': explanation/gitops-philosophy.md
+          - 'Modelo Zero Trust': explanation/zero-trust-model.md
+          - 'Patrones de Observabilidad': explanation/observability-patterns.md
   - Proyectos:
       - projects/index.md
       - 'HomeLab Kubernetes': projects/homelab.md
@@ -116,9 +145,6 @@ plugins:
       archive: true
       categories: true
       authors: true
-  # Macros para contenido dinámico (GitHub stats, etc)
-  - macros:
-      module_name: scripts/main
 
 # =============================================================================
 # MARKDOWN EXTENSIONS

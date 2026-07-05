@@ -33,7 +33,7 @@ Implementación de Canary Deployments con análisis automático de métricas par
 Traffic splitting progresivo con Istio y promoción automática basada en SLOs.
 
 !!! impact "Key Metrics & Impact"
-    **Zero-downtime** deployments • **Análisis automático** de success rate • **Rollback instantáneo** si métricas fallan
+**Zero-downtime** deployments • **Análisis automático** de success rate • **Rollback instantáneo** si métricas fallan
 
 ---
 
@@ -76,37 +76,38 @@ graph TB
 ```
 
 !!! info "Componentes Clave"
-    - **Argo Rollouts**: Controller que gestiona el ciclo de vida de canary deployments con análisis automático.
-    - **Istio VirtualService**: Control de tráfico L7 con weight-based routing entre versiones stable y canary.
-    - **Prometheus + AnalysisTemplate**: Queries automáticas de métricas para validar SLOs antes de promover.
+- **Argo Rollouts**: Controller que gestiona el ciclo de vida de canary deployments con análisis automático.
+- **Istio VirtualService**: Control de tráfico L7 con weight-based routing entre versiones stable y canary.
+- **Prometheus + AnalysisTemplate**: Queries automáticas de métricas para validar SLOs antes de promover.
 
 ---
 
 ## Stack Tecnológico
 
-=== "Rollout Engine"
+### Rollout Engine
 
-    | Componente | Tecnología | Función |
-    |:-----------|:-----------|:--------|
-    | **Controller** | Argo Rollouts | Gestión de Canary/Blue-Green |
-    | **Analysis** | AnalysisTemplate | Queries Prometheus para SLOs |
-    | **Metrics** | AnalysisRun | Ejecución de análisis |
+| Componente | Tecnología | Función |
+|:-----------|:-----------|:--------|
+| **Controller** | Argo Rollouts v0.13.0 | Gestión de Canary con AnalysisRuns |
+| **Metrics** | Prometheus queries | SLO validation en tiempo real |
+| **Traffic** | Istio Ambient v1.30.0 | Weight-based routing (5% → 30% → 50% → 100%) |
+| **Load Gen** | k6 Operator | Traffic generation durante análisis |
 
-=== "Traffic Management"
+### Traffic Management
 
-    | Componente | Tecnología | Función |
-    |:-----------|:-----------|:--------|
-    | **Mesh** | Istio Ambient | Traffic splitting L7 |
-    | **Gateway** | Gateway API | Standard routing |
-    | **VirtualService** | Istio CRD | Weight-based routing |
+| Componente | Tecnología | Función |
+|:-----------|:-----------|:--------|
+| **Mesh** | Istio Ambient | Traffic splitting L7 |
+| **Gateway** | Gateway API | Standard routing |
+| **VirtualService** | Istio CRD | Weight-based routing |
 
-=== "Observability"
+### Observability
 
-    | Componente | Tecnología | Función |
-    |:-----------|:-----------|:--------|
-    | **Metrics** | Prometheus | Success rate, latency |
-    | **Dashboards** | Grafana | Rollout visualization |
-    | **Alerts** | Alertmanager | Failure notifications |
+| Componente | Tecnología | Función |
+|:-----------|:-----------|:--------|
+| **Metrics** | Prometheus | Success rate, latency |
+| **Dashboards** | Grafana | Rollout visualization |
+| **Alerts** | Alertmanager | Failure notifications |
 
 ---
 
@@ -227,14 +228,14 @@ kubectl argo rollouts get analysisrun success-rate-xxxxx -n demo
 ### Troubleshooting
 
 !!! tip "Análisis falla pero métricas son buenas"
-    **Síntoma**: AnalysisRun marca failure pero Prometheus muestra success rate > 95%
+**Síntoma**: AnalysisRun marca failure pero Prometheus muestra success rate > 95%
 
-    **Solución**: Verificar que la query de Prometheus esté correctamente configurada con el label `destination_service`. Revisar que el service name en el argumento coincida exactamente.
+**Solución**: Verificar que la query de Prometheus esté correctamente configurada con el label `destination_service`. Revisar que el service name en el argumento coincida exactamente.
 
 !!! tip "Traffic no se divide correctamente"
-    **Síntoma**: Todo el tráfico va a stable a pesar de setWeight
+**Síntoma**: Todo el tráfico va a stable a pesar de setWeight
 
-    **Solución**: Verificar que los subsets (stable/canary) estén correctamente definidos en el DestinationRule de Istio. Asegurar que los pods tengan los labels correctos.
+**Solución**: Verificar que los subsets (stable/canary) estén correctamente definidos en el DestinationRule de Istio. Asegurar que los pods tengan los labels correctos.
 
 ---
 
@@ -301,6 +302,6 @@ Las alertas se envían a Telegram via Alertmanager cuando:
 ---
 
 !!! quote "Progressive Delivery Philosophy"
-    *"Deploy with confidence, rollback without fear"* - Cada deployment es validado automáticamente antes de afectar a todos los usuarios.
+*"Deploy with confidence, rollback without fear"* - Cada deployment es validado automáticamente antes de afectar a todos los usuarios.
 
 **Última actualización**: 2026-03-03

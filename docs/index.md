@@ -12,10 +12,11 @@ hide:
 
 <p class="hero-headline">Cloud Computing & Complex Code Solved</p>
 
-<p class="hero-subline">Sistemas de alta disponibilidad, seguridad <strong>Zero Trust</strong> y automatización extrema mediante <strong>GitOps</strong> e infraestructura como código.</p>
+<p class="hero-subline">Cluster <strong>Talos v1.13.2</strong> + <strong>K8s v1.35.0</strong> — 5 nodos bare-metal, 29 apps 100% compliant, seguridad <strong>Zero Trust</strong> y <strong>GitOps</strong> extremo.</p>
 
 <div class="hero-buttons">
 <a href="#proyectos" class="md-button md-button--primary">Explorar Proyectos ↓</a>
+<a href="documentacion/" class="md-button">Ver Documentación</a>
 <a href="https://github.com/palbina/HOMELAB-INFRA" class="md-button" target="_blank">View GitHub</a>
 </div>
 
@@ -94,6 +95,50 @@ hide:
 <a href="projects/ai-rag/" class="project-link">Ver IA Interface</a>
 </div>
 
+<div class="project-card">
+<div class="project-icon">🚀</div>
+<h3>Progressive Delivery</h3>
+<span class="project-impact">ZERO-DOWNTIME DEPLOYS</span>
+<p>Canary deployments con análisis automático de métricas y rollback inteligente mediante Argo Rollouts.</p>
+<div class="tech-tags">
+<span class="tech-tag">Argo Rollouts</span> <span class="tech-tag">Istio</span> <span class="tech-tag">Prometheus</span>
+</div>
+<a href="projects/progressive-delivery/" class="project-link">Ver Progressive Delivery</a>
+</div>
+
+<div class="project-card">
+<div class="project-icon">🛡️</div>
+<h3>Molty Standard V2</h3>
+<span class="project-impact">29 APPS COMPLIANT</span>
+<p>Metodología de despliegue estandarizada con 9 manifiestos obligatorios y validación automatizada de compliance.</p>
+<div class="tech-tags">
+<span class="tech-tag">Kubernetes</span> <span class="tech-tag">NetworkPolicy</span> <span class="tech-tag">Cilium</span>
+</div>
+<a href="projects/deployment-methodology/" class="project-link">Ver Metodología</a>
+</div>
+
+<div class="project-card">
+<div class="project-icon">🔒</div>
+<h3>Zero Trust Networking v2.1</h3>
+<span class="project-impact">5-LAYER DEFENSE</span>
+<p>Defensa en profundidad con Cilium eBPF, Istio Ambient mTLS sin sidecars, y fix del bug default-deny falso.</p>
+<div class="tech-tags">
+<span class="tech-tag">Cilium</span> <span class="tech-tag">Istio</span> <span class="tech-tag">mTLS</span>
+</div>
+<a href="projects/zero-trust-networking/" class="project-link">Ver Zero Trust</a>
+</div>
+
+<div class="project-card">
+<div class="project-icon">📊</div>
+<h3>Compliance Dashboard</h3>
+<span class="project-impact">7 CRONJOB AUDITORS</span>
+<p>Auditoría automatizada con 7 CronJobs verificando 29 apps al 100% contra el estándar Molty V2.</p>
+<div class="tech-tags">
+<span class="tech-tag">CronJob</span> <span class="tech-tag">Prometheus</span> <span class="tech-tag">Grafana</span>
+</div>
+<a href="projects/compliance-dashboard/" class="project-link">Ver Dashboard</a>
+</div>
+
 </div>
 
 ---
@@ -138,6 +183,35 @@ hide:
 <span class="cc-letter">C</span>
 <h4>Cloud Computing</h4>
 <p>Infraestructura escalable y resiliente. Kubernetes nativo, alta disponibilidad y orquestación automatizada en entornos cloud-native.</p>
+</div>
+</div>
+</div>
+
+---
+
+<div class="docs-diataxis-banner">
+<h2 style="text-align: center; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 2rem;">Documentación Diátaxis</h2>
+
+<div class="diataxis-grid">
+<div class="diataxis-card tutorial">
+<h4>:material-school: Tutoriales</h4>
+<p>Aprende construyendo. Lecciones paso a paso para dominar cada tecnología del stack.</p>
+<a href="tutorials/" class="md-button">Iniciar Aprendizaje</a>
+</div>
+<div class="diataxis-card howto">
+<h4>:material-wrench: Guías How-To</h4>
+<p>Resuelve problemas. Instrucciones prácticas para tareas específicas del día a día.</p>
+<a href="how-to/" class="md-button">Resolver Problemas</a>
+</div>
+<div class="diataxis-card reference">
+<h4>:material-bookshelf: Referencia</h4>
+<p>Consulta datos. Tablas de stacks, comandos y configuraciones de referencia rápida.</p>
+<a href="reference/" class="md-button">Consultar Referencia</a>
+</div>
+<div class="diataxis-card explanation">
+<h4>:material-lightbulb-on: Explicación</h4>
+<p>Entiende el por qué. Contexto, razonamiento y decisiones arquitectónicas del stack.</p>
+<a href="explanation/" class="md-button">Leer Explicaciones</a>
 </div>
 </div>
 </div>

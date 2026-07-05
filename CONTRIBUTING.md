@@ -17,7 +17,7 @@ Gracias por tu interés en contribuir a este portfolio. Este documento describe 
 1. **Fork** el repositorio
 2. Crea una **branch** descriptiva: `git checkout -b feature/nueva-seccion`
 3. Realiza tus cambios siguiendo las guías de estilo
-4. **Test** localmente: `mkdocs serve`
+4. **Test** localmente: `zensical build --clean`
 5. **Commit** con mensajes descriptivos
 6. **Push** a tu fork: `git push origin feature/nueva-seccion`
 7. Abre un **Pull Request**
@@ -136,7 +136,7 @@ Todo PR será revisado considerando:
 - [ ] **Formato**: Cumple guías de estilo
 - [ ] **Links**: Todos los enlaces funcionan
 - [ ] **Imágenes**: Optimizadas y con alt text
-- [ ] **Build**: `mkdocs build --strict` pasa sin errores
+- [ ] **Build**: `zensical build --clean` pasa sin errores ni warnings
 
 ---
 
@@ -144,27 +144,39 @@ Todo PR será revisado considerando:
 
 ### Requisitos
 
-- Python 3.8+
-- pip o uv
+- Python 3.8+ (solo para dependencias de compatibilidad)
+- Zensical SSG (instalado vía `pipx install zensical`)
+- Git
 
 ### Setup
 
 ```bash
-# Instalar dependencias
-pip install -r requirements.txt
+# Instalar Zensical SSG (motor de build primario)
+pipx install zensical
 
+# Instalar dependencias de compatibilidad (MkDocs retenido como referencia)
+pip install -r requirements.txt
+```
+
+### Build & Serve
+
+```bash
 # Servir localmente con hot-reload
-mkdocs serve
+zensical serve
 
 # Construir para producción
-mkdocs build --strict
+zensical build --clean
 ```
+
+> **Nota**: El proyecto migró de MkDocs a Zensical SSG en marzo 2026. `mkdocs.yml` se
+> retiene como referencia histórica. La configuración canónica es `zensical.toml`.
+> Ver `docs/MIGRATION-ZENSICAL.md` para detalles de la migración.
 
 ### Testing
 
 ```bash
-# Verificar links
-mkdocs build --strict
+# Verificar build sin errores
+zensical build --clean
 
 # Lint Markdown (opcional)
 npx markdownlint-cli docs/**/*.md

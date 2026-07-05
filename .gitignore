@@ -30,4 +30,5 @@ Thumbs.db
 _archive/
 .ai-context/
 .agents/
+.kilocode/
 CLAUDE.md
